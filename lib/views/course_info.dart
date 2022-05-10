@@ -1,3 +1,12 @@
+// ignore_for_file: prefer_is_empty, sized_box_for_whitespace
+// ignore: slash_for_doc_comments
+/**
+ * - this page responsible for display:
+ *   - 1- course lessons UI
+ *   - 2- course details UI
+ *   - 2- course review UI
+ *   - 2- add comment and rating UI
+ * **/
 import 'package:academy/models/lessons.dart';
 import 'package:academy/shared/network/local/cachehelper.dart';
 import 'package:academy/views/course%20register/course_register.dart';
@@ -10,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:academy/views/reviewCubit/review_cubit.dart';
 import '../components/components.dart';
 import '../components/const.dart';
 import '../components/custom_image.dart';
@@ -20,12 +28,15 @@ import '../shared/components/components.dart';
 import 'CourseContent/QuizPage/Quiz.dart';
 import 'CourseContent/lessonPage/lessonContent.dart';
 
+import 'CourseInfoCubit/CourseInfo_cubit.dart';
+import 'CourseInfoCubit/CourseInfo_state.dart';
 import 'course_details_screen.dart';
 
+// ignore: must_be_immutable
 class CourseInfo extends StatefulWidget {
   String id;
 
-  CourseInfo({required this.id});
+  CourseInfo({Key? key, required this.id}) : super(key: key);
 
   @override
   State<CourseInfo> createState() => _CourseInfoState();
@@ -38,6 +49,7 @@ class _CourseInfoState extends State<CourseInfo> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return BlocProvider(
+      /// Call Function from class ReviewCubit  When page is Build
       create: (context) => ReviewCubit()
         ..getCourseInfo(
           id: widget.id,
@@ -59,7 +71,8 @@ class _CourseInfoState extends State<CourseInfo> {
                   floatingActionButtonLocation:
                       FloatingActionButtonLocation.centerDocked,
                   floatingActionButton: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     child: reviewCubit.loadInfo == false ||
                             reviewCubit.loadLessons == false
                         ? Container()
@@ -119,6 +132,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                       'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
                                 ),
                               )
+
                             : Container(
                                 width: double.maxFinite,
                                 child: FancyShimmerImage(
@@ -131,8 +145,10 @@ class _CourseInfoState extends State<CourseInfo> {
                               ),
                         Column(
                           children: [
-                            // SizedBox(height: 40.h,),
+
+
                             Expanded(
+
                               child: Container(
                                 height: size.height - 40.h,
                                 child: SingleChildScrollView(
@@ -177,7 +193,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                                 onPress: () {
                                                   reviewCubit
                                                       .ChangeActiveTabBar(0);
-                                                  // reviewCubit.getCourseInfo(id: widget.id);
+
                                                 },
                                               ),
                                               CustomTabBarButton(
@@ -199,9 +215,6 @@ class _CourseInfoState extends State<CourseInfo> {
                                           height: 0,
                                         ),
                                         if (reviewCubit.activeTabBar == 0)
-                                          // state is GetCourseInfoSuccess?
-                                          // ignore: unnecessary_null_comparison
-                                          //   reviewCubit.aboutCourseModel != null
                                           reviewCubit.loadInfo == true
                                               ? CourseDetailsScreen(
                                                   aboutCourseModel: reviewCubit
@@ -214,18 +227,14 @@ class _CourseInfoState extends State<CourseInfo> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
-                                                    children: [
+                                                    children: const [
                                                       Center(
                                                           child:
                                                               CircularProgressIndicator()),
                                                     ],
                                                   ),
                                                 ),
-                                        //    CourseDetailsScreen(aboutCourseModel:reviewCubit.aboutCourseModel),
-
                                         if (reviewCubit.activeTabBar == 1)
-                                          // ignore: unnecessary_null_comparison
-                                          //reviewCubit.lessonsModel != null
                                           reviewCubit.loadLessons == true
                                               ? getCourseContent(
                                                   reviewCubit: reviewCubit,
@@ -239,7 +248,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
-                                                    children: [
+                                                    children: const [
                                                       Center(
                                                           child:
                                                               CircularProgressIndicator()),
@@ -259,7 +268,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
-                                                    children: [
+                                                    children: const [
                                                       Center(
                                                           child: Text(
                                                               'يرجى الاشتراك اولا لرؤية التعليقات')),
@@ -276,7 +285,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .center,
-                                                        children: [
+                                                        children: const [
                                                           Center(
                                                               child:
                                                                   CircularProgressIndicator()),
@@ -303,10 +312,13 @@ class _CourseInfoState extends State<CourseInfo> {
           }),
     );
   }
-
+  /// TODO function to display Review  UI
   Expanded getReviews(ReviewCubit? reviewCubit) {
     return Expanded(
+
+      /// condition to check if  reviews list contain review or not
       child: reviewCubit!.reviewModel.reviews.length > 0
+      /// if true
           ? SingleChildScrollView(
               child: Column(
                 children: [
@@ -322,10 +334,12 @@ class _CourseInfoState extends State<CourseInfo> {
                 ],
               ),
             )
+      /// else false
           : Padding(
-              padding: EdgeInsets.only(bottom: 30),
+              padding: const EdgeInsets.only(bottom: 30),
+              // ignore: avoid_unnecessary_containers
               child: Container(
-                child: Center(
+                child: const Center(
                   child: Text(
                     "لا يوجد تعليقات ",
                     style: TextStyle(
@@ -337,7 +351,7 @@ class _CourseInfoState extends State<CourseInfo> {
             ),
     );
   }
-
+   /// TODO function to display Lessons UI
   Expanded getCourseContent(
       {ReviewCubit? reviewCubit, AutoGenerate? autoGenerate}) {
     var size = MediaQuery.of(context).size;
@@ -364,23 +378,21 @@ class _CourseInfoState extends State<CourseInfo> {
                       children: [
                         Text(
                           autoGenerate.sections![index].title,
-                          style: TextStyle(
-                            fontSize: 40.sp
-                          ),
+                          style: TextStyle(fontSize: 40.sp),
                         ),
                         autoGenerate.checkEnrolled(
                                     autoGenerate.sections![index].items) ==
                                 false
                             ? Text(
                                 '${autoGenerate.getReviewCount(autoGenerate.sections![index].items)}/${autoGenerate.sections![index].items.length}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: kFontFamily,
                                   color: kSwatchColor,
                                 ),
                               )
                             : Text(
                                 '${autoGenerate.sections![index].items.length}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: kFontFamily,
                                   color: kSwatchColor,
                                 ),
@@ -401,21 +413,22 @@ class _CourseInfoState extends State<CourseInfo> {
                             color: autoGenerate.checkCompleted(
                                         autoGenerate.sections![index].items) ==
                                     true
-                                ? Color(0xff00B706)
+                                ? const Color(0xff00B706)
                                 : Colors.red,
                           ),
                         ),
+                        /// function to check if section is complete or not
                         autoGenerate.checkCompleted(
                                     autoGenerate.sections![index].items) ==
                                 true
-                            ? Text(
+                            ? const Text(
                                 ' مكتمل',
                                 style: TextStyle(
                                   color: Color(0xff00B706),
                                   fontSize: 12,
                                 ),
                               )
-                            : Text(
+                            : const Text(
                                 'غير مكتمل',
                                 style: TextStyle(
                                   color: Colors.red,
@@ -426,6 +439,7 @@ class _CourseInfoState extends State<CourseInfo> {
                     ),
                   ],
                 ),
+                /// loop lessons and Quiz inside Sections
                 children: autoGenerate.sections![index].items
                     .asMap()
                     .map(
@@ -433,7 +447,7 @@ class _CourseInfoState extends State<CourseInfo> {
                           i,
                           InkWell(
                             child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   width: 0.2,
@@ -443,21 +457,23 @@ class _CourseInfoState extends State<CourseInfo> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  /// number of lessons or Quiz
                                   Text(
                                     '  ${index + 1}.${i + 1}',
                                   ),
                                   SizedBox(
                                     width: 5.w,
                                   ),
+                                  /// determinate tape of item ( lessons or Quiz)
                                   e.type == 'lp_lesson'
-                                      ? Text(
+                                      ? const Text(
                                           ' المقرر :',
                                           style: TextStyle(
                                               color: Colors.black45,
                                               overflow: TextOverflow.ellipsis),
                                           maxLines: 1,
                                         )
-                                      : Text(
+                                      : const Text(
                                           'الإختبار :',
                                           style: TextStyle(
                                               color: Colors.black45,
@@ -467,10 +483,11 @@ class _CourseInfoState extends State<CourseInfo> {
                                   SizedBox(
                                     width: 10.w,
                                   ),
+                                  /// name of item
                                   Expanded(
                                     child: Text(
                                       e.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         overflow: TextOverflow.ellipsis,
                                         color: Colors.black,
                                         //   fontSize: 35.sp
@@ -478,39 +495,40 @@ class _CourseInfoState extends State<CourseInfo> {
                                       maxLines: 2,
                                     ),
                                   ),
+                                  /// check if lessons or Quiz is locked or passed or failed
                                   e.locked == true
-                                      ? Icon(
+                                      ? const Icon(
                                           Icons.lock,
                                           color: Colors.black45,
                                           size: 20,
                                         )
                                       : e.status == 'completed' &&
                                               e.type == 'lp_lesson'
-                                          ? Icon(
+                                          ? const Icon(
                                               Icons.check,
                                               color: Colors.green,
                                               size: 20,
                                             )
                                           : e.graduation == 'failed' &&
                                                   e.type == 'lp_quiz'
-                                              ? Icon(
+                                              ? const Icon(
                                                   Icons.check,
                                                   color: Colors.red,
                                                   size: 20,
                                                 )
                                               : e.graduation == 'passed' &&
                                                       e.type == 'lp_quiz'
-                                                  ? Icon(
+                                                  ? const Icon(
                                                       Icons.check,
                                                       color: Colors.green,
                                                       size: 20,
                                                     )
-                                                  : Icon(
+                                                  : const Icon(
                                                       Icons.check,
                                                       color: Colors.black45,
                                                       size: 20,
                                                     ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                 ],
@@ -579,14 +597,14 @@ class _CourseInfoState extends State<CourseInfo> {
                     itemCount: 5,
                     itemPadding:
                         const EdgeInsets.symmetric(horizontal: 2, vertical: 3),
-                    itemBuilder: (context, _) => Icon(
+                    itemBuilder: (context, _) => const Icon(
                       Icons.star,
                       color: kSwatchColor,
                     ),
                     onRatingUpdate: (rating) {
                       //reviewCubit!.ratingValue = rating.toInt() ;
                       reviewCubit!.ChangeRatingValue(rating.toInt());
-                      print(rating);
+
                     },
                   ),
                 ),
@@ -626,6 +644,7 @@ class _CourseInfoState extends State<CourseInfo> {
                   width: size.width * 0.5,
                   height: 60,
                   onTap: () {
+                    /// if token null login before else add rating and comment
                     CacheHelper.getData(key: 'token') == null
                         ? navigatorTo(context, LoginScreen())
                         : reviewCubit!.submitReview(
@@ -645,6 +664,7 @@ class _CourseInfoState extends State<CourseInfo> {
   }
 }
 
+// ignore: must_be_immutable
 class CustomerReview extends StatelessWidget {
   Reviews reviewModel;
 
@@ -664,7 +684,7 @@ class CustomerReview extends StatelessWidget {
             width: 60,
             height: 60,
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Expanded(
@@ -708,7 +728,7 @@ class CustomerReview extends StatelessWidget {
 class ClientRating extends StatelessWidget {
   final double ratingValue;
 
-  ClientRating({Key? key, required this.ratingValue}) : super(key: key);
+  const ClientRating({Key? key, required this.ratingValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -720,12 +740,12 @@ class ClientRating extends StatelessWidget {
       allowHalfRating: true,
       ignoreGestures: false,
       itemCount: 5,
-      itemBuilder: (context, _) => Icon(
+      itemBuilder: (context, _) => const Icon(
         Icons.star,
         color: kSwatchColor,
       ),
       onRatingUpdate: (rating) {
-        print(rating);
+
       },
     );
   }
@@ -745,7 +765,7 @@ class TitleWithDotIcon extends StatelessWidget {
       child: Row(
         children: [
           // SvgPicture.asset('assets/svg/dot.svg'),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -765,6 +785,7 @@ class TitleWithDotIcon extends StatelessWidget {
 class CustomTabBarButton extends StatelessWidget {
   final String title;
   final bool isActive;
+  // ignore: prefer_typing_uninitialized_variables
   final onPress;
 
   const CustomTabBarButton(
@@ -791,150 +812,10 @@ class CustomTabBarButton extends StatelessWidget {
           Container(
             width: 90,
             height: 2,
-            margin: EdgeInsets.only(bottom: 5),
+            margin: const EdgeInsets.only(bottom: 5),
             color: kSwatchColor,
           ),
       ],
     );
   }
-} /*  navigatorTo(context, CoursePage(id: widget.id,));*/
-
-//autoGenerate.sections![index].items
-/*
- InkWell(
-                        child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 0.2,
-                          color: Colors.black26,
-                        ),
-                    ),
-                    child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '  ${index + 1}',
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          e.type == 'lp_lesson'
-                              ? Expanded(
-                            child: Text(
-                              ' المقرر :',
-                              style: TextStyle(
-                                  color: Colors.black45,
-                                  overflow: TextOverflow.ellipsis),
-                              maxLines: 1,
-                            ),
-                          )
-                              : Expanded(
-                            child: Text(
-                              'الإختبار :',
-                              style: TextStyle(
-                                  color: Colors.black45,
-                                  overflow: TextOverflow.ellipsis),
-                              maxLines: 1,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            e.title,
-                            style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              color: Colors.black,
-                            ),
-                            maxLines: 1,
-                          ),
-                          Spacer(),
-                          e.locked == true
-                              ? Icon(
-                            Icons.lock,
-                            color: Colors.black45,
-                            size: 20,
-                          )
-                              : e.status == 'completed' &&
-                              e.type == 'lp_lesson'
-                              ? Icon(
-                            Icons.check,
-                            color: Colors.green,
-                            size: 20,
-                          )
-                              : e.graduation == 'failed' &&
-                              e.type == 'lp_quiz'
-                              ? Icon(
-                            Icons.check,
-                            color: Colors.red,
-                            size: 20,
-                          )
-                              : e.graduation == 'passed' &&
-                              e.type == 'lp_quiz'
-                              ? Icon(
-                            Icons.check,
-                            color: Colors.green,
-                            size: 20,
-                          )
-                              : Icon(
-                            Icons.check,
-                            color: Colors.black45,
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                    ),
-                  ),
-                        onTap: ()=>{
-                          if(e.locked==false)
-                           {
-
-
-
-                      if (e.status=='completed')
-                         {
-                           navigatorTo(context, ( e.type != 'lp_lesson')
-                               ?
-
-                           //QUIZ=CoursePage
-                           CoursePage(id: e.id.toString(),)
-                               :
-                           WatchCourse(id:e.id.toString(),finishId: widget.id,)),
-                         }
-                      else
-                             {
-                               navigatorTo(context, ( e.type != 'lp_lesson')
-                                   ?
-
-
-                               CoursePage(id: e.id.toString(),)
-                                   :
-                               WatchCourse(id:e.id.toString(),finishId: widget.id,)),
-                             }
-
-
-
-
-                           }
-                          else{
-                        AwesomeDialog(
-
-                        context: context,
-                        dialogType: DialogType.WARNING,
-                        animType: AnimType.BOTTOMSLIDE,
-                        title: 'تحذير',
-                        desc: 'أنك غير مشترك في هذه الدورة',
-                        btnCancelOnPress: () {},
-                        btnOkOnPress: () {
-
-                        },
-                      )..show()
-                          }
-
-                      },
-                      )
-                      *
-                      * */
+}

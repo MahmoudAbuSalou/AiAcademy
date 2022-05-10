@@ -1,11 +1,6 @@
 import 'package:academy/views/web_view/web_view.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter/material.dart';
-
-
-
 import '../components/const.dart';
 import '../components/loggin_text_field.dart';
 import '../components/login_button.dart';
@@ -16,11 +11,14 @@ import '../shared/network/local/cachehelper.dart';
 import 'HomeLayout/home_page.dart';
 import 'loginCubit/login_cubit.dart';
 
+
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   var formKey = GlobalKey<FormState>();
   TextEditingController userName = TextEditingController();
   TextEditingController password = TextEditingController();
+
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +29,7 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
+            /// if login Success  save user token and information
             if (state.userModel.token != null) {
               CacheHelper.saveData(key: 'token', value: state.userModel.token)
                   .then((value) => {
@@ -121,6 +120,7 @@ class LoginScreen extends StatelessWidget {
                         ):LoginButton(
                           load: false,
                           onTap: () {
+                            /// if user input true login else show error
                             if(formKey.currentState!.validate()) {
                               loginCubit.userLogin(userName: userName.text,
                                   password: password.text);
@@ -132,6 +132,7 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // ignore: deprecated_member_use
                     FlatButton(
                       onPressed: () {},
                       splashColor: kSwatchColor.withOpacity(0.3),
@@ -140,6 +141,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       child: InkWell(
                         onTap:(){
+                          /// register using web view
                           navigatorToNew(
                               context,
                               WebPage(Url:'https://aiacademy.info/%d8%a7%d9%84%d8%ad%d8%b3%d8%a7%d8%a8-%d8%a7%d9%84%d8%b4%d8%ae%d8%b5%d9%8a/?action=register'));

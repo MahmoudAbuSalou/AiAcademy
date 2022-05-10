@@ -6,6 +6,7 @@ abstract class LoginState {}
 class LoginInitial extends LoginState {}
 
 class LoadingState extends LoginState{}
+
 // ignore: must_be_immutable
 class LoginSuccessState extends LoginState{
   late UserModel userModel;

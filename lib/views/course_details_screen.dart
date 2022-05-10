@@ -1,23 +1,17 @@
-import 'package:academy/shared/components/components.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-
-import '../components/components.dart';
 import '../components/const.dart';
 import '../models/about_course_Model.dart';
 
+// ignore: must_be_immutable
 class CourseDetailsScreen extends StatelessWidget {
   AboutCourseModel aboutCourseModel;
   CourseDetailsScreen({Key? key,required this.aboutCourseModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //return Scaffold(
-    //body: SafeArea(
-    //child:
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -35,7 +29,7 @@ class CourseDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitleText(title:'لمحة عن الكورس'),
+                  const TitleText(title:'لمحة عن الكورس'),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
@@ -47,7 +41,7 @@ class CourseDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   const TitleText(title: 'تعريف التخصص'),
@@ -91,7 +85,7 @@ class SubtitleText extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset('assets/svg/dot.svg'),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -108,6 +102,7 @@ class SubtitleText extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CourseDetailsSection extends StatelessWidget {
   AboutCourseModel aboutCourseModel;
   CourseDetailsSection({
@@ -118,7 +113,7 @@ class CourseDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TitleText(
+        const TitleText(
           title: 'تفاصيل الكورس',
         ),
         CourseDetailsRow(
@@ -131,16 +126,7 @@ class CourseDetailsSection extends StatelessWidget {
           title: 'الإختبارات : ',
           value: aboutCourseModel.quiz,
         ),
-        // CourseDetailsRow(
-        //   iconUrl: 'assets/svg/timer.svg',
-        //   title: 'المدة : ',
-        //   value: '01:00:00',
-        // ),
-        // CourseDetailsRow(
-        //   iconUrl: 'assets/svg/up-arrow.svg',
-        //   title: 'الدرجة : ',
-        //   value: 6,
-        // ),
+
         CourseDetailsRow(
           iconUrl: 'assets/svg/online-education.svg',
           title: 'عدد الطلاب : ',
@@ -161,7 +147,7 @@ class TitleText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           '- ',
           style: TextStyle(
             fontSize: 30,
@@ -170,7 +156,7 @@ class TitleText extends StatelessWidget {
         ),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 19,
             fontFamily: kFontFamily,
             fontWeight: FontWeight.w500,
@@ -178,7 +164,7 @@ class TitleText extends StatelessWidget {
             color: kSwatchColor,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],
@@ -203,14 +189,8 @@ class CourseDetailsRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          // SvgPicture.asset(
-          //   iconUrl,
-          //   fit: BoxFit.none,
-          //   width: 25,
-          //   height: 25,
-          //   color: kSwatchColor,
-          // ),
-          SizedBox(
+
+          const SizedBox(
             width: 5,
           ),
           Text(
@@ -222,7 +202,7 @@ class CourseDetailsRow extends StatelessWidget {
 
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
           Text(

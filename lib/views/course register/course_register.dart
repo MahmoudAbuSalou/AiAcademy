@@ -1,4 +1,8 @@
-
+// ignore: slash_for_doc_comments
+/**
+ *  This page is responsible for displaying
+ * the name and price of the course before purchasing the course
+ * **/
 
 import 'dart:io';
 
@@ -21,6 +25,8 @@ class CourseRegister extends StatefulWidget {
 
 class _CourseRegisterState extends State<CourseRegister> {
   TextEditingController courseName=TextEditingController();
+
+  /// this function responsible for connect with whatApp
   void launchWhatsApp(
       {required int phone,
         required String message,
@@ -162,8 +168,8 @@ class _CourseRegisterState extends State<CourseRegister> {
       padding:  EdgeInsets.symmetric(horizontal:size.width*kPadding ),
       child: Container(
         height: 45,
-        margin: EdgeInsets.symmetric(vertical: 10),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        decoration: const BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
@@ -182,7 +188,7 @@ class _CourseRegisterState extends State<CourseRegister> {
             filled: true,
             fillColor: Colors.white,
             hintText: name,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color:kSwatchColor,
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -193,14 +199,14 @@ class _CourseRegisterState extends State<CourseRegister> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color:kSwatchColor,
                 width: 2,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: kSwatchColor,
                 width: 2,
               ),

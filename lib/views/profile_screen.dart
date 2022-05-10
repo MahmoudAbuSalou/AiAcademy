@@ -1,5 +1,3 @@
-import 'package:academy/shared/network/end_point.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +5,6 @@ import 'package:academy/shared/components/components.dart';
 import 'package:academy/shared/network/local/cachehelper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../components/const.dart';
-import '../components/custom_image.dart';
 import '../models/ProfileModel.dart';
 import 'Profile_Cubit/profile_cubit.dart';
 import 'course_info.dart';
@@ -20,6 +17,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  /// state of user courses
   List textItems = ["الكل", "الغير منتهية", "المنتهية", "نجاح", "فشل"];
   int selectedIndex = 0;
 
@@ -37,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           return ConditionalBuilder(
               condition: state is ProfileSuccessState,
-              fallback: (context) => Scaffold(
+              fallback: (context) => const Scaffold(
                   backgroundColor: Colors.white,
                   body: Center(
                     child: CircularProgressIndicator(
@@ -47,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (context) {
                 return Scaffold(
                   // appBar: AppBar(),
-                  appBar:PreferredSize(
+                  appBar:const PreferredSize(
                     preferredSize: Size.fromHeight(200),
                     child: MyAppBar(title: "الملف الشخصي"),
 
@@ -55,9 +53,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   body: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // MyAppBar(
-                        //   title: 'الصفحة الشحصية',
-                        // ),
                         const SizedBox(
                           height: 25,
                         ),
@@ -70,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             Text(
                               CacheHelper.getData(key: 'user_display_name'),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: kSecondaryColor,
                                 fontFamily: kFontFamily,
                                 fontSize: 16,
@@ -142,7 +137,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget getCoursesInfo(Courses course) {
+
     List allCourse = [...course.finished, ...course.in_Progress];
+    /// get course that user not passed
     List failed = allCourse
         .where((item) =>
     (item.graduation != "passed" && item.graduation != "in-progress"))
@@ -164,6 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 class AppBarItem extends StatelessWidget {
   final String title;
   final bool isSelected;
+  // ignore: prefer_typing_uninitialized_variables
   final onPress;
 
   const AppBarItem(
@@ -181,13 +179,14 @@ class AppBarItem extends StatelessWidget {
         onTap: onPress,
         child: Column(
           children: [
+            // ignore: avoid_unnecessary_containers
             Container(
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
                   title,
                   textDirection: TextDirection.rtl,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: kSecondaryColor,
                     fontWeight: FontWeight.w500,
                     fontFamily: kFontFamily,
@@ -200,7 +199,7 @@ class AppBarItem extends StatelessWidget {
                 height: 3,
                 width: 45,
                 color: kSwatchColor,
-                margin: EdgeInsets.only(top: 3),
+                margin: const EdgeInsets.only(top: 3),
               ),
           ],
         ),
@@ -209,10 +208,11 @@ class AppBarItem extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class AllCourses extends StatelessWidget {
   List<dynamic>? course;
 
-  AllCourses({ this.course});
+  AllCourses({Key? key,  this.course}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -233,11 +233,13 @@ class AllCourses extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CourseItemCard extends StatelessWidget {
   final String imageUrl;
   final String id;
   final String title;
   dynamic endTime;
+  // ignore: non_constant_identifier_names
   final dynamic Expiration_time;
   final dynamic results;
 
@@ -247,6 +249,7 @@ class CourseItemCard extends StatelessWidget {
     required this.title,
     required this.results,
     required this.endTime,
+    // ignore: non_constant_identifier_names
     required this.Expiration_time,
     required this.imageUrl,
   }) : super(key: key);
@@ -256,7 +259,7 @@ class CourseItemCard extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        navigatorTo(context, CourseInfo(id: this.id.toString()));
+        navigatorTo(context, CourseInfo(id: id.toString()));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 5, right: 15, left: 20),
@@ -289,15 +292,15 @@ class CourseItemCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     textDirection: TextDirection.rtl,
                     children: [
-                      SizedBox(height: 3),
+                      const SizedBox(height: 3),
                       Expanded(
                         child: Center(
                           child: Container(
-                            padding: EdgeInsetsDirectional.only(start: 5),
+                            padding: const EdgeInsetsDirectional.only(start: 5),
                             child: Text(
                               title,
                               maxLines: 1,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 color: kSwatchColor,
                                 fontSize: 16,
@@ -311,10 +314,10 @@ class CourseItemCard extends StatelessWidget {
                       Expanded(
                         child: Container(
                           width: double.infinity,
-                          padding: EdgeInsetsDirectional.only(
+                          padding: const EdgeInsetsDirectional.only(
                               start: 10, top: 7, bottom: 8),
                           child: Text(
-                            "النتيجة:" + "%${results} ",
+                            "النتيجة:" "%$results ",
                             // style: TextStyle(
                             //   color:Colors.black,
                             //   fontSize: 14,
@@ -328,13 +331,12 @@ class CourseItemCard extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           padding:
-                          EdgeInsetsDirectional.only(start: 8, bottom: 12),
+                          const EdgeInsetsDirectional.only(start: 8, bottom: 12),
                           height: 30,
                           child: endTime is! String
-                              ? Text("تاريخ الانتهاء: _")
+                              ? const Text("تاريخ الانتهاء: _")
                               : AutoSizeText(
-                            "تاريخ الانتهاء : " +
-                                "${endTime.substring(0, 10)}",
+                            "تاريخ الانتهاء : " "${endTime.substring(0, 10)}",
                             maxLines: 2,
                           ),
                         ),
@@ -342,12 +344,12 @@ class CourseItemCard extends StatelessWidget {
                       Expanded(
                         child: Container(
                             width: double.infinity,
-                            padding: EdgeInsetsDirectional.only(start: 2),
+                            padding: const EdgeInsetsDirectional.only(start: 2),
                             height: 30,
                             child: Expiration_time is! String ?
-                            Text("تاريخ الصلاحية: _")
+                            const Text("تاريخ الصلاحية: _")
                                 :AutoSizeText(
-                              "تاريخ الصلاحية: " +
+                              "تاريخ الصلاحية: "
                                   "${Expiration_time.substring(0, 10)}",
                               maxLines: 2,
                             )),
@@ -379,9 +381,9 @@ class CoursesCountContainer extends StatelessWidget {
           Container(
             height: 100,
             width: 100,
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              color: Color(0xff32504F),
+              color: const Color(0xff32504F),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Center(
@@ -432,9 +434,9 @@ class MyAppBar extends StatelessWidget {
       child: Container(
         width: size.width,
         height: size.height * 0.11,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: kSwatchColor,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(32),
           ),
         ),
@@ -444,7 +446,7 @@ class MyAppBar extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: kPrimaryColor,
                     fontSize: 18,
                     fontFamily: kFontFamily,
@@ -458,7 +460,7 @@ class MyAppBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios_new,
                   color: Colors.white,
                 ),

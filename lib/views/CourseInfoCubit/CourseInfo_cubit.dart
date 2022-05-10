@@ -1,4 +1,12 @@
-import 'dart:convert';
+// ignore: slash_for_doc_comments
+/**
+ *   - this cubit use in course info Page
+ *   - this cubit responsible:
+ *    -1-  get course details
+ *    -2-  get course lessons
+ *    -3-  get course review
+ *    -3-  add comment and rating to specific course
+ * */
 
 import 'package:academy/shared/components/components.dart';
 import 'package:academy/shared/components/constants.dart';
@@ -10,20 +18,37 @@ import '../../models/about_course_Model.dart';
 import '../../models/lessons.dart';
 import '../../shared/network/remote/ExceptionHandler.dart';
 import '../../shared/network/remote/dio_helper.dart';
+import 'CourseInfo_state.dart';
 
-part 'review_state.dart';
 
 class ReviewCubit extends Cubit<ReviewState> {
   ReviewCubit() : super(ReviewInitial());
 
+
+  ///  create instance of class ReviewCubit
   static ReviewCubit get(context) => BlocProvider.of(context);
+
+  /// Controller for pagination
   RefreshController refreshController = RefreshController(initialRefresh: false);
+  /// this variable describe number of page that contain courses
   int countPagination=1;
+  /// model of course details
   late AboutCourseModel aboutCourseModel;
-    late ReviewModel reviewModel;
-     late AutoGenerate lessonsModel;
+  /// model of course review
+  late ReviewModel reviewModel;
+  /// model of course lessons
+  late AutoGenerate lessonsModel;
+
+     /// default value for index of  bottom navigation bar
   int activeTabBar = 1;
+  /// default value for  rating => (  default is one stars )
   int ratingValue = 1;
+  // ignore: slash_for_doc_comments
+  /***
+   *  this variables check if data load successfully  from Api
+   *  and convert from json to class model successfully
+   *
+   * */
   bool loadInfo = false;
   bool loadLessons = false;
   bool loadReview = false;
@@ -31,18 +56,23 @@ class ReviewCubit extends Cubit<ReviewState> {
   String loadSubscribeCourse = '';
   String message = "";
 
+  // ignore: non_constant_identifier_names
+
+  // ignore: non_constant_identifier_names
   void ChangeActiveTabBar(int index) {
     activeTabBar = index;
     emit(ChangeActiveTabBarState());
   }
 
+  // ignore: non_constant_identifier_names
   void ChangeRatingValue(int index) {
     ratingValue = index;
     emit(ChangeRatingValueState());
   }
 
-  void getReviewCubit({required String id}) {
 
+  /// TODO  get review of course
+  void getReviewCubit({required String id}) {
 
       emit(GetReviewLoading());
 
@@ -57,12 +87,12 @@ class ReviewCubit extends Cubit<ReviewState> {
 
       emit(GetReviewSuccess(reviewModel));
     }).catchError((error) {
-
-      print(error);
       emit(GetReviewError(""));
     });
   }
 
+
+   ///  TODO get course Details
   void getCourseInfo({required String id}) {
     emit(GetCourseInfoLoading());
     DioHelper.getData(
@@ -71,29 +101,20 @@ class ReviewCubit extends Cubit<ReviewState> {
         .then((value) {
 
       aboutCourseModel = AboutCourseModel.fromJson(value.data);
-     print(aboutCourseModel.price);
-     print(aboutCourseModel.status);
-      print('sale');
       loadInfo = true;
       emit(GetCourseInfoSuccess(aboutCourseModel));
 
     }).catchError((error) {
-      String ERROR = exceptionsHandle(error: error);
       emit(GetCourseInfoError("ERROR"));
     });
   }
 
+  /// TODO Add Comment and Rating To Course
   void submitReview({required String id,
     required int rate,
     required String title,
     required String content}) {
-
-    print("id     : " + id);
-    print("rate   : " + rate.toString());
-    print("tittle : " + title);
-    print("content: " + content);
     emit(PostCourseReviewLoading());
-
     DioHelper.postData(
             url:
                'learnpress/v1/review/submit',
@@ -105,12 +126,12 @@ class ReviewCubit extends Cubit<ReviewState> {
             },
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
-      print(value.data);
             loadReviewSubmit = true;
       showToast(msg: 'سوف يظهر تعليقك بعد ان تتم مراجعته', state: ToastState .SUCCESS);
 
       emit(PostCourseReviewSuccess());
     }).catchError((error) {
+      // ignore: non_constant_identifier_names
       String ERROR = exceptionsHandle(error: error);
       showToast(msg: ERROR, state: ToastState.ERROR);
 
@@ -118,6 +139,8 @@ class ReviewCubit extends Cubit<ReviewState> {
     });
   }
 
+
+  /// TODO Get Course Lessons
   void getLessons({required String id}) {
     emit(GetLessonsLoading());
 
@@ -125,25 +148,20 @@ class ReviewCubit extends Cubit<ReviewState> {
             url: 'learnpress/v1/courses/$id',
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
-
-
     lessonsModel =   AutoGenerate.fromJson(value.data);
-
-
-
     loadLessons=true;
 
      emit(GetLessonsSuccess(lessonsModel));
     }).catchError((error) {
-
-
       emit(GetLessonsError("ERROR"));
     });
   }
+
+  /// TODO Enrolled Course
   void subscribeCourse({required String id}) {
     loadSubscribeCourse = 'load';
     emit(SubscribeCourseLoading());
-    print(CacheHelper.getData(key: 'token'));
+
     DioHelper.postData(
             url: 'learnpress/v1/courses/enroll/',
             data: {
@@ -153,17 +171,14 @@ class ReviewCubit extends Cubit<ReviewState> {
         .then((value) {
          loadSubscribeCourse='done';
           showToast(msg: 'تهانينا! تم الاشتراك بنجاح..', state: ToastState.SUCCESS);
+            /// update Status of lesson after enrolled course
              getLessons(id: id);
 
 
      emit(SubscribeCourseSuccess());
     }).catchError((error) {
-     print(error);
+
       emit(SubscribeCourseError());
     });
   }
-
-
-
-
 }

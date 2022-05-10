@@ -135,7 +135,7 @@ class Course extends StatelessWidget {
 
   final double width;
   final double height;
-  final int rate;
+  final  rate;
   final VoidCallback onTap;
   final String courseImage,
       platformImage,

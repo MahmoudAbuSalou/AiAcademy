@@ -1,16 +1,23 @@
-part of 'review_cubit.dart';
 
+
+
+import '../../models/about_course_Model.dart';
+import '../../models/lessons.dart';
+import '../../models/review_model.dart';
 
 abstract class ReviewState {}
-//// Initial State
+/// Initial State
 class ReviewInitial extends ReviewState {}
 
-//Active Bar State
+///Active Bar State
 class ChangeActiveTabBarState extends ReviewState {}
-//Rating State
+
+/// Rating State
 class ChangeRatingValueState extends ReviewState {}
 
-// Review State
+
+
+/// Reviews State
 class GetReviewLoading extends ReviewState {}
 class GetReviewSuccess extends ReviewState {
   ReviewModel reviewModel ;
@@ -18,6 +25,7 @@ class GetReviewSuccess extends ReviewState {
 
 }
 class GetReviewError extends ReviewState {
+  // ignore: non_constant_identifier_names
   final String ERROR;
 
   GetReviewError(this.ERROR);
@@ -25,7 +33,9 @@ class GetReviewError extends ReviewState {
 
 }
 
-//CourseInfo State
+
+
+/// Details Course  State
 class GetCourseInfoLoading extends ReviewState {}
 class GetCourseInfoSuccess extends ReviewState {
   AboutCourseModel aboutCourseModel ;
@@ -33,6 +43,7 @@ class GetCourseInfoSuccess extends ReviewState {
 
 }
 class GetCourseInfoError extends ReviewState {
+  // ignore: non_constant_identifier_names
   final String ERROR;
 
   GetCourseInfoError(this.ERROR);
@@ -40,7 +51,9 @@ class GetCourseInfoError extends ReviewState {
 
 }
 
-// Add Comment and Rating State
+
+
+/// Add Comment and Rating State
 class PostCourseReviewLoading extends ReviewState {}
 class PostCourseReviewSuccess extends ReviewState {
 
@@ -48,6 +61,7 @@ class PostCourseReviewSuccess extends ReviewState {
 
 }
 class PostCourseReviewError extends ReviewState {
+  // ignore: non_constant_identifier_names
   final String ERROR;
 
   PostCourseReviewError(this.ERROR);
@@ -55,7 +69,8 @@ class PostCourseReviewError extends ReviewState {
 
 }
 
-// Get Lessons State
+
+/// Get Lessons State
 class GetLessonsLoading extends ReviewState {}
 class GetLessonsSuccess extends ReviewState {
 
@@ -64,6 +79,7 @@ class GetLessonsSuccess extends ReviewState {
 
 }
 class GetLessonsError extends ReviewState {
+  // ignore: non_constant_identifier_names
   final String ERROR;
 
   GetLessonsError(this.ERROR);
@@ -71,7 +87,7 @@ class GetLessonsError extends ReviewState {
 
 }
 
-//Subscribe Course State
+/// Enrolled  Course State
 class SubscribeCourseLoading extends ReviewState {}
 class SubscribeCourseSuccess extends ReviewState {
 
