@@ -9,6 +9,7 @@ class ProfileModel {
 class Courses {
   List<SingleCourse> finished = [];
   List<SingleCourse> passed = [];
+  // ignore: non_constant_identifier_names
   List<SingleCourse> in_Progress = [];
 
   Courses.fromJson(Map<String, dynamic>? json) {

@@ -24,7 +24,7 @@ class AboutCourseModel {
 
     rating = json['rating'];
   }
-
+/// function to parse html content to String
   String parseHtmlString(String htmlString) {
     final document = parse(htmlString);
     const end = "للتعرف";
