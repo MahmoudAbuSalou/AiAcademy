@@ -14,13 +14,13 @@ class LoginScreenScaffold extends StatelessWidget {
         height: size.height,
         width: size.width,
         decoration: const BoxDecoration(
-          //color: Colors.orange,
+
           image:
               DecorationImage(image: AssetImage('images/bg_login.png')),
         ),
         child: DelayedDisplay(
           delay: Duration(milliseconds: 150),
-          //fadingDuration: Duration(milliseconds: 400),
+
           slidingBeginOffset: Offset(0, 1),
           slidingCurve: Curves.easeInOutSine,
           child: Container(

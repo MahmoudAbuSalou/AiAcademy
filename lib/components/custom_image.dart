@@ -48,17 +48,7 @@ class CustomImage extends StatelessWidget {
       ),
       child: imageUrl != ""
           ?
-      /*CachedNetworkImage(
-              imageUrl: imageUrl,
-              placeholder: (context, url) => BlankImageWidget(),
-              errorWidget: (context, url, error) => BlankImageWidget(),
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: borderRadius ?? BorderRadius.circular(radius),
-                  image: DecorationImage(image: imageProvider, fit: fit),
-                ),
-              ),
-            )*/
+
            FancyShimmerImage(
         boxFit: BoxFit.cover,
         imageUrl: imageUrl,
@@ -92,7 +82,8 @@ class _BlankImageWidgetState extends State<BlankImageWidget> {
           clipBehavior: Clip.antiAlias,
           elevation: 0.0,
         ),
-      )),
+      )
+      ),
     );
   }
 }

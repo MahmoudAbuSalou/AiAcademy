@@ -42,7 +42,7 @@ class ReviewCubit extends Cubit<ReviewState> {
   }
 
   void getReviewCubit({required String id}) {
-    // url: 'learnpress/v1/review/course/$id'
+
 
       emit(GetReviewLoading());
 
@@ -87,7 +87,7 @@ class ReviewCubit extends Cubit<ReviewState> {
     required int rate,
     required String title,
     required String content}) {
-    //url:'learnpress/v1/review/submit'
+
     print("id     : " + id);
     print("rate   : " + rate.toString());
     print("tittle : " + title);
@@ -135,8 +135,7 @@ class ReviewCubit extends Cubit<ReviewState> {
 
      emit(GetLessonsSuccess(lessonsModel));
     }).catchError((error) {
-      // print(error);
-      // String ERROR = exceptionsHandle(error: error);
+
 
       emit(GetLessonsError("ERROR"));
     });
@@ -168,5 +167,3 @@ class ReviewCubit extends Cubit<ReviewState> {
 
 
 }
-// /wp-json/learnpress/v1/courses/id_course
-//'learnpress/v1/courses?learned=true&include=$id'

@@ -31,7 +31,7 @@ class QuizModel{
 
   }
 }
-//ResultsInt
+//ResultsIntrnal
 class Results {
   dynamic mark;
   dynamic userMark;
@@ -42,7 +42,7 @@ class Results {
   dynamic questionCorrect;
   dynamic status;
   dynamic  resul;
- // Res? results;
+
   dynamic timeSpend;
   dynamic passingGrade;
   dynamic userItemId;
@@ -50,7 +50,7 @@ class Results {
   dynamic graduationText;
   dynamic  total_time;
   List <Ques>  questions=[];
- // var entity ;
+
 
   Results(
       {this.mark,
@@ -62,7 +62,7 @@ class Results {
         this.questionCorrect,
         this.status,
         required this.questions,
-    //    this.results,
+
         this.timeSpend,
         this.passingGrade,
         this.userItemId,
@@ -84,7 +84,7 @@ class Results {
 
     if (json['questions'] != null){
       IDS.forEach((element) {
-        // print(json['questions']['$element']['correct']);
+
 
         questions.add(Ques.fromJson(json['questions']['$element']));
       });

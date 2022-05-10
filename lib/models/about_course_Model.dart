@@ -30,7 +30,7 @@ class AboutCourseModel {
     const end = "للتعرف";
     final String parsedString =
         parse(document.body?.text).documentElement!.text;
-    //final String content  = parsedString.substring(0,parsedString.indexOf(end));
+
 
     return parsedString;
   }

@@ -25,12 +25,5 @@ class courseModel {
         );
     }
 
-    // Map<String, dynamic> toJson() {
-    //     final Map<String, dynamic> data = new Map<String, dynamic>();
-    //     data['image'] = this.image;
-    //     data['name'] = this.name;
-    //     data['price'] = this.price;
-    //     data['count_students']=this.count_students;
-    //     return data;
-    // }
+
 }

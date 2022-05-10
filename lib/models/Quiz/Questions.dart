@@ -24,9 +24,7 @@ class Questions {
     type = json['type'];
     point = json['point'];
 
-    //idd=json['results']['results']['questions']['$id']['correct'];
 
-   // correct=json['results']['results']['questions']['$id']['correct'];
     if (json['options'] != null) {
       options = <Options>[];
       json['options'].forEach((v) {

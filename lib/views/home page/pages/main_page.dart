@@ -20,6 +20,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
 var height=0.0;var width=0.0;
+
+//List Of Info That i show It In Carsoul Slider
  List <Widget> Univ=[
   UniversityContainer(name: 'ادارة أعمال', color: Color(0xff32504F),icon: SvgPicture.asset('images/portfolio.svg',color: Colors.white,),),
   UniversityContainer(name: 'الحقوق', color: Color(0xff0096B1),icon: SvgPicture.asset('images/justice.svg',color: Colors.white)),
@@ -33,6 +35,8 @@ var height=0.0;var width=0.0;
   UniversityContainer(name: 'الدراسات الاسلامية', color: Color(0xff0096B1),icon: SvgPicture.asset('images/quran.svg',color: Colors.white)),
   UniversityContainer(name: 'التربية', color: Color(0xff562DD4),icon: SvgPicture.asset('images/education.svg',color: Colors.white)),
 ];
+
+ //List Of Main Sections In Main Page
 List <Widget>  Speci=[
 
 ];
@@ -66,9 +70,7 @@ List <Widget>  Speci=[
                 ),
               ],
             ),
-            // GestureDetector(child: SearchTextField(),
-            // onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context) =>SearchScreen() ,)),
-            // ),
+
             SizedBox(height: size.height*.025,),
 
             Row(
@@ -77,7 +79,7 @@ List <Widget>  Speci=[
                 FittedBox(child: AutoSizeText('التخصصات',style: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),),)
               ],
             ),
-           // SizedBox(height: size.height*.009,),
+
             Container(
               width: size.width,
               height: 160,
@@ -86,7 +88,7 @@ List <Widget>  Speci=[
                 items: Univ,
                   options: CarouselOptions(
                     height: 250,
-                    //aspectRatio: 16/9,
+
                     viewportFraction: 0.3,
                     initialPage: 0,
                     enableInfiniteScroll: true,
@@ -96,7 +98,7 @@ List <Widget>  Speci=[
                     autoPlayAnimationDuration: Duration(milliseconds: 1000),
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enlargeCenterPage: true,
-                    // onPageChanged: callbackFunction,
+
                     scrollDirection: Axis.horizontal,
                   )
               ),
@@ -147,44 +149,7 @@ class SearchTextField extends StatelessWidget {
         color: Colors.grey,
         borderRadius: new BorderRadius.circular(10.0),
       ),
-      // child: TextFormField(
-      //
-      //    // focusNode:FocusScope.of(context).unfocus(),
-      //   decoration: InputDecoration(
-      //
-      //     focusColor: kSwatchColor,
-      //     // iconColor: kSwatchColor,
-      //     contentPadding: const EdgeInsets.symmetric(vertical: 0.0),
-      //     filled: true,
-      //     // fillColor: isLightMode.value
-      //     //     ? Color(0xffF2F0F0)
-      //     //     : Colors.black.withOpacity(0.4),
-      //     prefixIcon: Padding(
-      //         padding: const EdgeInsets.only(left: 10),
-      //         child: Icon(Icons.search)
-      //     ),
-      //     suffixIcon: Container(
-      //       width: 45,
-      //       decoration: BoxDecoration(
-      //           color: kSwatchColor,
-      //           borderRadius: BorderRadius.circular(20)
-      //       ),
-      //       child: Icon(Icons.filter_alt,color: Colors.white,),
-      //     ),
-      //     border: OutlineInputBorder(
-      //       borderRadius: BorderRadius.circular(20.0),
-      //       borderSide: BorderSide.none,
-      //     ),
-      //     focusedBorder: OutlineInputBorder(
-      //       borderSide: BorderSide(
-      //         color: kSecondaryColor,
-      //       ),
-      //       borderRadius: BorderRadius.all(
-      //         Radius.circular(20.0),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+
     );
   }
 }

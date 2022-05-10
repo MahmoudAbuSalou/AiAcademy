@@ -87,7 +87,7 @@ class BorderedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 30,
-      //width: size.width,
+
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: RaisedButton(
         onPressed: onPress,
@@ -105,7 +105,7 @@ class BorderedButton extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
-                // fontSize: 12,
+
               ),
             ),
           ),
@@ -182,26 +182,11 @@ class Course extends StatelessWidget {
                         errorWidget: Image.network(
                             'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
                       ),
-                      // decoration: BoxDecoration(
-                      //   color: Colors.grey.shade50,
-                      //   borderRadius: BorderRadius.circular(9.0),
-                      //   image:
-                      //   DecorationImage(
-                      //     fit: BoxFit.cover,
-                      //     image: NetworkImage(courseImage),
-                      //   ),
-                      // ),
+
+
                     ),
                   ),
-                  // Container(
-                  //   padding: EdgeInsets.only(left: 8),
-                  //   child: CircleAvatar(
-                  //     backgroundColor: Colors.transparent,
-                  //     minRadius: 24,
-                  //     maxRadius: 28,
-                  //     backgroundImage: NetworkImage(platformImage),
-                  //   ),
-                  // ),
+
                 ],
               ),
             ),
@@ -249,7 +234,7 @@ class Course extends StatelessWidget {
                               child: CircleAvatar(
                                 backgroundColor: Colors.transparent,
                                 minRadius: 45.r,
-                                // maxRadius: 40.r,
+
                                 backgroundImage: NetworkImage(platformImage),
                               ),
                             ),
@@ -314,30 +299,13 @@ class Course extends StatelessWidget {
                                   color: kSwatchColor,
                                 ),
                                 onRatingUpdate: (rating) {
-                                  //reviewCubit!.ratingValue = rating.toInt() ;
+
 
                                   print(rating);
                                 },
                               ),
                             ),
-                            // Row(
-                            //   crossAxisAlignment: CrossAxisAlignment.center,
-                            //   children: [
-                            //
-                            //
-                            //     // FittedBox(
-                            //     //   child: Text(
-                            //     //     '($rate)',
-                            //     //     style: TextStyle(
-                            //     //       fontSize: 30.sp,
-                            //     //       fontFamily: kFontFamily,
-                            //     //       fontWeight: FontWeight.w600,
-                            //     //       overflow: TextOverflow.fade,
-                            //     //     ),
-                            //     //   ),
-                            //     // ),
-                            //   ],
-                            // ),
+
                           ],
                         ),
                       ],
@@ -418,7 +386,10 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return OpenContainer(
+      //the Card Of Collage or University
       closedBuilder: (context, action) => SizedBox(
         height: height * .25,
         width: width * .35,
@@ -456,6 +427,7 @@ class ItemCard extends StatelessWidget {
           ],
         ),
       ),
+      //Content Of Collage or University [ Courses  ]
       openBuilder: (context, action) => BlocProvider(
         create: (context) => CoursesCubit()..getCourseData(id),
         child: BlocConsumer<CoursesCubit, CoursesState>(
@@ -469,11 +441,13 @@ class ItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MyAppBar(title: title),
-                  //HerePagination
+
                   Expanded(
                     child: ConditionalBuilder(
                         condition: state is! GetDataLoadingAcademyCourses,
-                        builder: (context) => SmartRefresher(
+                        builder: (context) =>
+                            //Pagination : Wrap Grid View With SmartRefresher
+                            SmartRefresher(
                               controller: cubit.refreshController,
                               enablePullUp: true,
                               enablePullDown: false,
@@ -483,7 +457,7 @@ class ItemCard extends StatelessWidget {
                               child: GridView.builder(
                                 shrinkWrap: true,
                                 physics:
-                                    //   const NeverScrollableScrollPhysics(),
+
                                     const BouncingScrollPhysics(),
                                 itemCount: cubit.courses.length,
                                 gridDelegate:
@@ -491,7 +465,7 @@ class ItemCard extends StatelessWidget {
                                   crossAxisCount: 2,
                                   mainAxisExtent: height * .37,
                                   mainAxisSpacing: width * .03,
-                                  //   crossAxisSpacing: height * .02
+
                                 ),
                                 itemBuilder: (context, index) => Course(
                                   width: width,
@@ -502,7 +476,7 @@ class ItemCard extends StatelessWidget {
                                   courseName: cubit.courses[index].name,
                                   coursePrice: '\$' +
                                       cubit.courses[index].price.toString(),
-                                  //'\$60.000',
+
                                   courseCommentsCount: '0',
                                   courseStudentsCount: cubit
                                       .courses[index].count_students
@@ -531,7 +505,7 @@ class ItemCard extends StatelessWidget {
                               ],
                             )),
                   ),
-                  //GridView Builder for the courses
+
                 ],
               ),
             );

@@ -39,13 +39,15 @@ class University extends StatelessWidget {
               SizedBox(
                 height: height,
                 child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: universityImages.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: width * .03,
                       crossAxisSpacing: height * .02),
-                  itemBuilder: (context, index) => ItemCard(
+                  itemBuilder: (context, index) =>
+                      //Fill ItemCard From University Model
+                      ItemCard(
                     height: height,
                     width: width,
                     image: universityImages[index],

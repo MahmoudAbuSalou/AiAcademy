@@ -48,7 +48,10 @@ return Scaffold(
                         crossAxisCount: 2,
                         mainAxisSpacing: width * .03,
                         crossAxisSpacing: height * .02),
-                    itemBuilder: (context, index) => ItemCard(
+                    itemBuilder: (context, index) =>
+
+                    //Fill Item Card From CollageModel
+                        ItemCard(
                       height: height,
                       width: width,
                       image: collageImages[index],

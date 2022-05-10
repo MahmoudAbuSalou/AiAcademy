@@ -17,34 +17,46 @@ part  'course_content_state.dart';
 
 class CourseContentCubit extends Cubit<CourseContentState> {
   CourseContentCubit() : super(CourseContentInitial());
+
   static CourseContentCubit get(context) => BlocProvider.of(context);
+  //Useful For Conditional builder in Class (WatchCourse) in File (lessonContent) For Show
   bool test=false;
 
+ //To Storage Course Model
   late CourseWatchModel  course;
+
+  //List of Titels and Icons that i use it in bottom Nav Bar In  Class (WatchCourse) in File (lessonContent)
   List<BottomNavigationBarItem> list = [
     BottomNavigationBarItem(icon: Icon(Icons.video_call_outlined), label: "الفيديوهات"),
     BottomNavigationBarItem(icon: Icon(Icons.list), label: "الملحقات"),
 
   ];
+  //Index For show page that i need it from Nav Bar
   int currentIndex = 0;
+
+  //Api for get Data of Course
   void getCourseWatchCubit( {required String id,required context}){
     print(id);
     emit(GetDataLoadingWatchCourse());
     DioHelper.getData(url: 'learnpress/v1/lessons/$id',token: CacheHelper.getData(key: 'token'))
         .then((value) {
+
        print(value.data);
+
+       //Parsing
       course = CourseWatchModel.fromJson(value.data);
 
+      //Call getLinkVideos : it will extract links of Videos From ContentHtml (links) in Model
       course.getLinkVideos(course.links);
       course.linkvideo.forEach((e)=>print(e));
+       //Call getLinkPdfs : it will extract links of Pdfs From ContentHtml (links) in Model
       course.getLinkPdfs(course.links);
 
 
 
 
 
-      //print(" CourseLink: ${course.linkvideo[1]}");
-      //  print(" CoursePdfLink: ${course.linkPdf[1]}");
+    //Change value of test for Show
       test=true;
       emit(GetDataSuccessWatchCourse());
     }).catchError((error) {
@@ -58,6 +70,9 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
 
   }
+
+
+  //Api for Finis Lesson
   void finishLesson({required String id,required token}) {
     print(id);
     //مكتمل
@@ -66,7 +81,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
 
     },token: token,).then((value) {
-
+        //Show Message that Backend return it for me (if SUCCESS)
       showToast(msg: value.data['message'] , state:ToastState.SUCCESS);
       print(value.data);
 
@@ -82,14 +97,17 @@ class CourseContentCubit extends Cubit<CourseContentState> {
       emit(ErrorFinishLesson());
     });
   }
+
+
+  // Api for Finish Course
   void finishCourse({required String id,required token}) {
 
     emit(loadingFinishCourse());
-    DioHelper.postData(url:'learnpress/v1/courses/finish?id=$id' /*'/wp-json/learnpress/v1/courses/finish?id=105110'*/, data: {
+    DioHelper.postData(url:'learnpress/v1/courses/finish?id=$id' , data: {
 
 
     },token: token).then((value) {
-      print(value.data);
+
 
 
 
@@ -103,6 +121,8 @@ class CourseContentCubit extends Cubit<CourseContentState> {
       emit(ErrorFinishCourse());
     });
   }
+
+  //To Change State Of Page
   void changeBottomNavigationBar(int index) {
     currentIndex = index;
     emit(ChangeBottomNavigationBar());

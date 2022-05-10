@@ -12,12 +12,13 @@ class CoursesCubit extends Cubit<CoursesState> {
 
   static CoursesCubit get(context) => BlocProvider.of(context);
   late List<courseModel> courses = [];
-
+   //Store Num Of Page of Dat To Pagination
   int countPagination = 1;
+  //Controller For Pagination
   RefreshController refreshController = RefreshController(initialRefresh: false);
-  dynamic temp;
 
 
+  //Api Fetch Data From Back With Pagination
   void getCourseData(int id) async{
 
 
@@ -33,13 +34,16 @@ class CoursesCubit extends Cubit<CoursesState> {
         courses.add(courseModel.fromJson(value.data[i]));
       }
 
+
+      //Add One To countPagination For Fetch Data From Next Page
       countPagination++;
 
+      //that Refer To The Data is Downloaded In Right Way
       refreshController.loadComplete();
 
       emit(GetDataSuccessAcademyCourses());
     }).catchError((error) {
-      print(error);
+
       refreshController.loadFailed();
       emit(GetDataErrorAcademyCourses());
     });

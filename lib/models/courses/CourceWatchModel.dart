@@ -38,9 +38,9 @@ CourseWatchModel({required this.can_finish_course,required this.title,required t
          index=r[i].indexOf('?list');
          list.add(r[i].substring(index));
          r[i]=r[i].substring(0,index);
-//src="//www.youtube.com/embed/2DLp-wL1IEQ"
+
       }
-//src="//www.youtube.com/embed/2DLp-wL1IEQ"
+
     }
 
     this.linkvideo=r;
@@ -57,7 +57,7 @@ void getLinkPdfs(String link) {
 
 
 print(li[i]);
-  //  doc [i]=await PDFDocument.fromURL(li[i]);
+
   }
   if(i==li.length){
     if(li[i-1].contains('embeddoc'))

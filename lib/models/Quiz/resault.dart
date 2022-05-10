@@ -16,7 +16,7 @@ class Res {
   String? status;
   List<Attempts>? attempts;
   Results ? result;
-  // List<Null>? checkedQuestions;
+
   String? startTime;
   dynamic retaken;
   dynamic  totalTime;
@@ -35,7 +35,7 @@ class Res {
         this.status,
         this.attempts,
         this.result,
-      //  this.checkedQuestions,
+
         this.startTime,
         this.retaken,
          this.totalTime});
@@ -49,21 +49,15 @@ class Res {
     pageNumbers = json['page_numbers'];
     reviewQuestions = json['review_questions'];
     result = json['results'] != null ? new Results.fromJson(json['results']) : null;
-    //supportOptions = json['support_options'];
+
     duration = json['duration'];
     status = json['status'];
-    // if (json['attempts'] != null) {
-    //   attempts = <Attempts>[];
-    //   json['attempts'].forEach((v) {
-    //     attempts!.add(new Attempts.fromJson(v));
-    //   });
-    // }
 
     startTime = json['start_time'];
     retaken = json['retaken'];
     totalTime = json['total_time'];
 
- // print(json['questions']['102439']['correct']);
+
 
   }
 

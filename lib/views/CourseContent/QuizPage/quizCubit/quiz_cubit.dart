@@ -21,23 +21,45 @@ part 'quiz_state.dart';
 
 class QuizCubit extends Cubit<QuizState> {
   QuizCubit() : super(QuizInitial());
-  bool test=false;
-  bool status=true;
-  String Message='';
-
-  bool inProgress=false;
-  late QuizModel quiz;
-  bool StartTimer=false;
-  Map answered={};
-  Map ReviewAnswered={};
-  late List<question> ? storeAnswers=[];
   static QuizCubit get(context) => BlocProvider.of(context);
+
+
+  //For Conditional Builder In QuizPage in File Quiz.dart
+  bool test=false;
+
+
+
+
+//For Change Screen Quiz if Quiz become in 'In Progress ' State
+  bool inProgress=false;
+
+  late QuizModel quiz;
+
+//To Storage Answers Of User On Quiz's Questions To Send It Back
+  Map answered={};
+
+
+
+
+  // To Store Answers Of User On Quiz's Questions in Last Time that i recieve it From Back
+  late List<question> ? storeAnswers=[];
+
+
+  //Timer For Calculate Time During Quiz
   Timer ? timer;
- dynamic start =3600;
- bool doneQuiz=true;
- String Time='';
- bool Review=false;
-  late Results  finalResult;
+
+  //Initial Start For Timer
+  //that i change it when i recieve data From Back in Api
+  // it is used in Timer
+   dynamic start =3600;
+
+
+
+//For Change Screen Quiz if Quiz become in 'Review ' State
+   bool Review=false;
+
+
+//Timer
  void startTimer() {
    Duration(seconds: 2);
     emit(ChangeTime());
@@ -62,18 +84,22 @@ class QuizCubit extends Cubit<QuizState> {
 
 
   }
+
+  //Api For Get Quiz
   void getQuiz( {required String id,context}){
-   //test=false;
-String token=CacheHelper.getData(key: 'token');
-print(token);
+
+
+
     emit(GetQuizLoading());
-    DioHelper.getData(url: 'learnpress/v1/quiz/$id',token:token,
+    DioHelper.getData(url: 'learnpress/v1/quiz/$id',token:CacheHelper.getData(key: 'token'),
     )
         .then((value ) {
 
 
         quiz=  QuizModel.fromJson(value.data);
 
+
+        //Change Value Of Time that i use it in Timer
           start=quiz.results!.totalTime!;
 
 
@@ -90,7 +116,7 @@ print(token);
       emit(GetQuizSuccess());
     }).catchError((error) {
       showToast(msg: 'عذراً ، الصفحة المطلوبة غير متوفرة', state:ToastState.ERROR);
-    //  Navigator.of(context).pop();
+
       print(error.toString());
 
       emit(GetQuizError());
@@ -99,12 +125,16 @@ print(token);
 
 
   }
+
+  //Change State Of Screen from 'In progress' To Anthor State and the opposite
   void changeScreen(){
     inProgress=!inProgress;
     emit(chgScreenQuiz());
   }
 
-
+  //To Change State in Quiz Page
+  //when i choose answer
+  //Instead Of SetState
   void change({count,index,valueRa,valueCheck,context}){
 
 
@@ -112,10 +142,14 @@ print(token);
     (index==null)?temp[count].value=valueRa:temp[count].isChecked[index]=valueCheck;
     emit(changeState());
   }
+
+  //Change State Of Screen from 'Review' To Anthor State and the opposite
   void moveToReview(){
    Review=!Review;
    emit(changeState());
   }
+
+  //Api To Start Quiz
   void startQuiz(id,context){
 
     String token=CacheHelper.getData(key: 'token');
@@ -125,8 +159,8 @@ print(token);
     ).then((value) {
 
       getQuiz(id: id,context: context);
-          StartTimer=true;
-    //  startTimer();
+
+
 
       emit(StartQuizSuccess());
 
@@ -138,14 +172,14 @@ print(token);
     });
   }
 
-
+  //Api To Finish Quiz
   void finishQuiz(id,context){
    timer?.cancel();
-   //answered.clear();
+
     String token=CacheHelper.getData(key: 'token');
- //  test =false;
+
   inProgress=false;
- doneQuiz=false;
+
    Map toSend= {
       "id":id,
     "answered":answered
@@ -170,9 +204,13 @@ print(token);
       emit(FinishQuizFailed());
     });
   }
+
+  //To Convert seconds  to Fromat 01:00:00
   String formatTime(int seconds) {
     return '${(Duration(seconds: seconds))}'.split('.')[0].padLeft(8, '0');
   }
+
+  // To Store Answers Of User On Quiz's Questions in Last Time that i recieve it From Back in [[     storeAnswers      ]]
   void fillReviewPage(){
   storeAnswers?.clear();
   int i=0;
@@ -194,7 +232,7 @@ print(token);
 
     if(quiz.questions[i].type!="multi_choice"){
 
-    // dynamic element=quiz.results?.result?.questions[i].answered;
+
      int value=10;
      int j=0;
      if( quiz.questions[i].options is! String) {
@@ -214,7 +252,7 @@ print(token);
 
 
 
-
+  // //Manipulate for Multi Choice
     else{
 
      if(quiz.results?.result?.questions[i].answered is! String && quiz.results?.result?.questions[i].answered is! bool) {
@@ -242,6 +280,8 @@ print(token);
     i++;
   });
   }
+
+  //SubString from 0 to Sign '%'
   String convert(String converter){
 
     int temp = converter.indexOf('%');

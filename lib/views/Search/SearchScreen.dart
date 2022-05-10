@@ -46,17 +46,18 @@ class SearchScreen extends StatelessWidget {
                     onFieldSubmitted: (s) {
                       SearchCubit.get(context).getSearchData(text: s);
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       suffixIcon: Icon(Icons.search),
                       label: Text('ابحث:'),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   if (state is GetDataLoadingSearchState)
-                    LinearProgressIndicator(),
+                    const LinearProgressIndicator(),
                   ConditionalBuilder(
+                    // ignore: unnecessary_null_comparison
                     condition: SearchCubit.get(context).courses != null,
                     builder: (context) => Expanded(
                       child: GridView.builder(
@@ -85,7 +86,7 @@ class SearchScreen extends StatelessWidget {
                                   .courses[index]
                                   .price
                                   .toString(),
-                          //'\$60.000',
+
                           courseCommentsCount: '0',
                           courseStudentsCount: SearchCubit.get(context)
                               .courses[index]

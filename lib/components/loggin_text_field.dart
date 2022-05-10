@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'const.dart';
 
-// ignore: must_be_immutable
+
 class LogginTextField extends StatelessWidget {
   final String title;
   final String iconPath;

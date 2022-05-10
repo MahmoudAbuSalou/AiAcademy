@@ -18,6 +18,8 @@ class SearchCubit extends Cubit<SearchStates> {
 
 
   late List <courseModel> courses=[];
+
+  //Api Search
   void getSearchData({required String text}) {
     courses.clear();
 
@@ -29,7 +31,7 @@ class SearchCubit extends Cubit<SearchStates> {
           for(int i=0;i<value.data.length;i++){
             courses.add(courseModel.fromJson(value.data[i]));
           }
-      //print(favoritesModel.data.data[0].products.image);
+
       emit(GetDataSuccessSearchState());
     }).catchError((error) {
       print(error.toString());

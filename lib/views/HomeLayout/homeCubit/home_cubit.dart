@@ -17,8 +17,12 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit (HomeState  initialState) : super(HomeInitial());
   static  HomeCubit get(context) => BlocProvider.of(context);
+  //To Storage State Of Network
   bool netConnected=false;
+  //To Storage Index Screen The Screen I need Show It from Nav bar
   int currentIndex = 1;
+
+  //List Of Screens That I will Choose Show It From nav Bar
   List<Widget> screen = [
 
 
