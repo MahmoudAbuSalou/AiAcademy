@@ -1,0 +1,531 @@
+import 'package:academy/components/const.dart';
+import 'package:academy/shared/components/components.dart';
+import 'package:academy/views/web_view/web_view.dart';
+
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+
+import '../../../shared/network/local/cachehelper.dart';
+import 'lessonCubit/course_content_cubit.dart';
+
+class WatchCourse extends StatelessWidget {
+  String id;
+  String finishId;
+  int globalIndex = 1;
+
+  WatchCourse({required this.id, required this.finishId}) : super();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          CourseContentCubit()..getCourseWatchCubit(id: id, context: context),
+      child: BlocConsumer<CourseContentCubit, CourseContentState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          var cubit = CourseContentCubit.get(context);
+
+          return Directionality(
+            textDirection: TextDirection.ltr,
+            //Full Mode In YouTube
+            child: (MediaQuery.of(context).orientation == Orientation.landscape)
+                ? WillPopScope(
+                    //To Prevent User from back if Dir is H
+                    onWillPop: () async => false,
+                    child: Scaffold(
+                      body: Container(
+                        child: YoutubePlayer(
+                          controller: YoutubePlayerController(
+                            initialVideoId: cubit.course.linkvideo[globalIndex],
+                            flags: YoutubePlayerFlags(
+                              autoPlay: false,
+                              mute: false,
+                            ),
+                          ),
+                          showVideoProgressIndicator: true,
+                        ),
+                      ),
+                    ),
+                  )
+
+                //Normal Mode
+                : Scaffold(
+                    appBar: AppBar(),
+                    body: ConditionalBuilder(
+                      condition: cubit.test,
+                      builder: (context) {
+                        if (cubit.currentIndex == 0) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height,
+                            child: (cubit.course.linkvideo.length - 1 == 0)
+                                ? Center(
+                                    child: Text(
+                                      'عذراً لا يوجد محتوى في هذا القسم تحقق من قسم الملحقات',
+                                      style: GoogleFonts.tajawal(
+                                          textStyle: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                    ),
+                                  )
+                                : SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height -
+                                              540.h,
+                                          child: ListView.builder(
+
+                                            shrinkWrap: true,
+                                            padding: EdgeInsets.all(16.h),
+                                            scrollDirection: Axis.vertical,
+                                            itemBuilder: (context, index) {
+                                              //For Full Mode
+                                              globalIndex = index + 1;
+
+                                              return Padding(
+                                                padding: EdgeInsets.all(25.h),
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: Colors.grey,
+                                                          width: 8.w,
+                                                        ),
+                                                      ),
+
+                                                      //Video
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.all(4.h),
+                                                        child: YoutubePlayer(
+                                                          controller:
+                                                              YoutubePlayerController(
+                                                            initialVideoId: cubit
+                                                                    .course
+                                                                    .linkvideo[
+                                                                index + 1],
+                                                            flags:
+                                                                YoutubePlayerFlags(
+                                                              autoPlay: false,
+                                                              mute: false,
+                                                            ),
+                                                          ),
+                                                          showVideoProgressIndicator:
+                                                              true,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 150.h,
+                                                    ),
+                                                    if (index !=
+                                                        cubit.course.linkvideo
+                                                                .length -
+                                                            2)
+                                                      myDriver(),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            itemCount:
+                                                cubit.course.linkvideo.length -
+                                                    1,
+                                          ),
+                                        ),
+
+
+                                        //Buttons Of Finish Course And Finish Lesson
+                                        Container(
+                                          height: 120.h,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 50.w),
+                                            child: Row(
+                                              children: [
+                                                if (cubit.course
+                                                        .can_finish_course ==
+                                                    true)
+                                                  FlatButton (
+                                                    onPressed: () {
+                                                      // ignore: avoid_single_cascade_in_expression_statements
+                                                      AwesomeDialog(
+                                                        context: context,
+                                                        dialogType:
+                                                            DialogType.QUESTION,
+                                                        animType:
+                                                            AnimType.BOTTOMSLIDE,
+                                                        title: 'تحقق',
+                                                        desc:
+                                                            'هل أنت متأكد أنك تريد إنهاء هذه الدورة',
+                                                        btnCancelOnPress: () {},
+                                                        btnOkOnPress: () {
+                                                          cubit.finishCourse(
+                                                              id: finishId,
+                                                              token: CacheHelper
+                                                                  .getData(
+                                                                      key:
+                                                                          'token'));
+                                                        },
+                                                      )..show();
+
+                                                      // showToast(msg: , state: state)
+                                                    },
+                                                    child: Text('إنهاء الدورة'),
+                                                    color: kSwatchColor,
+                                                  ),
+                                                Spacer(),
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    // ignore: avoid_single_cascade_in_expression_statements
+                                                    AwesomeDialog(
+                                                      context: context,
+                                                      dialogType:
+                                                          DialogType.QUESTION,
+                                                      animType:
+                                                          AnimType.BOTTOMSLIDE,
+                                                      title: 'تحقق',
+                                                      desc:
+                                                          'هل أنت متأكد أنك أكملت هذه الدورة',
+                                                      btnCancelOnPress: () {},
+                                                      btnOkOnPress: () {
+                                                        cubit.finishLesson(
+                                                            id: id,
+                                                            token: CacheHelper
+                                                                .getData(
+                                                                    key:
+                                                                        'token'));
+                                                      },
+                                                    )..show();
+                                                  },
+                                                  child: (cubit.course.status ==
+                                                          'completed')
+                                                      ? Text('✅ مكتمل')
+                                                      : Text(' مكتمل'),
+                                                  color: kSwatchColor,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                          );
+                        } else {
+                          return SingleChildScrollView(
+                              child: Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              children: [
+                                //List Of Pdfs
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: ExpansionTile(
+                                    title: Text(
+                                      'الملفات الملحقة :',
+                                      style: GoogleFonts.tajawal(),
+                                      textDirection: TextDirection.rtl,
+                                    ),
+                                    children: [
+                                      (cubit.course.linkPdf.length - 1 == null)
+                                          ? Center(
+                                              child: Text(
+                                                'عذراً لا يوجد محتوى في هذا القسم تحقق من بقية الأقسام',
+                                                style: GoogleFonts.tajawal(
+                                                    textStyle: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                              ),
+                                            )
+                                          :
+                                      Container(
+                                              height: 800.h,
+                                              width: double.infinity,
+                                              child: Directionality(
+                                                textDirection:
+                                                    TextDirection.rtl,
+                                                child: ListView.separated(
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return InkWell(
+                                                      child: Container(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 25.h,
+                                                                horizontal:
+                                                                    35.w),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                            width: 0.2,
+                                                            color:
+                                                                Colors.black26,
+                                                          ),
+                                                        ),
+                                                        child: Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 15.w,
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                '${cubit.course.linkPdf[index + 1].substring(cubit.course.linkPdf[index + 1].lastIndexOf('uploads') + 16, cubit.course.linkPdf[index + 1].indexOf('.pdf'))}',
+                                                                style: GoogleFonts
+                                                                    .tajawal(
+                                                                        textStyle:
+                                                                            TextStyle(
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  //   fontSize: 35.sp
+                                                                )),
+                                                                maxLines: 2,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      onTap: () async {
+                                                        await launch(
+                                                            cubit.course
+                                                                    .linkPdf[
+                                                                index + 1],
+                                                            forceSafariVC:
+                                                                false,
+                                                            forceWebView:
+                                                                false);
+                                                      },
+                                                    );
+                                                  },
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 100.w),
+                                                    child: Container(
+                                                      height: 20.h,
+                                                    ),
+                                                  ),
+                                                  itemCount: cubit.course
+                                                          .linkPdf.length -
+                                                      1,
+                                                ),
+                                              ),
+                                            )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                ),
+
+                                //List Of Additional Files and Links
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Column(
+                                    children: [
+                                      ExpansionTile(
+                                        title: Text(
+                                          'قوائم التشغيل الملحقة',
+                                          style: GoogleFonts.tajawal(),
+                                          textDirection: TextDirection.rtl,
+                                        ),
+                                        children: [
+                                          (cubit.course.list.length == 0)
+                                              ? Center(
+                                                  child: Text(
+                                                    'عذراً لا يوجد محتوى في هذا القسم تحقق من بقية الأقسام',
+                                                    style: GoogleFonts.tajawal(
+                                                        textStyle: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ),
+                                                )
+                                              : Container(
+                                                  height: 400.h,
+                                                  width: double.infinity,
+                                                  child: Directionality(
+                                                    textDirection:
+                                                        TextDirection.rtl,
+                                                    child: ListView.separated(
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return InkWell(
+                                                          child: Container(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical:
+                                                                        20.h,
+                                                                    horizontal:
+                                                                        35.w),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                width: 0.2,
+                                                                color: Colors
+                                                                    .black26,
+                                                              ),
+                                                            ),
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  'قائمة التشغيل',
+                                                                  style: GoogleFonts
+                                                                      .tajawal(
+                                                                    textStyle:
+                                                                        TextStyle(
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      color: Colors
+                                                                          .black,
+                                                                      //   fontSize: 35.sp
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 15.w,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          onTap: () async {
+
+                                                            await launch(
+                                                                'https://www.youtube.com/watch' +
+                                                                    cubit.course
+                                                                            .list[
+                                                                        index],
+                                                                forceSafariVC:
+                                                                    false,
+                                                                forceWebView:
+                                                                    false);
+                                                          },
+                                                        );
+                                                      },
+                                                      separatorBuilder:
+                                                          (context, index) =>
+                                                              Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    100.w),
+                                                        child: Container(
+                                                          height: 20.h,
+                                                        ),
+                                                      ),
+                                                      itemCount: cubit
+                                                          .course.list.length,
+                                                    ),
+                                                  ),
+                                                )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20.h,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 200.h,
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 50.w),
+                                  child: Row(
+                                    children: [
+                                      if (cubit.course.can_finish_course ==
+                                          true)
+                                        MaterialButton(
+                                          onPressed: () {
+                                            // ignore: avoid_single_cascade_in_expression_statements
+
+                                            // showToast(msg: , state: state)
+                                          },
+                                          child: Text('إنهاء الدورة'),
+                                          color: kSwatchColor,
+                                        ),
+                                      Spacer(),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          // ignore: avoid_single_cascade_in_expression_statements
+                                          AwesomeDialog(
+                                            context: context,
+                                            dialogType: DialogType.QUESTION,
+                                            animType: AnimType.BOTTOMSLIDE,
+                                            title: 'تحقق',
+                                            desc:
+                                                'هل أنت متأكد أنك أكملت هذه الدورة',
+                                            btnCancelOnPress: () {},
+                                            btnOkOnPress: () {
+                                              cubit.finishLesson(
+                                                  id: id,
+                                                  token: CacheHelper.getData(
+                                                      key: 'token'));
+                                            },
+                                          )..show();
+                                        },
+                                        child:
+                                            (cubit.course.status == 'completed')
+                                                ? Text('✅ مكتمل')
+                                                : Text(' مكتمل'),
+                                        color: kSwatchColor,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ));
+                        }
+                      },
+                      fallback: (context) => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    bottomNavigationBar: Container(
+                      height: 170.h,
+                      child: BottomNavigationBar(
+
+                        unselectedItemColor: Colors.grey,
+                        currentIndex: cubit.currentIndex,
+                        onTap: (index) {
+                          cubit.changeBottomNavigationBar(index);
+                        },
+                        items: cubit.list,
+
+                      ),
+                    ),
+                  ),
+          );
+        },
+      ),
+    );
+  }
+}
