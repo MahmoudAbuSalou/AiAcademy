@@ -18,21 +18,14 @@ import 'package:academy/views/splash%20screen/splash_screen.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'components/const.dart';
-
-
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
-
   await CacheHelper.init();
-
-
-
   runApp(const MyApp());
 }
-
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -41,7 +34,6 @@ class MyHttpOverrides extends HttpOverrides {
           (X509Certificate cert, String host, int port) => true;
   }
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -57,14 +49,11 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
               providers: [
                 BlocProvider(create: (context) => HomeCubit(HomeInitial())),
-                // BlocProvider(
-                //     create: (context) => ReviewCubit(),
-                //      lazy: false,
-                // ),
+
                 BlocProvider(
                   create: (BuildContext context) =>
                       ProfileCubit(ProfileInitial())..getUserProfile(),
-                  //lazy: false,
+
                 )
               ],
               child: GetMaterialApp(

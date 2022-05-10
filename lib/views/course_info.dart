@@ -135,13 +135,15 @@ class _CourseInfoState extends State<CourseInfo> {
 
                             : Container(
                                 width: double.maxFinite,
-                                child: FancyShimmerImage(
+
+                                child:FancyShimmerImage(
                                   imageUrl:
                                       'https://i.pinimg.com/originals/07/59/47/075947cd7ad84c38a558070e233808b5.gif',
                                   errorWidget: Image.network(
                                       'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
                                   boxFit: BoxFit.cover,
                                 ),
+
                               ),
                         Column(
                           children: [
@@ -312,7 +314,7 @@ class _CourseInfoState extends State<CourseInfo> {
           }),
     );
   }
-  /// TODO function to display Review  UI
+  ///  function to display Review  UI
   Expanded getReviews(ReviewCubit? reviewCubit) {
     return Expanded(
 
@@ -351,7 +353,7 @@ class _CourseInfoState extends State<CourseInfo> {
             ),
     );
   }
-   /// TODO function to display Lessons UI
+   ///  function to display Lessons UI
   Expanded getCourseContent(
       {ReviewCubit? reviewCubit, AutoGenerate? autoGenerate}) {
     var size = MediaQuery.of(context).size;
@@ -602,7 +604,7 @@ class _CourseInfoState extends State<CourseInfo> {
                       color: kSwatchColor,
                     ),
                     onRatingUpdate: (rating) {
-                      //reviewCubit!.ratingValue = rating.toInt() ;
+
                       reviewCubit!.ChangeRatingValue(rating.toInt());
 
                     },
