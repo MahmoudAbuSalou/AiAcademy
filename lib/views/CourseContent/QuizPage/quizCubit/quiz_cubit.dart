@@ -16,8 +16,22 @@ import '../../../../shared/network/remote/dio_helper.dart';
 
 
 
-
 part 'quiz_state.dart';
+/*
+this class is used To:
+1-get Quiz :
+  1-1:Questions + Answers
+  1-2:Review Page
+  1-3:Result Page
+
+2-Timer
+
+3-Start Quiz + Finish Quiz
+
+4-
+
+
+ */
 
 class QuizCubit extends Cubit<QuizState> {
   QuizCubit() : super(QuizInitial());

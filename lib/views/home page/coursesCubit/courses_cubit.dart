@@ -6,13 +6,20 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../../shared/network/end_point.dart';
 import '../../../../../shared/network/remote/dio_helper.dart';
 part 'courses_state.dart';
+/*
+this Class is Used for:
+ 1-get Courses inside collages and university
+ Note: Pagination is Here And Components in components.dart (Class Item Card)
 
+
+
+ */
 class CoursesCubit extends Cubit<CoursesState> {
   CoursesCubit() : super(CoursesInitial());
 
   static CoursesCubit get(context) => BlocProvider.of(context);
   late List<courseModel> courses = [];
-   //Store Num Of Page of Dat To Pagination
+   //Store Num Of Page of Data To Pagination
   int countPagination = 1;
   //Controller For Pagination
   RefreshController refreshController = RefreshController(initialRefresh: false);

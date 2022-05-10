@@ -1,4 +1,3 @@
-// ignore_for_file: sized_box_for_whitespace
 
 import 'package:academy/components/const.dart';
 import 'package:academy/shared/components/components.dart';

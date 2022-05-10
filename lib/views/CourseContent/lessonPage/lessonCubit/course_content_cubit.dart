@@ -12,7 +12,14 @@ import '../../../../shared/network/remote/ExceptionHandler.dart';
 import '../../../../shared/network/remote/dio_helper.dart';
 part  'course_content_state.dart';
 
+/*
+this class is used for:
+1-get lesson [ Videos + Pdfs + Playlists  ]
+2-Finish Lesson + Finish Course
 
+
+
+ */
 
 
 class CourseContentCubit extends Cubit<CourseContentState> {

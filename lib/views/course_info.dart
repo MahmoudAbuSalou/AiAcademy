@@ -256,7 +256,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                                   ),
                                                 ),
 
-                                        //getCourseContent(),
+
                                         if (reviewCubit.activeTabBar == 2)
                                           CacheHelper.getData(key: 'token') ==
                                                   null
@@ -293,7 +293,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                                       ),
                                                     ),
 
-                                        //activeTabBar == 0 ? getCourseContent() : getReviews(),
+                                      
                                         const SizedBox(
                                           height: 60,
                                         ),

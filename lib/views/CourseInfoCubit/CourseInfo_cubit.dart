@@ -20,29 +20,34 @@ import '../../shared/network/remote/ExceptionHandler.dart';
 import '../../shared/network/remote/dio_helper.dart';
 import 'CourseInfo_state.dart';
 
-
 class ReviewCubit extends Cubit<ReviewState> {
   ReviewCubit() : super(ReviewInitial());
-
 
   ///  create instance of class ReviewCubit
   static ReviewCubit get(context) => BlocProvider.of(context);
 
   /// Controller for pagination
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
   /// this variable describe number of page that contain courses
-  int countPagination=1;
+  int countPagination = 1;
+
   /// model of course details
   late AboutCourseModel aboutCourseModel;
+
   /// model of course review
   late ReviewModel reviewModel;
+
   /// model of course lessons
   late AutoGenerate lessonsModel;
 
-     /// default value for index of  bottom navigation bar
+  /// default value for index of  bottom navigation bar
   int activeTabBar = 1;
+
   /// default value for  rating => (  default is one stars )
   int ratingValue = 1;
+
   // ignore: slash_for_doc_comments
   /***
    *  this variables check if data load successfully  from Api
@@ -70,20 +75,16 @@ class ReviewCubit extends Cubit<ReviewState> {
     emit(ChangeRatingValueState());
   }
 
-
-  /// TODO  get review of course
+  ///   get review of course
   void getReviewCubit({required String id}) {
-
-      emit(GetReviewLoading());
+    emit(GetReviewLoading());
 
     DioHelper.getData(
-            url:'learnpress/v1/review/course/$id?&per_page=100',
-        token: CacheHelper.getData(key: 'token')
-    )
+            url: 'learnpress/v1/review/course/$id?&per_page=100',
+            token: CacheHelper.getData(key: 'token'))
         .then((value) {
-
       reviewModel = ReviewModel.fromJson(value.data);
-             loadReview=true;
+      loadReview = true;
 
       emit(GetReviewSuccess(reviewModel));
     }).catchError((error) {
@@ -91,33 +92,30 @@ class ReviewCubit extends Cubit<ReviewState> {
     });
   }
 
-
-   ///  TODO get course Details
+  ///   get course Details
   void getCourseInfo({required String id}) {
     emit(GetCourseInfoLoading());
     DioHelper.getData(
             url: 'learnpress/v1/courses/$id',
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
-
       aboutCourseModel = AboutCourseModel.fromJson(value.data);
       loadInfo = true;
       emit(GetCourseInfoSuccess(aboutCourseModel));
-
     }).catchError((error) {
       emit(GetCourseInfoError("ERROR"));
     });
   }
 
-  /// TODO Add Comment and Rating To Course
-  void submitReview({required String id,
-    required int rate,
-    required String title,
-    required String content}) {
+  ///  Add Comment and Rating To Course
+  void submitReview(
+      {required String id,
+      required int rate,
+      required String title,
+      required String content}) {
     emit(PostCourseReviewLoading());
     DioHelper.postData(
-            url:
-               'learnpress/v1/review/submit',
+            url: 'learnpress/v1/review/submit',
             data: {
               'id': int.parse(id),
               'rate': rate,
@@ -126,8 +124,9 @@ class ReviewCubit extends Cubit<ReviewState> {
             },
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
-            loadReviewSubmit = true;
-      showToast(msg: 'سوف يظهر تعليقك بعد ان تتم مراجعته', state: ToastState .SUCCESS);
+      loadReviewSubmit = true;
+      showToast(
+          msg: 'سوف يظهر تعليقك بعد ان تتم مراجعته', state: ToastState.SUCCESS);
 
       emit(PostCourseReviewSuccess());
     }).catchError((error) {
@@ -139,8 +138,7 @@ class ReviewCubit extends Cubit<ReviewState> {
     });
   }
 
-
-  /// TODO Get Course Lessons
+  ///  Get Course Lessons
   void getLessons({required String id}) {
     emit(GetLessonsLoading());
 
@@ -148,36 +146,33 @@ class ReviewCubit extends Cubit<ReviewState> {
             url: 'learnpress/v1/courses/$id',
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
-    lessonsModel =   AutoGenerate.fromJson(value.data);
-    loadLessons=true;
+      lessonsModel = AutoGenerate.fromJson(value.data);
+      loadLessons = true;
 
-     emit(GetLessonsSuccess(lessonsModel));
+      emit(GetLessonsSuccess(lessonsModel));
     }).catchError((error) {
       emit(GetLessonsError("ERROR"));
     });
   }
 
-  /// TODO Enrolled Course
+  ///  Enrolled Course
   void subscribeCourse({required String id}) {
     loadSubscribeCourse = 'load';
     emit(SubscribeCourseLoading());
 
     DioHelper.postData(
             url: 'learnpress/v1/courses/enroll/',
-            data: {
-              "id": id
-            },
+            data: {"id": id},
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
-         loadSubscribeCourse='done';
-          showToast(msg: 'تهانينا! تم الاشتراك بنجاح..', state: ToastState.SUCCESS);
-            /// update Status of lesson after enrolled course
-             getLessons(id: id);
+      loadSubscribeCourse = 'done';
+      showToast(msg: 'تهانينا! تم الاشتراك بنجاح..', state: ToastState.SUCCESS);
 
+      /// update Status of lesson after enrolled course
+      getLessons(id: id);
 
-     emit(SubscribeCourseSuccess());
+      emit(SubscribeCourseSuccess());
     }).catchError((error) {
-
       emit(SubscribeCourseError());
     });
   }

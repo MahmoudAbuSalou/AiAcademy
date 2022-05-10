@@ -26,7 +26,7 @@ class CourseRegister extends StatefulWidget {
 class _CourseRegisterState extends State<CourseRegister> {
   TextEditingController courseName=TextEditingController();
 
-  /// this function responsible for connect with whatApp
+  /// this function responsible for connect with whatsApp
   void launchWhatsApp(
       {required int phone,
         required String message,
@@ -63,11 +63,11 @@ class _CourseRegisterState extends State<CourseRegister> {
                     Container(
                       height: size.height/2,
                       decoration: BoxDecoration(
-                         // borderRadius: BorderRadius.circular(20),
+
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(widget.img)
-                             // image: NetworkImage('https://images.unsplash.com/photo-1606231140504-b6ec6cbbbf6b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60')
+
                           )
                       ),
                     ),
