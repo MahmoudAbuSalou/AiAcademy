@@ -153,23 +153,35 @@ void showToast({required String msg,required ToastState state})=> Fluttertoast.s
   );
 class question extends StatefulWidget {
 
+
+  //Id Of Question
   int ?idQues;
-  //NumberOfQuestion
+
+  //Number Of Questionin Quiz  1 - 2 - 3 .......
   int count;
+
+
+  //To Detect Showing Screen [ Review or  Test]
   bool  Review=false;
+
+  //This is Question
   late String  questionTitle;
 
+
+  //This is List Of Options
   List<Options> ? answers=[];
 
-  //MultiChoiceOrSingleChoice
+  //Multi Choice Or Single Choice
   String type;
 
 
   int point;
 
-
+  //Initial Value For Radio Button
   dynamic value=10;
 
+
+  //Initial List For CheckBOX
   List <bool >  isChecked=[
     false,false,false,false,false
   ];
@@ -182,10 +194,12 @@ class question extends StatefulWidget {
 class _questionState extends State<question> {
 @override
   void initState() {
-    // TODO: implement initState
+
+
+  //Store Question In List StoreAnswers In Quiz Cubit
   QuizCubit.get(context).storeAnswers!.add(question(count: widget.count, questionTitle: widget.questionTitle, answers:widget. answers, type: widget.type, point: widget.point, idQues: widget.idQues,Review: widget.Review,));
 
-  //QuizCubit.get(context).answered['${widget.idQues}']=
+
   super.initState();
   }
 
@@ -241,11 +255,11 @@ class _questionState extends State<question> {
             ListView.builder(
                 shrinkWrap: true,
 
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: widget.answers!.length,
                 itemBuilder: (context, index) {
-                  //   grpValue!.add(1);
+
 
                   return Container(
                     width:700.w,
@@ -257,9 +271,9 @@ class _questionState extends State<question> {
     );
   }
   Widget buildOption( String ? name,int index,String type) {
-    // Object? groupValue=1.0;
- //  print( QuizCubit.get(context).ReviewAnswered['${IDS[widget.count-1]}']['answered']);
+
     return (type!='multi_choice')?
+        //RadioButtons
     Padding(
       padding:  EdgeInsets.symmetric(horizontal: 12.w),
 
@@ -273,19 +287,38 @@ class _questionState extends State<question> {
             Padding(
               padding:  EdgeInsets.all(0.h),
               child: Radio(
-                // activeColor: Color(0xFF6200EE),
+
                 value: index,
-                groupValue:/*(!widget.Review)?*/((QuizCubit.get(context).storeAnswers!.length>0)?QuizCubit.get(context).storeAnswers![widget.count-1].value:widget.value ),
+                groupValue:(
+                //Check if Store Answers Contain Data Or No
+                    (QuizCubit.get(context).storeAnswers!.length>0)?
+                    //If contain data this mean i am in review Page and i will show my answers
+                    QuizCubit.get(context).storeAnswers![widget.count-1].value
+
+                    :
+                //if don't contain data this mean i am in Test Page
+                widget.value
+                ),
                 hoverColor: Colors.yellow,
-                activeColor:(widget.Review)?((QuizCubit.get(context).quiz.results?.result?.questions[widget.count-1].correct)?Colors.green:Colors.red) : kSwatchColor,
+                activeColor:
+                //if i am in Review Page i will Show Green radio for correct Answer And Red For False Answer
+                (widget.Review)?
+                ((QuizCubit.get(context).quiz.results?.result?.questions[widget.count-1].correct)
+                    ?Colors.green:Colors.red)
+
+
+                    :   //if i am in Test Page i will Showyellow radio
+                kSwatchColor,
                 focusColor: Colors.purple,
                 onChanged: (valu ) {
 
 
-
+                        //Change Value when i choose answer
                     widget.value = valu;
+                    //Change State instead SetState
                     QuizCubit.get(context).change(count: widget.count-1,context: context,valueRa: valu);
-               //     if(valu==0)
+
+                    //Store Answer In List To Send It To The Back
                     QuizCubit.get(context).answered['${widget.idQues}']=QuizCubit.get(context).quiz.questions[widget.count-1].options![index].value;
 
                 },
@@ -309,11 +342,13 @@ class _questionState extends State<question> {
         ],
       ),
     )
-    : Padding(
+    :
+    //CheckBOXES
+    Padding(
       padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 0.h),
       child: Container(
         width: 800.w,
-        //height: 250.h,
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -346,11 +381,11 @@ class _questionState extends State<question> {
             ),
             Container(
               width: 700.w,
-              //height: 200.h,
+
               child: Text(
 
                 name!,
-               // textDirection: TextDirection.ltr,
+
                 maxLines: 3,
                 style:  GoogleFonts.tajawal(
                     textStyle: TextStyle(
