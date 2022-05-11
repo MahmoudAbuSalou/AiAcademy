@@ -3,6 +3,7 @@ import 'package:academy/views/course_info.dart';
 import 'package:animations/animations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -462,7 +463,36 @@ class ItemCard extends StatelessWidget {
                               controller: cubit.refreshController,
                               enablePullUp: true,
                               enablePullDown: false,
-
+                              footer: CustomFooter(
+                                builder: (BuildContext context,LoadStatus? mode){
+                                  Widget body ;
+                                  if(mode==LoadStatus.idle){
+                                    body =  Text(" ",style: GoogleFonts.tajawal(),);
+                                  }
+                                  else if(mode==LoadStatus.loading){
+                                    body =  Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("جاري التحميل ...  ",style: GoogleFonts.tajawal(),),
+                                        CupertinoActivityIndicator()
+                                      ],
+                                    );
+                                  }
+                                  else if(mode == LoadStatus.failed){
+                                    body =   CupertinoActivityIndicator(color: Colors.red,);
+                                  }
+                                  else if(mode == LoadStatus.canLoading){
+                                    body = Text("");
+                                  }
+                                  else{
+                                    body = Text("No more Data");
+                                  }
+                                  return Container(
+                                    height: 55.0,
+                                    child: Center(child:body),
+                                  );
+                                }
+                              ),
                               onLoading: () {
                                 cubit.getCourseData(id);
                               },
