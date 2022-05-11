@@ -139,7 +139,7 @@ class _CourseInfoState extends State<CourseInfo> {
 
                                 child:FancyShimmerImage(
                                   imageUrl:
-                                      'https://i.pinimg.com/originals/07/59/47/075947cd7ad84c38a558070e233808b5.gif',
+                                      'https://hackernoon.com/images/0*4Gzjgh9Y7Gu8KEtZ.gif',
                                   errorWidget: Image.network(
                                       'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
                                   boxFit: BoxFit.cover,

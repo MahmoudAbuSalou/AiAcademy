@@ -462,6 +462,7 @@ class ItemCard extends StatelessWidget {
                               controller: cubit.refreshController,
                               enablePullUp: true,
                               enablePullDown: false,
+
                               onLoading: () {
                                 cubit.getCourseData(id);
                               },
