@@ -205,23 +205,26 @@ class Course extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AutoSizeText(
+                        Text(
                           courseName,
-                          maxLines: 1,
+                          maxLines: 2,
                           style: GoogleFonts.tajawal(
                             textStyle: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: 38.sp,
                                 fontFamily: kFontFamily,
                                 fontWeight: FontWeight.w600,
                                 overflow: TextOverflow.ellipsis)
                           ),
+                        ),
+                        SizedBox(
+                          height: 30.h,
                         ),
                         FittedBox(
                           child: Text(
                             coursePrice.toString(),
                             style:GoogleFonts.tajawal(
                               textStyle:  TextStyle(
-                                fontSize: 30.sp,
+                                fontSize: 40.sp,
                                 fontFamily: kFontFamily,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.red,
@@ -268,7 +271,7 @@ class Course extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 25.h,
+                          height: 30.h,
                         ),
                         Row(
                           children: [
@@ -277,12 +280,12 @@ class Course extends StatelessWidget {
                                 width: double.infinity,
                                 child: Text(
                                   platformName,
-                                  maxLines: 1,
+                                  maxLines: 2,
                                   style: GoogleFonts.tajawal(
                                     textStyle: TextStyle(
                                         fontSize: 25.sp,
-                                        fontFamily: kFontFamily,
-                                        fontWeight: FontWeight.w400,
+
+                                        fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline,
                                         color: Colors.blueGrey,
                                         overflow: TextOverflow.ellipsis),
@@ -290,7 +293,7 @@ class Course extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Spacer(),
+
                             Padding(
                               padding:  EdgeInsets.only(left: 5.w),
                               child: RatingBar.builder(

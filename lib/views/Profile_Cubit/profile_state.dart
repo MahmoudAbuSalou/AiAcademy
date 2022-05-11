@@ -7,6 +7,9 @@ class ProfileInitial extends ProfileState {}
 
 
 class ProfileLoadingState extends ProfileState{}
+class downloadImageSuccessState extends ProfileState{}
+class downloadImageErrorState extends ProfileState{}
+class downloadImageLoadingState extends ProfileState{}
 // ignore: must_be_immutable
 class ProfileSuccessState extends ProfileState{
    ProfileModel? profileModel;

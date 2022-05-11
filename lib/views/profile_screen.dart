@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:academy/shared/components/components.dart';
 import 'package:academy/shared/network/local/cachehelper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/const.dart';
 import '../models/ProfileModel.dart';
@@ -53,59 +54,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   body: SingleChildScrollView(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         const SizedBox(
-                          height: 25,
+                          height: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Icon(
-                              Icons.person_sharp,
-                              size: 90,
-                            ),
-                            Text(
-                              CacheHelper.getData(key: 'user_display_name'),
-                              style:GoogleFonts.tajawal(
-                                textStyle:  const TextStyle(
-                                  color: kSecondaryColor,
-                                  fontFamily: kFontFamily,
-                                  fontSize: 16,
-                                ),
-                              )
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            children: [
-                              CoursesCountContainer(
-                                count: cubit
-                                    .profileModel.courses!.finished.length +
-                                    cubit.profileModel.courses!.in_Progress
-                                        .length,
-                                title: 'الكورسات المسجلة',
-                              ),
-                              CoursesCountContainer(
-                                count: cubit
-                                    .profileModel.courses!.in_Progress.length,
-                                title: 'الكورسات الفعالة',
-                              ),
-                              CoursesCountContainer(
-                                count:
-                                cubit.profileModel.courses!.finished.length,
-                                title: 'الكورسات المنتهية',
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //   children: [
+                        //     const Icon(
+                        //       Icons.person_sharp,
+                        //       size: 90,
+                        //     ),
+                        //     Text(
+                        //       CacheHelper.getData(key: 'user_display_name'),
+                        //       style:GoogleFonts.tajawal(
+                        //         textStyle:  const TextStyle(
+                        //           color: kSecondaryColor,
+                        //           fontFamily: kFontFamily,
+                        //           fontSize: 16,
+                        //         ),
+                        //       )
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SizedBox(
+                        //   height: 25,
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                        //   child: Row(
+                        //     children: [
+                        //       CoursesCountContainer(
+                        //         count: cubit
+                        //             .profileModel.courses!.finished.length +
+                        //             cubit.profileModel.courses!.in_Progress
+                        //                 .length,
+                        //         title: 'الكورسات المسجلة',
+                        //       ),
+                        //       CoursesCountContainer(
+                        //         count: cubit
+                        //             .profileModel.courses!.in_Progress.length,
+                        //         title: 'الكورسات الفعالة',
+                        //       ),
+                        //       CoursesCountContainer(
+                        //         count:
+                        //         cubit.profileModel.courses!.finished.length,
+                        //         title: 'الكورسات المنتهية',
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   height: 25,
+                        // ),
+
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -142,6 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget getCoursesInfo(Courses course) {
 
     List allCourse = [...course.finished, ...course.in_Progress];
+
     /// get course that user not passed
     List failed = allCourse
         .where((item) =>
@@ -150,10 +154,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return IndexedStack(
       index: selectedIndex,
+
       children: [
         AllCourses(course: allCourse), // index = 0
         AllCourses(course: course.in_Progress), // index = 1
-        AllCourses(course: course.finished),
+         AllCourses(course: course.finished),
+
         AllCourses(course: course.passed),
         AllCourses(course: failed),
       ],
@@ -222,15 +228,17 @@ class AllCourses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+
       itemCount: course!.length,
       shrinkWrap: true,
+
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => CourseItemCard(
         id: course![index]?.id,
         imageUrl: '',
         title: course![index]?.title,
         endTime: course![index]?.endTime,
-        // endTime:course[index]?.endTime,
+
         Expiration_time: course![index]?.expiration,
         results: course![index]?.results,
       ),

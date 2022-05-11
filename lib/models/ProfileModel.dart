@@ -1,3 +1,5 @@
+import '../shared/components/constants.dart';
+
 class ProfileModel {
   Courses? courses;
 
@@ -41,7 +43,7 @@ class SingleCourse {
 
   SingleCourse.fromJson(Map<String, dynamic>? json) {
     id = json!['id'];
-
+    IdsOfCoursesImages.add(id);
     title = json['title'];
     graduation = json['graduation'];
     endTime = json['end_time'];

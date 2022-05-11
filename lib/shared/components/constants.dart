@@ -29,3 +29,4 @@ import '../network/local/cachehelper.dart';
 
 String token = CacheHelper.getData(key: 'token');
  bool loadAns=false;
+ List IdsOfCoursesImages=[];
