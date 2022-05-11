@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
 
           return ConditionalBuilder(
-              condition: state is ProfileSuccessState,
+              condition: cubit.show,
               fallback: (context) => const Scaffold(
                   backgroundColor: Colors.white,
                   body: Center(
@@ -53,61 +53,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   ),
                   body: SingleChildScrollView(
+
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const SizedBox(
                           height: 10,
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //   children: [
-                        //     const Icon(
-                        //       Icons.person_sharp,
-                        //       size: 90,
-                        //     ),
-                        //     Text(
-                        //       CacheHelper.getData(key: 'user_display_name'),
-                        //       style:GoogleFonts.tajawal(
-                        //         textStyle:  const TextStyle(
-                        //           color: kSecondaryColor,
-                        //           fontFamily: kFontFamily,
-                        //           fontSize: 16,
-                        //         ),
-                        //       )
-                        //     ),
-                        //   ],
-                        // ),
-                        // const SizedBox(
-                        //   height: 25,
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                        //   child: Row(
-                        //     children: [
-                        //       CoursesCountContainer(
-                        //         count: cubit
-                        //             .profileModel.courses!.finished.length +
-                        //             cubit.profileModel.courses!.in_Progress
-                        //                 .length,
-                        //         title: 'الكورسات المسجلة',
-                        //       ),
-                        //       CoursesCountContainer(
-                        //         count: cubit
-                        //             .profileModel.courses!.in_Progress.length,
-                        //         title: 'الكورسات الفعالة',
-                        //       ),
-                        //       CoursesCountContainer(
-                        //         count:
-                        //         cubit.profileModel.courses!.finished.length,
-                        //         title: 'الكورسات المنتهية',
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 25,
-                        // ),
 
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -121,9 +73,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     (index) => AppBarItem(
                                   title: textItems[index],
                                   onPress: () {
-                                    setState(() {
+
                                       selectedIndex = index;
-                                    });
+                                      cubit.changeScreen(index);
+
                                   },
                                   isSelected: selectedIndex == index,
                                 ),
@@ -131,7 +84,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                         ),
-                        getCoursesInfo(cubit.profileModel.courses!),
+                       getCoursesInfo(cubit.profileModel.courses!,
+
+                        ),
                       ],
                     ),
                   ),
@@ -151,19 +106,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .where((item) =>
     (item.graduation != "passed" && item.graduation != "in-progress"))
         .toList();
+    List <Widget>Screens=[
+     AllCourses(course: allCourse), // index = 0
+     AllCourses(course: course.in_Progress), // index = 1
+     AllCourses(course: course.finished),
 
-    return IndexedStack(
-      index: selectedIndex,
+      AllCourses(course:course.passed),
+     AllCourses(course: failed)
+    ];
 
-      children: [
-        AllCourses(course: allCourse), // index = 0
-        AllCourses(course: course.in_Progress), // index = 1
-         AllCourses(course: course.finished),
 
-        AllCourses(course: course.passed),
-        AllCourses(course: failed),
-      ],
-    );
+     return Container(
+       child: Screens[selectedIndex],
+     );
+    // return IndexedStack(
+    //   index: selectedIndex,
+    //
+    //   children: [
+    //     AllCourses(course: allCourse), // index = 0
+    //     AllCourses(course: course.in_Progress), // index = 1
+    //      AllCourses(course: course.finished),
+    //
+    //     AllCourses(course: course.passed),
+    //     AllCourses(course: failed),
+    //   ],
+    // );
   }
 }
 
@@ -227,8 +194,9 @@ class AllCourses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     print('here');
     return ListView.builder(
-
+clipBehavior: Clip.antiAliasWithSaveLayer,
       itemCount: course!.length,
       shrinkWrap: true,
 

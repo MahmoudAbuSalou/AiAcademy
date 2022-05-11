@@ -19,12 +19,13 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(profileInitial) : super(ProfileInitial());
+  int currentIndex=0;
 
   static ProfileCubit get(context) => BlocProvider.of(context);
 
   /// model of profile
  late ProfileModel profileModel;
-
+bool show=false;
   void getUserProfile() {
     IdsOfCoursesImages=[];
     emit(ProfileLoadingState());
@@ -34,6 +35,8 @@ class ProfileCubit extends Cubit<ProfileState> {
         profileModel = ProfileModel.fromJson(value.data['tabs']);
         //Call Images Of Coureces
       //  getImages();
+
+        show=true;
       emit(ProfileSuccessState(profileModel));
     }).catchError((error) {
       emit(ProfileErrorState("error"));
@@ -61,6 +64,14 @@ class ProfileCubit extends Cubit<ProfileState> {
     });
 
   }
+  void changeScreen(int id ){
+    currentIndex=id;
+    print(id);
+    emit(changeScreenState());
+
+  }
+
+
 
 }
 
