@@ -226,8 +226,14 @@ class WatchCourse extends StatelessWidget {
                                                   },
                                                   child: (cubit.course.status ==
                                                           'completed')
-                                                      ? Text('✅ مكتمل')
-                                                      : Text(' مكتمل'),
+                                                      ? Text('✅ مكتمل',style:
+                                                    GoogleFonts.tajawal(
+
+                                                    ),)
+                                                      : Text(' مكتمل',style:
+                                                  GoogleFonts.tajawal(
+
+                                                  ),),
                                                   color: kSwatchColor,
                                                 ),
                                               ],
@@ -514,7 +520,7 @@ class WatchCourse extends StatelessWidget {
                                               },
                                             )..show();
                                           },
-                                          child: const Text('إنهاء الدورة'),
+                                          child:  Text('إنهاء الدورة',style:GoogleFonts.tajawal()),
                                           color: kSwatchColor,
                                         ),
                                       const Spacer(),

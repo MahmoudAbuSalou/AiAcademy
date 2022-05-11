@@ -1,6 +1,7 @@
 import 'package:academy/components/components.dart';
 import 'package:academy/components/const.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class YourCourses extends StatefulWidget {
   const YourCourses({Key? key}) : super(key: key);
@@ -84,10 +85,12 @@ class MyCourse extends StatelessWidget {
             FittedBox(
               child: Text(
                 name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: kFontFamily,
-                ),
+                style: GoogleFonts.tajawal(
+                  textStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: kFontFamily,
+                  ),
+                )
               ),
             ),
             SizedBox(height: size.height*(kPadding/2),),

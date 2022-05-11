@@ -8,6 +8,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -206,21 +207,25 @@ class Course extends StatelessWidget {
                         AutoSizeText(
                           courseName,
                           maxLines: 1,
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              fontFamily: kFontFamily,
-                              fontWeight: FontWeight.w600,
-                              overflow: TextOverflow.ellipsis),
+                          style: GoogleFonts.tajawal(
+                            textStyle: TextStyle(
+                                fontSize: 16.sp,
+                                fontFamily: kFontFamily,
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.ellipsis)
+                          ),
                         ),
                         FittedBox(
                           child: Text(
                             coursePrice.toString(),
-                            style: TextStyle(
-                              fontSize: 30.sp,
-                              fontFamily: kFontFamily,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.red,
-                            ),
+                            style:GoogleFonts.tajawal(
+                              textStyle:  TextStyle(
+                                fontSize: 30.sp,
+                                fontFamily: kFontFamily,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.red,
+                              ),
+                            )
                           ),
                         ),
                         SizedBox(
@@ -247,11 +252,13 @@ class Course extends StatelessWidget {
                                 FittedBox(
                                   child: Text(
                                     '(${courseStudentsCount})',
-                                    style: TextStyle(
-                                      fontSize: 30.sp,
-                                      fontFamily: kFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      overflow: TextOverflow.ellipsis,
+                                    style:GoogleFonts.tajawal(
+                                      textStyle:  TextStyle(
+                                        fontSize: 30.sp,
+                                        fontFamily: kFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        overflow: TextOverflow.ellipsis,
+                                      )
                                     ),
                                   ),
                                 ),
@@ -270,13 +277,15 @@ class Course extends StatelessWidget {
                                 child: Text(
                                   platformName,
                                   maxLines: 1,
-                                  style: TextStyle(
-                                      fontSize: 25.sp,
-                                      fontFamily: kFontFamily,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.blueGrey,
-                                      overflow: TextOverflow.ellipsis),
+                                  style: GoogleFonts.tajawal(
+                                    textStyle: TextStyle(
+                                        fontSize: 25.sp,
+                                        fontFamily: kFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blueGrey,
+                                        overflow: TextOverflow.ellipsis),
+                                  )
                                 ),
                               ),
                             ),
@@ -415,11 +424,13 @@ class ItemCard extends StatelessWidget {
                 child: FittedBox(
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontFamily: kFontFamily,
-                      color: kPrimaryColor,
-                      fontSize: 16.sp,
-                    ),
+                    style: GoogleFonts.tajawal(
+                      textStyle: TextStyle(
+                        fontFamily: kFontFamily,
+                        color: kPrimaryColor,
+                        fontSize: 16.sp,
+                      ),
+                    )
                   ),
                 ),
               ),

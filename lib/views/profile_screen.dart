@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:academy/shared/components/components.dart';
 import 'package:academy/shared/network/local/cachehelper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../components/const.dart';
 import '../models/ProfileModel.dart';
 import 'Profile_Cubit/profile_cubit.dart';
@@ -65,11 +66,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             Text(
                               CacheHelper.getData(key: 'user_display_name'),
-                              style: const TextStyle(
-                                color: kSecondaryColor,
-                                fontFamily: kFontFamily,
-                                fontSize: 16,
-                              ),
+                              style:GoogleFonts.tajawal(
+                                textStyle:  const TextStyle(
+                                  color: kSecondaryColor,
+                                  fontFamily: kFontFamily,
+                                  fontSize: 16,
+                                ),
+                              )
                             ),
                           ],
                         ),
@@ -186,11 +189,13 @@ class AppBarItem extends StatelessWidget {
                 child: Text(
                   title,
                   textDirection: TextDirection.rtl,
-                  style: const TextStyle(
-                    color: kSecondaryColor,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: kFontFamily,
-                  ),
+                  style: GoogleFonts.tajawal(
+                    textStyle: const TextStyle(
+                      color: kSecondaryColor,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: kFontFamily,
+                    ),
+                  )
                 ),
               ),
             ),
@@ -275,7 +280,7 @@ class CourseItemCard extends StatelessWidget {
           ],
         ),
         child: Row(
-          // textDirection: TextDirection.rtl,
+
           children: [
             Expanded(
               flex: 1,
@@ -300,13 +305,15 @@ class CourseItemCard extends StatelessWidget {
                             child: Text(
                               title,
                               maxLines: 1,
-                              style: const TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                color: kSwatchColor,
-                                fontSize: 16,
-                                fontFamily: kFontFamily,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: GoogleFonts.tajawal(
+                                textStyle: const TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  color: kSwatchColor,
+                                  fontSize: 16,
+                                  fontFamily: kFontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
                             ),
                           ),
                         ),
@@ -318,12 +325,7 @@ class CourseItemCard extends StatelessWidget {
                               start: 10, top: 7, bottom: 8),
                           child: Text(
                             "النتيجة:" "%$results ",
-                            // style: TextStyle(
-                            //   color:Colors.black,
-                            //   fontSize: 14,
-                            //   fontFamily: kFontFamily,
-                            //   fontWeight: FontWeight.w500,
-                            // ),
+                            style: GoogleFonts.tajawal(),
                           ),
                         ),
                       ),
@@ -334,10 +336,11 @@ class CourseItemCard extends StatelessWidget {
                           const EdgeInsetsDirectional.only(start: 8, bottom: 12),
                           height: 30,
                           child: endTime is! String
-                              ? const Text("تاريخ الانتهاء: _")
+                              ?  Text("تاريخ الانتهاء: _",style: GoogleFonts.tajawal(),)
                               : AutoSizeText(
                             "تاريخ الانتهاء : " "${endTime.substring(0, 10)}",
-                            maxLines: 2,
+                            maxLines: 2
+                              ,style: GoogleFonts.tajawal(),
                           ),
                         ),
                       ),
@@ -347,11 +350,11 @@ class CourseItemCard extends StatelessWidget {
                             padding: const EdgeInsetsDirectional.only(start: 2),
                             height: 30,
                             child: Expiration_time is! String ?
-                            const Text("تاريخ الصلاحية: _")
+                             Text("تاريخ الصلاحية: _",style: GoogleFonts.tajawal(),)
                                 :AutoSizeText(
                               "تاريخ الصلاحية: "
                                   "${Expiration_time.substring(0, 10)}",
-                              maxLines: 2,
+                              maxLines: 2,style: GoogleFonts.tajawal(),
                             )),
                       )
                     ]),
@@ -389,11 +392,14 @@ class CoursesCountContainer extends StatelessWidget {
             child: Center(
                 child: Text(
                   count.toString(),
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                )),
+                  style: GoogleFonts.tajawal(
+                    textStyle: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )
+                  )
+            ),
           ),
           const SizedBox(
             height: 15,
@@ -404,16 +410,14 @@ class CoursesCountContainer extends StatelessWidget {
               title,
               textDirection: TextDirection.rtl,
               maxLines: 2,
-              style: const TextStyle(
-                color: Color(0xff32504F),
-                fontFamily: kFontFamily,
-                fontSize: 14,
-              ),
-              // child: Text(
-              //   title,
-              //
-              //
-              // ),
+              style:GoogleFonts.tajawal(
+                textStyle:  const TextStyle(
+                  color: Color(0xff32504F),
+                  fontFamily: kFontFamily,
+                  fontSize: 14,
+                ),
+              )
+
             ),
           ),
         ],
@@ -446,11 +450,13 @@ class MyAppBar extends StatelessWidget {
               child: Center(
                 child: Text(
                   title,
-                  style: const TextStyle(
-                    color: kPrimaryColor,
-                    fontSize: 18,
-                    fontFamily: kFontFamily,
-                  ),
+                  style: GoogleFonts.tajawal(
+                    textStyle: const TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 18,
+                      fontFamily: kFontFamily,
+                    ),
+                  )
                 ),
               ),
             ),

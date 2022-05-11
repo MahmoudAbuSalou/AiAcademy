@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../components/components.dart';
 import '../components/const.dart';
@@ -82,17 +83,19 @@ class CourseItem extends StatelessWidget {
               children: [
                 SizedBox(
                   width: size.width * 0.45,
-                  child: const Center(
+                  child:  Center(
                     child: Text(
                       'التغيير في المجتمعات',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: kFontFamily,
-                      ),
+                      style: GoogleFonts.tajawal(
+                        textStyle:const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: kFontFamily,
+                        ),
+                      )
                     ),
                   ),
                 ),

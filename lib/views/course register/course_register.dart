@@ -8,6 +8,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/components.dart';
@@ -78,10 +79,12 @@ class _CourseRegisterState extends State<CourseRegister> {
                             child: FittedBox(
                               child: Text(
                                 'اسم الكورس',
-                                style: TextStyle(
-                                  fontSize: kSubTitleSize,
-                                  fontFamily: kFontFamily,
-                                ),
+                                style:GoogleFonts.tajawal(
+                                  textStyle:  TextStyle(
+                                    fontSize: kSubTitleSize,
+                                    fontFamily: kFontFamily,
+                                  ),
+                                )
                               ),
                             ),
                           ),
@@ -96,10 +99,12 @@ class _CourseRegisterState extends State<CourseRegister> {
                             child: FittedBox(
                               child: Text(
                                 'الرقم',
-                                style: TextStyle(
-                                  fontSize: kSubTitleSize,
-                                  fontFamily: kFontFamily,
-                                ),
+                                style:GoogleFonts.tajawal(
+                                  textStyle:  TextStyle(
+                                    fontSize: kSubTitleSize,
+                                    fontFamily: kFontFamily,
+                                  ),
+                                )
                               ),
                             ),
                           ),
@@ -108,10 +113,12 @@ class _CourseRegisterState extends State<CourseRegister> {
                             child: FittedBox(
                               child: Text(
                                 '201221481731+',
-                                style: TextStyle(
-                                  fontSize: kSubTitleSize,
-                                  fontFamily: kFontFamily,
-                                ),
+                                style: GoogleFonts.tajawal(
+                                  textStyle: TextStyle(
+                                    fontSize: kSubTitleSize,
+                                    fontFamily: kFontFamily,
+                                  ),
+                                )
                               ),
                             ),
                           ),
@@ -125,10 +132,12 @@ class _CourseRegisterState extends State<CourseRegister> {
                             child: FittedBox(
                               child: Text(
                                 'السعر',
-                                style: TextStyle(
-                                  fontSize: kSubTitleSize,
-                                  fontFamily: kFontFamily,
-                                ),
+                                style: GoogleFonts.tajawal(
+                                  textStyle: TextStyle(
+                                    fontSize: kSubTitleSize,
+                                    fontFamily: kFontFamily,
+                                  ),
+                                )
                               ),
                             ),
                           ),
@@ -137,10 +146,13 @@ class _CourseRegisterState extends State<CourseRegister> {
                             child: FittedBox(
                               child: Text(
                                 '\$ ${widget.price}',
-                                style: TextStyle(
-                                  fontSize: kSubTitleSize,
-                                  fontFamily: kFontFamily,
-                                ),
+                                style: GoogleFonts.tajawal(
+
+                                  textStyle: TextStyle(
+                                    fontSize: kSubTitleSize,
+                                    fontFamily: kFontFamily,
+                                  ),
+                                )
                               ),
                             ),
                           ),
@@ -188,10 +200,12 @@ class _CourseRegisterState extends State<CourseRegister> {
             filled: true,
             fillColor: Colors.white,
             hintText: name,
-            hintStyle: const TextStyle(
-              color:kSwatchColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+            hintStyle: GoogleFonts.tajawal(
+              textStyle: const TextStyle(
+                color:kSwatchColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              )
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0),

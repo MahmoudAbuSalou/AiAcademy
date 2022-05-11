@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'const.dart';
 
@@ -42,9 +43,11 @@ class LogginTextField extends StatelessWidget {
 
         },
         obscureText: obSecureText,
-        style: const TextStyle(
-          color: Colors.black,
-          fontFamily: kFontFamily,
+        style: GoogleFonts.tajawal(
+          textStyle: const TextStyle(
+            color: Colors.black,
+            fontFamily: kFontFamily,
+          )
         ),
         decoration: InputDecoration(
           filled: true,
@@ -60,11 +63,13 @@ class LogginTextField extends StatelessWidget {
           ),
           label: Text(
             title,
-            style: TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
+            style: GoogleFonts.tajawal(
+              textStyle: TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            )
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),

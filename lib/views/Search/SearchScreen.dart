@@ -4,6 +4,7 @@ import 'package:academy/views/course_info.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 import '../../components/components.dart';
@@ -102,15 +103,7 @@ class SearchScreen extends StatelessWidget {
                             //CourseDetails
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>  CourseInfo(id:id )
-                                // const CoursePage(
-                                //       courseImage:
-                                //           'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_7774889739-768x512.webp',
-                                //       degree: 'Diploma',
-                                //       platformImage:
-                                //           'https://lh3.googleusercontent.com/a-/AOh14Giz3B5xi3irpfXiJEiaB5tmmLcLVWMcB9xM7t4o=s96-c',
-                                //       platformName: 'MAad',
-                                //       tag: '1',
-                                //     )
+
                             ));
                           },
                           tag: '1',

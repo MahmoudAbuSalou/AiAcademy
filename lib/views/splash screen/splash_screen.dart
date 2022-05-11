@@ -1,6 +1,8 @@
 
+import 'package:academy/components/const.dart';
 import 'package:academy/shared/components/components.dart';
 import 'package:academy/views/HomeLayout/home_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
@@ -31,18 +33,22 @@ class _SplashScreenState extends State<SplashScreen> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
-        height: height,
-        width: width,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'images/1.jpg',
-              ),
-              fit: BoxFit.fill,
-              filterQuality: FilterQuality.high,
-              isAntiAlias: true,
-            )),
-      ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.orange.shade400,kSwatchColor, kSwatchColor.withOpacity(0.8),kSwatchColor.withOpacity(0.7),],
+              end: Alignment.bottomCenter,
+              begin: Alignment.topCenter
+          ),
+        ),
+        child: Center(
+          child: Image.asset('images/logoUp.png',
+
+          width: 700.w,
+            height: 700.h,
+          ),
+        ),
+      )
     );
   }
 }
+

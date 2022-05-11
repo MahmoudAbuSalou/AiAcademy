@@ -79,11 +79,13 @@ class _QuizPageState extends State<QuizPage> {
                                     ),
                                     Text(
                                       ' راجع أجوبتك لاكتساب المعرفة ',
-                                      style: TextStyle(
-                                        fontFamily: kFontFamily,
-                                        fontSize: 40.sp,
-                                        color: Colors.red,
-                                      ),
+                                      style: GoogleFonts.tajawal(
+                                        textStyle: TextStyle(
+                                          fontFamily: kFontFamily,
+                                          fontSize: 40.sp,
+                                          color: Colors.red,
+                                        ),
+                                      )
                                     ),
                                   ],
                                 ),
@@ -188,11 +190,13 @@ class _QuizPageState extends State<QuizPage> {
                                     ),
                                     Text(
                                       ' لقد أكملت المقرر ، تحقق من فهمك ',
-                                      style: TextStyle(
-                                        fontFamily: kFontFamily,
-                                        fontSize: 40.sp,
-                                        color: Colors.red,
-                                      ),
+                                      style:GoogleFonts.tajawal(
+                                        textStyle:  TextStyle(
+                                          fontFamily: kFontFamily,
+                                          fontSize: 40.sp,
+                                          color: Colors.red,
+                                        ),
+                                      )
                                     ),
                                   ],
                                 ),
@@ -214,8 +218,10 @@ class _QuizPageState extends State<QuizPage> {
                                   ),
                                   Text(
                                     formatTime(cubit.start),
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 50.sp),
+                                    style: GoogleFonts.tajawal(
+                                      textStyle: TextStyle(
+                                          color: Colors.black, fontSize: 50.sp),
+                                    )
                                   )
                                 ],
                               ),
@@ -408,7 +414,7 @@ class _QuizPageState extends State<QuizPage> {
                           radius: 45.0,
                           lineWidth: 8.0,
                           percent: (finalResult.resul! / 100),
-                          center: Text("${finalResult.resul!.ceil()}%"),
+                          center: Text("${finalResult.resul!.ceil()}%",style: GoogleFonts.tajawal(),),
                           progressColor: kSwatchColor,
                         ),
                       ),

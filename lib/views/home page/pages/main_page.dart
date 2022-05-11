@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../components/components.dart';
 import '../../../components/const.dart';
 import '../../../shared/network/local/cachehelper.dart';
@@ -66,7 +67,9 @@ List <Widget>  Speci=[
                 if(CacheHelper.getData(key: 'user_display_name')!=null)
                 FittedBox(
                   fit: BoxFit.scaleDown,
-                  child: AutoSizeText('${CacheHelper.getData(key: 'user_display_name')}',style: TextStyle(fontFamily: kFontFamily,color: kSwatchColor,fontSize: kTitleSize),),
+                  child: AutoSizeText('${CacheHelper.getData(key: 'user_display_name')}',style:GoogleFonts.tajawal(
+                    textStyle:  TextStyle(color: kSwatchColor,fontSize: kTitleSize)
+                  ),),
                 ),
               ],
             ),
@@ -75,8 +78,12 @@ List <Widget>  Speci=[
 
             Row(
               children: [
-                FittedBox(child: AutoSizeText('أبرز ',style: TextStyle(fontSize: kTitleSize),),),
-                FittedBox(child: AutoSizeText('التخصصات',style: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),),)
+                FittedBox(child: AutoSizeText('أبرز ',style: GoogleFonts.tajawal(
+                  textStyle: TextStyle(fontSize: kTitleSize)
+                ),),),
+                FittedBox(child: AutoSizeText('التخصصات',style: GoogleFonts.tajawal(
+                  textStyle: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),
+                )),)
               ],
             ),
 
@@ -107,8 +114,12 @@ List <Widget>  Speci=[
             SizedBox(height: size.height*.005,),
             Row(
               children: [
-                FittedBox(child: AutoSizeText('الدرجات ',style: TextStyle(fontSize: kTitleSize),),),
-                FittedBox(child: AutoSizeText('الجامعية',style: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),),)
+                FittedBox(child: AutoSizeText('الدرجات ',style:GoogleFonts.tajawal(
+                  textStyle:  TextStyle(fontSize: kTitleSize),
+                )),),
+                FittedBox(child: AutoSizeText('الجامعية',style: GoogleFonts.tajawal(
+                  textStyle: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),
+                )),)
               ],
             ),
 
@@ -178,7 +189,9 @@ class Collage extends StatelessWidget{
             ),
           ),
           FittedBox(
-            child: AutoSizeText(name,style: TextStyle(fontWeight: FontWeight.bold),),
+            child: AutoSizeText(name,style: GoogleFonts.tajawal(
+              textStyle: TextStyle(fontWeight: FontWeight.bold),
+            )),
           )
         ],
       ),
@@ -211,7 +224,9 @@ class Course extends StatelessWidget{
             ),
           ),
           FittedBox(
-            child: AutoSizeText(name,style: TextStyle(fontWeight: FontWeight.bold),),
+            child: AutoSizeText(name,style:GoogleFonts.tajawal(
+              textStyle:  TextStyle(fontWeight: FontWeight.bold),
+            )),
           )
         ],
       ),
@@ -240,7 +255,7 @@ class UniversityContainer extends StatelessWidget{
             child: Center(child: icon),
           ),
           FittedBox(
-            child: AutoSizeText(name),
+            child: AutoSizeText(name,style: GoogleFonts.tajawal(),),
           )
         ],
       ),

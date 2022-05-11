@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../components/const.dart';
 import '../models/about_course_Model.dart';
 
@@ -34,11 +35,13 @@ class CourseDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       aboutCourseModel.name,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: kFontFamily,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
+                      style: GoogleFonts.tajawal(
+                        textStyle: TextStyle(
+                          fontSize: 16,
+                          fontFamily: kFontFamily,
+                          color: Colors.black.withOpacity(0.7),
+                        ),
+                      )
                     ),
                   ),
                   const SizedBox(
@@ -49,11 +52,13 @@ class CourseDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       aboutCourseModel.content,
-                      style: TextStyle(
-                        fontSize: 35.sp,
-                        fontFamily: kFontFamily,
-                        color: Colors.black.withOpacity(0.7),
-                      ),
+                      style: GoogleFonts.tajawal(
+                        textStyle: TextStyle(
+                          fontSize: 35.sp,
+                          fontFamily: kFontFamily,
+                          color: Colors.black.withOpacity(0.7),
+                        ),
+                      )
                     ),
                   ),
                   // SizedBox(height:50,),
@@ -90,11 +95,13 @@ class SubtitleText extends StatelessWidget {
           ),
           Text(
             text,
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: kFontFamily,
-              color: Colors.black.withOpacity(0.7),
-            ),
+            style:GoogleFonts.tajawal(
+              textStyle:  TextStyle(
+                fontSize: 16,
+                fontFamily: kFontFamily,
+                color: Colors.black.withOpacity(0.7),
+              ),
+            )
           ),
         ],
       ),
@@ -156,13 +163,15 @@ class TitleText extends StatelessWidget {
         ),
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 19,
-            fontFamily: kFontFamily,
-            fontWeight: FontWeight.w500,
-            decoration: TextDecoration.underline,
-            color: kSwatchColor,
-          ),
+          style:GoogleFonts.tajawal(
+            textStyle:  const TextStyle(
+              fontSize: 19,
+              fontFamily: kFontFamily,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.underline,
+              color: kSwatchColor,
+            ),
+          )
         ),
         const SizedBox(
           height: 10,
@@ -195,23 +204,27 @@ class CourseDetailsRow extends StatelessWidget {
           ),
           Text(
             title,
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: kFontFamily,
-              color: Colors.black.withOpacity(0.7),
+            style: GoogleFonts.tajawal(
+              textStyle: TextStyle(
+                fontSize: 16,
+                fontFamily: kFontFamily,
+                color: Colors.black.withOpacity(0.7),
 
-            ),
+              ),
+            )
           ),
           const SizedBox(
             width: 5,
           ),
           Text(
             value.toString(),
-            style: TextStyle(
-              fontSize: 16,
-              fontFamily: kFontFamily,
-              color: Colors.black.withOpacity(0.7),
-            ),
+            style:GoogleFonts.tajawal(
+              textStyle:  TextStyle(
+                fontSize: 16,
+                fontFamily: kFontFamily,
+                color: Colors.black.withOpacity(0.7),
+              ),
+            )
 
           ),
         ],

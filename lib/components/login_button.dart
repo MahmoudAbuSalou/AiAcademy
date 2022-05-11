@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginButton extends StatelessWidget {
   final onTap;
@@ -25,12 +26,14 @@ class LoginButton extends StatelessWidget {
         child: Center(
           child: load==true?CircularProgressIndicator(color: Colors.white,):Text(
             'تسجيل الدخول',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              fontFamily: 'NotoKufiArabic-Medium',
-            ),
+            style:GoogleFonts.tajawal(
+              textStyle:  TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'NotoKufiArabic-Medium',
+              ),
+            )
           ),
 
         ),

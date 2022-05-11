@@ -1,6 +1,7 @@
 import 'package:academy/views/web_view/web_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../components/const.dart';
 import '../components/loggin_text_field.dart';
 import '../components/login_button.dart';
@@ -74,14 +75,16 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                const Text(
+                 Text(
                   'تسجيل الدخول',
-                  style: TextStyle(
-                    color: kSwatchColor,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'NotoKufiArabic-Medium',
-                  ),
+                  style:GoogleFonts.tajawal(
+                    textStyle:const  TextStyle(
+                      color: kSwatchColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'NotoKufiArabic-Medium',
+                    ),
+                  )
                 ),
                 const SizedBox(
                   height: 25,
@@ -148,14 +151,16 @@ class LoginScreen extends StatelessWidget {
                         },
                         child: Container(
                           width: size.width * 0.35,
-                          child: const FittedBox(
+                          child:  FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
                               'إنشاء حساب إلكتروني',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'NotoKufiArabic-Medium',
-                              ),
+                              style: GoogleFonts.tajawal(
+                                textStyle:const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'NotoKufiArabic-Medium',
+                                ),
+                              )
                             ),
                           ),
                         ),

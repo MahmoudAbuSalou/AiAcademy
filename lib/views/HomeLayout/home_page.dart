@@ -76,10 +76,10 @@ class _HomePageState extends State<HomePage> {
                   Icons.home,
                   size: 38,
                   color: Color(0xff32504F),
-                  // color: context.isDarkMode ? kTextColorWhiteDark : Colors.black26,
+
                 ),
                 iconNavBar('images/collages.svg','المساقات'),
-                //  SvgPicture.asset('images/collages.svg',color:const Color(0xff32504F),width: 35,height: 35,),
+
               ],
               onTap: (index) {
 
@@ -112,11 +112,13 @@ class _HomePageState extends State<HomePage> {
                           leading: SvgPicture.asset('images/user (1).svg'),
                           title: AutoSizeText(
                             'الصفحة الشخصية',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontFamily: kFontFamily,
-                              fontSize: kTitleSize,
-                            ),
+                            style:GoogleFonts.tajawal(
+                              textStyle:  TextStyle(
+                                color: kPrimaryColor,
+                                fontFamily: kFontFamily,
+                                fontSize: kTitleSize,
+                              ),
+                            )
                           ),
                         ):Container(),
                       ),
@@ -133,11 +135,13 @@ class _HomePageState extends State<HomePage> {
                           leading: SvgPicture.asset('images/online-course (1).svg'),
                           title: AutoSizeText(
                             'تسجيل الخروج',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontFamily: kFontFamily,
-                              fontSize: kTitleSize,
-                            ),
+                            style: GoogleFonts.tajawal(
+                              textStyle: TextStyle(
+                                color: kPrimaryColor,
+                                fontFamily: kFontFamily,
+                                fontSize: kTitleSize,
+                              ),
+                            )
                           ),
                         ),
                       ):
@@ -149,11 +153,13 @@ class _HomePageState extends State<HomePage> {
                           leading: SvgPicture.asset('images/online-course (1).svg'),
                           title: AutoSizeText(
                             'تسجيل الدخول',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontFamily: kFontFamily,
-                              fontSize: kTitleSize,
-                            ),
+                            style:GoogleFonts.tajawal(
+                              textStyle:  TextStyle(
+                                color: kPrimaryColor,
+                                fontFamily: kFontFamily,
+                                fontSize: kTitleSize,
+                              ),
+                            )
                           ),
                         ),
                       ),
@@ -166,11 +172,13 @@ class _HomePageState extends State<HomePage> {
                           leading: SvgPicture.asset('images/contact-us.svg'),
                           title: AutoSizeText(
                             'تواصل معنا',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontFamily: kFontFamily,
-                              fontSize: kTitleSize,
-                            ),
+                            style:GoogleFonts.tajawal(
+                              textStyle:  TextStyle(
+                                color: kPrimaryColor,
+                                fontFamily: kFontFamily,
+                                fontSize: kTitleSize,
+                              ),
+                            )
                           ),
                         ),
                       ),
@@ -266,7 +274,7 @@ Widget  iconNavBar(String image,String name)
   return Column(
     children: [
       SvgPicture.asset(image,color:const Color(0xff32504F),width: 35,height: 35,),
-      AutoSizeText(name)
+      AutoSizeText(name,style: GoogleFonts.tajawal(),)
     ],
   );
 

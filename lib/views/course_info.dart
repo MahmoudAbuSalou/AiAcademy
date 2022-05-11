@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../components/components.dart';
 import '../components/const.dart';
 import '../components/custom_image.dart';
@@ -270,10 +271,10 @@ class _CourseInfoState extends State<CourseInfo> {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
-                                                    children: const [
+                                                    children:  [
                                                       Center(
                                                           child: Text(
-                                                              'يرجى الاشتراك اولا لرؤية التعليقات')),
+                                                              'يرجى الاشتراك اولا لرؤية التعليقات',style:GoogleFonts.tajawal(),)),
                                                     ],
                                                   ),
                                                 )
@@ -341,11 +342,13 @@ class _CourseInfoState extends State<CourseInfo> {
               padding: const EdgeInsets.only(bottom: 30),
               // ignore: avoid_unnecessary_containers
               child: Container(
-                child: const Center(
+                child:  Center(
                   child: Text(
                     "لا يوجد تعليقات ",
-                    style: TextStyle(
-                      fontFamily: 'NotoKufiArabic',
+                    style: GoogleFonts.tajawal(
+                      textStyle: TextStyle(
+                        fontFamily: 'NotoKufiArabic',
+                      ),
                     ),
                   ),
                 ),
@@ -380,24 +383,30 @@ class _CourseInfoState extends State<CourseInfo> {
                       children: [
                         Text(
                           autoGenerate.sections![index].title,
-                          style: TextStyle(fontSize: 40.sp),
+                          style: GoogleFonts.tajawal(
+                            textStyle: TextStyle(fontSize: 40.sp)
+                          ),
                         ),
                         autoGenerate.checkEnrolled(
                                     autoGenerate.sections![index].items) ==
                                 false
                             ? Text(
                                 '${autoGenerate.getReviewCount(autoGenerate.sections![index].items)}/${autoGenerate.sections![index].items.length}',
-                                style: const TextStyle(
-                                  fontFamily: kFontFamily,
-                                  color: kSwatchColor,
-                                ),
+                                style: GoogleFonts.tajawal(
+                                  textStyle:  TextStyle(
+                                    fontFamily: kFontFamily,
+                                    color: kSwatchColor,
+                                  ),
+                                )
                               )
                             : Text(
                                 '${autoGenerate.sections![index].items.length}',
-                                style: const TextStyle(
-                                  fontFamily: kFontFamily,
-                                  color: kSwatchColor,
-                                ),
+                                style: GoogleFonts.tajawal(
+                                  textStyle: const TextStyle(
+                                    fontFamily: kFontFamily,
+                                    color: kSwatchColor,
+                                  ),
+                                )
                               )
                       ],
                     ),
@@ -423,19 +432,23 @@ class _CourseInfoState extends State<CourseInfo> {
                         autoGenerate.checkCompleted(
                                     autoGenerate.sections![index].items) ==
                                 true
-                            ? const Text(
+                            ?  Text(
                                 ' مكتمل',
-                                style: TextStyle(
-                                  color: Color(0xff00B706),
-                                  fontSize: 12,
-                                ),
+                                style: GoogleFonts.tajawal(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xff00B706),
+                                    fontSize: 12,
+                                  ),
+                                )
                               )
-                            : const Text(
+                            :  Text(
                                 'غير مكتمل',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                ),
+                                style: GoogleFonts.tajawal(
+                                  textStyle:const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                )
                               ),
                       ],
                     ),
@@ -468,18 +481,22 @@ class _CourseInfoState extends State<CourseInfo> {
                                   ),
                                   /// determinate tape of item ( lessons or Quiz)
                                   e.type == 'lp_lesson'
-                                      ? const Text(
+                                      ?  Text(
                                           ' المقرر :',
-                                          style: TextStyle(
-                                              color: Colors.black45,
-                                              overflow: TextOverflow.ellipsis),
+                                          style: GoogleFonts.tajawal(
+                                            textStyle:const TextStyle(
+                                                color: Colors.black45,
+                                                overflow: TextOverflow.ellipsis),
+                                          ),
                                           maxLines: 1,
                                         )
-                                      : const Text(
+                                      :  Text(
                                           'الإختبار :',
-                                          style: TextStyle(
-                                              color: Colors.black45,
-                                              overflow: TextOverflow.ellipsis),
+                                          style: GoogleFonts.tajawal(
+                                            textStyle: TextStyle(
+                                                color: Colors.black45,
+                                                overflow: TextOverflow.ellipsis),
+                                          ),
                                           maxLines: 1,
                                         ),
                                   SizedBox(
@@ -489,10 +506,12 @@ class _CourseInfoState extends State<CourseInfo> {
                                   Expanded(
                                     child: Text(
                                       e.title,
-                                      style: const TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        color: Colors.black,
-                                        //   fontSize: 35.sp
+                                      style: GoogleFonts.tajawal(
+                                        textStyle: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          color: Colors.black,
+                                          //   fontSize: 35.sp
+                                        ),
                                       ),
                                       maxLines: 2,
                                     ),
@@ -699,8 +718,10 @@ class CustomerReview extends StatelessWidget {
                   children: [
                     Text(
                       reviewModel.display_name.toString(),
-                      style: TextStyle(
-                          overflow: TextOverflow.ellipsis, fontSize: 30.sp),
+                      style: GoogleFonts.tajawal(
+                        textStyle: TextStyle(
+                            overflow: TextOverflow.ellipsis, fontSize: 30.sp),
+                      ),
                       maxLines: 2,
                     ),
                     ClientRating(
@@ -712,9 +733,11 @@ class CustomerReview extends StatelessWidget {
                   width: double.infinity,
                   child: Text(
                     reviewModel.content.toString(),
-                    style: TextStyle(
-                      fontSize: 35.sp,
-                      color: Colors.grey,
+                    style: GoogleFonts.tajawal(
+                      textStyle: TextStyle(
+                        fontSize: 35.sp,
+                        color: Colors.grey,
+                      )
                     ),
                   ),
                 ),
@@ -772,11 +795,13 @@ class TitleWithDotIcon extends StatelessWidget {
           ),
           Text(
             title,
-            style: TextStyle(
-              fontSize: fontSize,
-              fontFamily: kFontFamily,
-              color: Colors.black.withOpacity(0.7),
-            ),
+            style:GoogleFonts.tajawal(
+              textStyle:  TextStyle(
+                fontSize: fontSize,
+                fontFamily: kFontFamily,
+                color: Colors.black.withOpacity(0.7),
+              ),
+            )
           ),
         ],
       ),
@@ -802,12 +827,14 @@ class CustomTabBarButton extends StatelessWidget {
           onTap: onPress,
           child: AutoSizeText(
             title,
-            style: TextStyle(
-              color: isActive ? kSecondaryColor : Colors.grey,
-              // fontSize: 20,
-              fontFamily: kFontFamily,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-            ),
+            style: GoogleFonts.tajawal(
+              textStyle: TextStyle(
+                color: isActive ? kSecondaryColor : Colors.grey,
+                // fontSize: 20,
+
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+              ),
+            )
           ),
         ),
         if (isActive)

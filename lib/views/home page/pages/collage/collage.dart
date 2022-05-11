@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 import '../../../../components/components.dart';
@@ -28,10 +29,12 @@ return Scaffold(
               FittedBox(
                 child: Text(
                   'برامج الأكاديمية',
-                  style: TextStyle(
-                    fontFamily: kFontFamily,
-                    fontSize: kTitleSize,
-                  ),
+                  style: GoogleFonts.tajawal(
+                    textStyle: TextStyle(
+                      fontFamily: kFontFamily,
+                      fontSize: kTitleSize,
+                    ),
+                  )
                 ),
               ),
               SizedBox(
