@@ -84,13 +84,13 @@ class _MainPageState extends State<MainPage> {
 
                     prefixIcon: const Padding(
                         padding: EdgeInsets.only(left: 10),
-                        child: Icon(Icons.search,color: kSwatchColor,)
+                        child: Icon(Icons.search,color: Colors.black54,)
                     ),
                     hintText: 'بحث',
-                    hintStyle: const TextStyle(
+                    hintStyle:  TextStyle(
                       color: kSwatchColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+
+                      fontSize: 50.sp,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20.0),
@@ -129,7 +129,7 @@ class _MainPageState extends State<MainPage> {
         navigatorTo(context, Courses(title: title, id: id, height: height, width: width));
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 40.h),
+        padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 30.h),
         child: Container(
 
           height: 500.h,
@@ -141,7 +141,7 @@ class _MainPageState extends State<MainPage> {
 
                 )
               ],
-              borderRadius: BorderRadius.only(topRight: Radius.circular(40.r), topLeft:Radius.circular(40.r)),
+              borderRadius: BorderRadius.only(topRight: Radius.circular(40.r), topLeft:Radius.circular(40.r),bottomLeft: Radius.circular(40.r),bottomRight: Radius.circular(40.r)),
 
               color: Colors.white,
               border: Border.all (color:kSwatchColor)
@@ -165,11 +165,11 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 4.h),
+              SizedBox(height: 8.h),
               Divider(color:kSwatchColor,height: 3.h),
               Expanded(
                 child: FancyShimmerImage(
-                  boxFit: BoxFit.fill,
+                  boxFit: BoxFit.fitHeight,
                   imageUrl:image ,
                   errorWidget: Image.network(
                       'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),

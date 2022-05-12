@@ -26,10 +26,10 @@ class Assets {
   static const String imagesMenu = 'images/menu.svg';
   static const String imagesMicroscope = 'images/microscope.svg';
 
-
   static const String imagesPharmacy = 'images/pharmacy.svg';
 
   static const String imagesPortfolio = 'images/portfolio.svg';
+
 
   static const String imagesQuran = 'images/quran.svg';
   static const String imagesResult = 'images/result.svg';
