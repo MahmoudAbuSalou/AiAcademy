@@ -25,7 +25,7 @@ class SearchScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return BlocProvider(
-      create: (context) => SearchCubit()..getSearchData(text: search.text),
+      create: (context) => SearchCubit(),
       child: BlocConsumer<SearchCubit, SearchStates>(
         listener: (context, state) {
           // TODO: implement listener
@@ -80,23 +80,63 @@ class SearchScreen extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: search,
-                    validator: (String? value) {
-                      if (value!.length == 0)
-                        return 'Search must not be Empty';
-                      return "";
-                    },
-                    onChanged: (s) async {
-                      SearchCubit.get(context).getSearchData(text: s);
-                    },
-                    enableSuggestions: true,
-                    onFieldSubmitted: (s) {
-                      SearchCubit.get(context).getSearchData(text: s);
-                    },
-                    decoration: const InputDecoration(
-                      suffixIcon: Icon(Icons.search),
-                      label: Text('ابحث:'),
+
+                  Container(
+                    height: 45,
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                          spreadRadius: 0,
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+
+                      keyboardType: TextInputType.text,
+                      controller: search,
+             validator: (String? value) {
+              if (value!.length == 0)
+                   return 'Search must not be Empty';
+                  return "";
+                 },
+
+                        onChanged: (s) async {
+                          SearchCubit.get(context).getSearchData(text: s);
+                        },
+
+                        onFieldSubmitted: (s) {
+                          SearchCubit.get(context).getSearchData(text: s);
+                        },
+
+
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: kFontFamily,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(12),
+                        filled: true,
+                        fillColor: Colors.white,
+
+                        prefixIcon: const Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Icon(Icons.search,color: Colors.black54,)
+                        ),
+                        hintText: 'بحث',
+                        hintStyle:  TextStyle(
+                          color: kSwatchColor,
+
+                          fontSize: 50.sp,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
