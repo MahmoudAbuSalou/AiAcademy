@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:academy/shared/network/local/cachehelper.dart';
+import 'package:academy/views/profile_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:academy/views/home%20page/pages/main_page.dart' as main;
@@ -26,7 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<Widget> screen = [
 
 
-    main.MainPage(),
+     main.MainPage(),
     University(),
     Collage(),
   ];

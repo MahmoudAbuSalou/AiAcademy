@@ -170,7 +170,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(height: 8.h),
-             
+
               Expanded(
                 child: FancyShimmerImage(
                   boxFit: BoxFit.fitHeight,
