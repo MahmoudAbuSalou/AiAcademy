@@ -154,7 +154,7 @@ class Course extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: EdgeInsets.all(width * .03),
-        height: height * .33,
+        height: height * .35,
         width: width * .43,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -205,15 +205,18 @@ class Course extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          courseName,
-                          maxLines: 2,
-                          style: GoogleFonts.tajawal(
-                            textStyle: TextStyle(
-                                fontSize: 38.sp,
-                                fontFamily: kFontFamily,
-                                fontWeight: FontWeight.w600,
-                                overflow: TextOverflow.ellipsis)
+                        Container(
+                          height:75.h,
+                          child: Text(
+                            courseName,
+                            maxLines: 2,
+                            style: GoogleFonts.tajawal(
+                              textStyle: TextStyle(
+                                  fontSize: 36.sp,
+                                  fontFamily: kFontFamily,
+                                  fontWeight: FontWeight.w600,
+                                  overflow: TextOverflow.ellipsis)
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -242,7 +245,7 @@ class Course extends StatelessWidget {
                               padding: EdgeInsets.only(right: 4),
                               child: CircleAvatar(
                                 backgroundColor: Colors.transparent,
-                                minRadius: 45.r,
+                                minRadius: 40.r,
 
                                 backgroundImage: NetworkImage(platformImage),
                               ),
@@ -271,7 +274,7 @@ class Course extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 20.h,
                         ),
                         Row(
                           children: [
@@ -283,7 +286,7 @@ class Course extends StatelessWidget {
                                   maxLines: 2,
                                   style: GoogleFonts.tajawal(
                                     textStyle: TextStyle(
-                                        fontSize: 25.sp,
+                                        fontSize: 20.sp,
 
                                         fontWeight: FontWeight.bold,
                                         decoration: TextDecoration.underline,
@@ -606,6 +609,36 @@ class Courses extends StatelessWidget {
                         SmartRefresher(
                           controller: cubit.refreshController,
                           enablePullUp: true,
+                          footer: CustomFooter(
+                              builder: (BuildContext context,LoadStatus? mode){
+                                Widget body ;
+                                if(mode==LoadStatus.idle){
+                                  body =  Text(" ",style: GoogleFonts.tajawal(),);
+                                }
+                                else if(mode==LoadStatus.loading){
+                                  body =  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("جاري التحميل ...  ",style: GoogleFonts.tajawal(),),
+                                      CupertinoActivityIndicator()
+                                    ],
+                                  );
+                                }
+                                else if(mode == LoadStatus.failed){
+                                  body =   CupertinoActivityIndicator(color: Colors.red,);
+                                }
+                                else if(mode == LoadStatus.canLoading){
+                                  body = Text("");
+                                }
+                                else{
+                                  body = Text("No more Data");
+                                }
+                                return Container(
+                                  height: 55.0,
+                                  child: Center(child:body),
+                                );
+                              }
+                          ),
                           enablePullDown: false,
                           onLoading: () {
                             cubit.getCourseData(int.parse(id));
