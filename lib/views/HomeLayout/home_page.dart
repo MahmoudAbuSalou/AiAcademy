@@ -189,7 +189,8 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               shadowColor: Colors.black,
               foregroundColor: Colors.black,
-              backgroundColor: Colors.white,
+              backgroundColor: kSwatchColor,
+
 
 
               actions: [
