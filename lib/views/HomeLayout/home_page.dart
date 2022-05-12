@@ -197,9 +197,10 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(icon:CacheHelper.getData(key: 'token')!=null? Icon(Icons.person):Icon(Icons.login), onPressed: () {
-                      CacheHelper.getData(key: 'token')!=null?
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(homepage: false),)):
+                    if(CacheHelper.getData(key: 'token')==null)
+                    IconButton(icon:Icon(Icons.login), onPressed: () {
+
+
                       navigatorToNew(context, LoginScreen());
 
                     },),
