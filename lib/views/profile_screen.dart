@@ -338,7 +338,7 @@ class CourseItemCard extends StatelessWidget {
                               ?  Row(
                                 children: [
                                   SvgPicture.asset(
-                                    'images/date.svg',
+                                    'images/timeEnd.svg',
                                     width: 70.w,
 
                                   ),
@@ -351,7 +351,7 @@ class CourseItemCard extends StatelessWidget {
                               : Row(
                                 children: [
                                   SvgPicture.asset(
-                                    'images/date.svg',
+                                    'images/timeEnd.svg',
                                     width: 70.w,
 
                                   ),
@@ -376,7 +376,7 @@ class CourseItemCard extends StatelessWidget {
                              Row(
                                children: [
                                  SvgPicture.asset(
-                                   'images/timeEnd.svg',
+                                   'images/date.svg',
                                    width: 70.w,
 
                                  ),
@@ -387,7 +387,7 @@ class CourseItemCard extends StatelessWidget {
                                 :Row(
                                   children: [
                                     SvgPicture.asset(
-                                      'images/timeEnd.svg',
+                                      'images/date.svg',
                                       width: 70.w,
 
                                     ),
