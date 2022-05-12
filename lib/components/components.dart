@@ -274,7 +274,7 @@ class Course extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 20.h,
+                          height: 31.h,
                         ),
                         Row(
                           children: [

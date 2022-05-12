@@ -1,10 +1,12 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:academy/shared/components/components.dart';
 import 'package:academy/shared/network/local/cachehelper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/const.dart';
 import '../models/ProfileModel.dart';
@@ -261,7 +263,14 @@ class CourseItemCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
+                color: Colors.white60,
                 width: size.width * 0.33,
+                child: FancyShimmerImage(
+                  boxFit: BoxFit.contain,
+                  imageUrl: 'https://www.clipartkey.com/mpngs/m/11-118380_transparent-development-clipart-role-and-responsibility-icon.png',
+                  errorWidget: Image.network(
+                      'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                ),
 
               ),
             ),
@@ -299,9 +308,23 @@ class CourseItemCard extends StatelessWidget {
                           width: double.infinity,
                           padding: const EdgeInsetsDirectional.only(
                               start: 10, top: 7, bottom: 8),
-                          child: Text(
-                            "النتيجة:" "%$results ",
-                            style: GoogleFonts.tajawal(),
+                          child: Row(
+
+                            children: [
+                            SvgPicture.asset(
+                            'images/result.svg',
+                              width: 70.w,
+
+                          ),
+                              SizedBox(width: 20.w,),
+
+                              Text(
+                                "النتيجة:" "%$results ",
+                                style: GoogleFonts.tajawal(
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -309,29 +332,73 @@ class CourseItemCard extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           padding:
-                          const EdgeInsetsDirectional.only(start: 8, bottom: 12),
+                          const EdgeInsetsDirectional.only(start: 8, bottom: 8),
                           height: 30,
                           child: endTime is! String
-                              ?  Text("تاريخ الانتهاء: _",style: GoogleFonts.tajawal(),)
-                              : AutoSizeText(
+                              ?  Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'images/date.svg',
+                                    width: 70.w,
+
+                                  ),
+                                  SizedBox(width: 20.w,),
+                                  Text("تاريخ الانتهاء: _",style: GoogleFonts.tajawal(
+                                    fontWeight: FontWeight.bold,
+                                  ),),
+                                ],
+                              )
+                              : Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'images/date.svg',
+                                    width: 70.w,
+
+                                  ),
+                                  SizedBox(width: 20.w,),
+                                  AutoSizeText(
                             "تاريخ الانتهاء : " "${endTime.substring(0, 10)}",
                             maxLines: 2
-                              ,style: GoogleFonts.tajawal(),
+                                  ,style: GoogleFonts.tajawal(
+                                    fontWeight: FontWeight.bold
+                                  ),
                           ),
+                                ],
+                              ),
                         ),
                       ),
                       Expanded(
                         child: Container(
                             width: double.infinity,
-                            padding: const EdgeInsetsDirectional.only(start: 2),
-                            height: 30,
+                            padding: const EdgeInsetsDirectional.only(start: 8),
+                            height: 25,
                             child: Expiration_time is! String ?
-                             Text("تاريخ الصلاحية: _",style: GoogleFonts.tajawal(),)
-                                :AutoSizeText(
+                             Row(
+                               children: [
+                                 SvgPicture.asset(
+                                   'images/timeEnd.svg',
+                                   width: 70.w,
+
+                                 ),
+                                 SizedBox(width: 20.w,),
+                                 Text("تاريخ الصلاحية: _",style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),),
+                               ],
+                             )
+                                :Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'images/timeEnd.svg',
+                                      width: 70.w,
+
+                                    ),
+                                    SizedBox(width: 20.w,),
+                                    AutoSizeText(
                               "تاريخ الصلاحية: "
-                                  "${Expiration_time.substring(0, 10)}",
-                              maxLines: 2,style: GoogleFonts.tajawal(),
-                            )),
+                                      "${Expiration_time.substring(0, 10)}",
+                              maxLines: 2,style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),
+                            ),
+                                  ],
+                                )),
                       )
                     ]),
               ),
