@@ -16,6 +16,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -146,6 +147,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                 ),
 
                               ),
+
                         Column(
                           children: [
 
@@ -296,16 +298,25 @@ class _CourseInfoState extends State<CourseInfo> {
                                                       ),
                                                     ),
 
-                                      
+
                                         const SizedBox(
                                           height: 60,
                                         ),
                                       ],
                                     ),
+
                                   ),
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(icon:Icon(Icons.arrow_back_ios_new),onPressed: (){
+                              print('ddd');
+                              Navigator.of(context).pop();}),
                           ],
                         ),
                       ],
