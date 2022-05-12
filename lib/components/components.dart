@@ -560,3 +560,114 @@ class ItemCard extends StatelessWidget {
     );
   }
 }
+class Courses extends StatelessWidget {
+
+  Courses(
+      {Key? key,
+
+
+        required this.title,
+        required this.id,
+        required this.height,
+        required this.width,
+
+      })
+      : super(key: key);
+
+  final double height;
+  final double width;
+  final String title;
+  final String id;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => CoursesCubit()..getCourseData(int.parse(id)),
+        child: BlocConsumer<CoursesCubit, CoursesState>(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            var cubit = CoursesCubit.get(context);
+
+            return Scaffold(
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyAppBar(title: title),
+
+                  Expanded(
+                    child: ConditionalBuilder(
+                        condition: state is! GetDataLoadingAcademyCourses,
+                        builder: (context) =>
+                        //Pagination : Wrap Grid View With SmartRefresher
+                        SmartRefresher(
+                          controller: cubit.refreshController,
+                          enablePullUp: true,
+                          enablePullDown: false,
+                          onLoading: () {
+                            cubit.getCourseData(int.parse(id));
+                          },
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics:
+
+                            const BouncingScrollPhysics(),
+                            itemCount: cubit.courses.length,
+                            gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisExtent: height * .37,
+                              mainAxisSpacing: width * .03,
+
+                            ),
+                            itemBuilder: (context, index) => Course(
+                              width: width,
+                              rate: cubit.courses[index].rate,
+                              height: height,
+                              courseImage: cubit.courses[index].image,
+                              platformImage: cubit.courses[index].avatar,
+                              courseName: cubit.courses[index].name,
+                              coursePrice: '\$' +
+                                  cubit.courses[index].price.toString(),
+
+                              courseCommentsCount: '0',
+                              courseStudentsCount: cubit
+                                  .courses[index].count_students
+                                  .toString(),
+                              platformName: cubit.courses[index].nameOwner,
+                              onTap: () {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                  builder: (context) => CourseInfo(
+                                    id: cubit.courses[index].id.toString(),
+                                  ),
+                                ));
+                              },
+                              tag: '1',
+                            ),
+                          ),
+                        ),
+                        fallback: (context) => Column(
+                          children: [
+                            SizedBox(
+                              height: 200.h,
+                            ),
+                            const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ],
+                        )),
+                  ),
+
+                ],
+              ),
+            );
+          },
+        ),
+      ) ,
+    );
+  }
+}

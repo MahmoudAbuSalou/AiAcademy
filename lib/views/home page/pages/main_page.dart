@@ -1,13 +1,17 @@
 import 'dart:ffi';
 
 import 'package:academy/shared/components/components.dart';
+import 'package:academy/views/course_info.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../components/components.dart';
 import '../../../components/const.dart';
+import '../../../components/loggin_text_field.dart';
 import '../../../shared/network/local/cachehelper.dart';
 import '../../Search/SearchScreen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,123 +24,97 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-var height=0.0;var width=0.0;
+  var height=0.0;var width=0.0;
 
-//List Of Info That i show It In Carsoul Slider
- List <Widget> Univ=[
-  UniversityContainer(name: 'ادارة أعمال', color: Color(0xff32504F),icon: SvgPicture.asset('images/portfolio.svg',color: Colors.white,),),
-  UniversityContainer(name: 'الحقوق', color: Color(0xff0096B1),icon: SvgPicture.asset('images/justice.svg',color: Colors.white)),
-  UniversityContainer(name: 'هندسة', color: Color(0xffE2498A),icon: SvgPicture.asset('images/connection.svg',color: Colors.white)),
-  UniversityContainer(name: 'الصحة', color: Color(0xff0096B1),icon: SvgPicture.asset('images/pharmacy.svg',color: Colors.white)),
-  UniversityContainer(name: 'العلوم', color: Color(0xff562DD4),icon: SvgPicture.asset('images/microscope.svg',color: Colors.white)),
-  UniversityContainer(name: 'الصحافة', color: Color(0xffFFB606),icon: SvgPicture.asset('images/journalism.svg',color: Colors.white)),
-  UniversityContainer(name: 'الاداب', color: Color(0xffFF067D),icon: SvgPicture.asset('images/literature.svg',color: Colors.white)),
-  UniversityContainer(name: 'العلوم السياسية', color: Color(0xffF4B110),icon: SvgPicture.asset('images/political-science.svg',color: Colors.white)),
-  UniversityContainer(name: 'الفنون', color: Color(0xff32504F),icon: SvgPicture.asset('images/art-studies.svg',color: Colors.white)),
-  UniversityContainer(name: 'الدراسات الاسلامية', color: Color(0xff0096B1),icon: SvgPicture.asset('images/quran.svg',color: Colors.white)),
-  UniversityContainer(name: 'التربية', color: Color(0xff562DD4),icon: SvgPicture.asset('images/education.svg',color: Colors.white)),
-];
 
- //List Of Main Sections In Main Page
-List <Widget>  Speci=[
 
-];
+  //List Of Main Sections In Main Page
+  List <Widget>  Speci=[
+
+  ];
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
-     width = MediaQuery.of(context).size.width;
+    width = MediaQuery.of(context).size.width;
     var size=MediaQuery.of(context).size;
+    TextEditingController search = TextEditingController();
     Speci.clear();
-    Speci.add(ItemCard(title: 'درجة الدكتوراة', id: 40, height: height-200.h, width: width/1.2,image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_2935186286-768x512.webp',),);
-    Speci.add(ItemCard(title: 'درجة الماجيستير', id: 42, height: height-200.h, width: width/1.2,image: 'https://aiacademy.info/wp-content/uploads/2020/07/imageedit_3_2634596191-768x512.webp',),);
-    Speci.add(ItemCard(title: 'درجة البكالوريوس', id: 32, height: height-200.h, width: width/1.2,image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_9_8887104436-768x512.webp',),);
+    Speci.add(_degreeCard(title: 'درجة الدكتوراة',id:40.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_2935186286-768x512.webp'),);
+    Speci.add(_degreeCard(title: 'درجة الماجيستير',id:42.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/07/imageedit_3_2634596191-768x512.webp',),);
+    Speci.add(_degreeCard(title: 'درجة البكالوريوس',id:32.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_9_8887104436-768x512.webp'),);
     return  SingleChildScrollView(
-
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: EdgeInsets.all(size.width*kPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: AutoSizeText('مرحبا بك',style: TextStyle(fontSize: kTitleSize),),
-                ),
-                SizedBox(width: 5,),
-                if(CacheHelper.getData(key: 'user_display_name')!=null)
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: AutoSizeText('${CacheHelper.getData(key: 'user_display_name')}',style:GoogleFonts.tajawal(
-                    textStyle:  TextStyle(color: kSwatchColor,fontSize: kTitleSize)
-                  ),),
-                ),
-              ],
-            ),
-
-            SizedBox(height: size.height*.025,),
-
-            Row(
-              children: [
-                FittedBox(child: AutoSizeText('أبرز ',style: GoogleFonts.tajawal(
-                  textStyle: TextStyle(fontSize: kTitleSize)
-                ),),),
-                FittedBox(child: AutoSizeText('التخصصات',style: GoogleFonts.tajawal(
-                  textStyle: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),
-                )),)
-              ],
-            ),
 
             Container(
-              width: size.width,
-              height: 160,
-              child: CarouselSlider(
-
-                items: Univ,
-                  options: CarouselOptions(
-                    height: 250,
-
-                    viewportFraction: 0.3,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 1000),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-
-                    scrollDirection: Axis.horizontal,
-                  )
+              height: 45,
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                    spreadRadius: 0,
+                  ),
+                ],
               ),
+              child: InkWell(
+                onTap: (){
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SearchScreen(),));
+                },
+                child: TextFormField(
+                  enabled: false,
+                  keyboardType: TextInputType.text,
 
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontFamily: kFontFamily,
+                  ),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(12),
+                    filled: true,
+                    fillColor: Colors.white,
+
+                    prefixIcon: const Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Icon(Icons.search,color: kSwatchColor,)
+                    ),
+                    hintText: 'بحث',
+                    hintStyle: const TextStyle(
+                      color: kSwatchColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
             ),
-            SizedBox(height: size.height*.005,),
+
+
             Row(
               children: [
-                FittedBox(child: AutoSizeText('الدرجات ',style:GoogleFonts.tajawal(
-                  textStyle:  TextStyle(fontSize: kTitleSize),
-                )),),
-                FittedBox(child: AutoSizeText('الجامعية',style: GoogleFonts.tajawal(
-                  textStyle: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),
-                )),)
+                FittedBox(child: AutoSizeText('الدرجات ',style: TextStyle(fontSize: kTitleSize),),),
+                FittedBox(child: AutoSizeText('الجامعية',style: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),),)
               ],
             ),
-
-
-            SizedBox(
-              height: 20.h,
-            ),
-
             Container(
 
-              padding: EdgeInsets.symmetric(horizontal: 2.w),
-
-
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:Speci,
-              )
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children:Speci
+                )
 
             ),
 
@@ -145,7 +123,68 @@ List <Widget>  Speci=[
       ),
     );
   }
+  Widget _degreeCard({required String image,required String title,required String id,}){
+    return  InkWell(
+      onTap: (){
+        navigatorTo(context, Courses(title: title, id: id, height: height, width: width));
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 40.h),
+        child: Container(
+
+          height: 500.h,
+          decoration: BoxDecoration(
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 20,
+
+                )
+              ],
+              borderRadius: BorderRadius.only(topRight: Radius.circular(40.r), topLeft:Radius.circular(40.r)),
+
+              color: Colors.white,
+              border: Border.all (color:kSwatchColor)
+          ),
+
+          child: Column(
+            children:[
+              Container(
+
+
+                height: 70.h,
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: kFontFamily,
+                      color: const Color(0xff0B0742),
+                      fontSize: 40.sp,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 4.h),
+              Divider(color:kSwatchColor,height: 3.h),
+              Expanded(
+                child: FancyShimmerImage(
+                  boxFit: BoxFit.fill,
+                  imageUrl:image ,
+                  errorWidget: Image.network(
+                      'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
+
+
 
 class SearchTextField extends StatelessWidget {
   @override
@@ -154,13 +193,67 @@ class SearchTextField extends StatelessWidget {
 
     return Container(
       width: size.width,
-      margin: EdgeInsets.only(top: 5),
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.only(top: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.grey,
-        borderRadius: new BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
 
+    );
+  }
+  Widget _degreeCard({required String img,required String title}){
+    return  Padding(
+      padding: EdgeInsets.symmetric(horizontal: 100.w,vertical: 40.h),
+      child: Container(
+
+        height: 500.h,
+        decoration: BoxDecoration(
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20,
+
+              )
+            ],
+            borderRadius: BorderRadius.only(topRight: Radius.circular(40.r), topLeft:Radius.circular(40.r)),
+
+            color: Colors.white,
+            border: Border.all (color:kSwatchColor)
+        ),
+
+        child: Column(
+          children:[
+            Container(
+
+
+              height: 70.h,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: kFontFamily,
+                    color: const Color(0xff0B0742),
+                    fontSize: 40.sp,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 4.h),
+            Divider(color:kSwatchColor,height: 3.h),
+            Expanded(
+              child: FancyShimmerImage(
+                boxFit: BoxFit.fill,
+                imageUrl:img ,
+                errorWidget: Image.network(
+                    'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+              ),
+            ),
+
+          ],
+        ),
+      ),
     );
   }
 }
@@ -189,9 +282,7 @@ class Collage extends StatelessWidget{
             ),
           ),
           FittedBox(
-            child: AutoSizeText(name,style: GoogleFonts.tajawal(
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-            )),
+            child: AutoSizeText(name,style: TextStyle(fontWeight: FontWeight.bold),),
           )
         ],
       ),
@@ -224,9 +315,7 @@ class Course extends StatelessWidget{
             ),
           ),
           FittedBox(
-            child: AutoSizeText(name,style:GoogleFonts.tajawal(
-              textStyle:  TextStyle(fontWeight: FontWeight.bold),
-            )),
+            child: AutoSizeText(name,style: TextStyle(fontWeight: FontWeight.bold),),
           )
         ],
       ),
@@ -255,7 +344,7 @@ class UniversityContainer extends StatelessWidget{
             child: Center(child: icon),
           ),
           FittedBox(
-            child: AutoSizeText(name,style: GoogleFonts.tajawal(),),
+            child: AutoSizeText(name),
           )
         ],
       ),

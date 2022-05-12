@@ -1,17 +1,21 @@
 import 'package:academy/views/Search/cubit/search_cubit.dart';
 import 'package:academy/views/Search/cubit/search_state.dart';
 import 'package:academy/views/course_info.dart';
+import 'package:academy/views/profile_screen.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../../components/components.dart';
+import '../../components/const.dart';
 import '../../shared/components/components.dart';
 
 
+// ignore: must_be_immutable
 class SearchScreen extends StatelessWidget {
+
   SearchScreen({Key? key}) : super(key: key);
   TextEditingController search = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -28,7 +32,50 @@ class SearchScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar:  PreferredSize(
+              preferredSize: const Size.fromHeight(200),
+              child: SafeArea(
+                child: Container(
+                  width: width,
+                  height: height * 0.11,
+                  decoration: const BoxDecoration(
+                    color: kSwatchColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(32),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: Center(
+                          child: Text(
+                            'ابحث',
+                            style: TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: 18,
+                              fontFamily: kFontFamily,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+            ),
             body: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -62,13 +109,13 @@ class SearchScreen extends StatelessWidget {
                     condition: SearchCubit.get(context).courses != null,
                     builder: (context) => Expanded(
                       child: GridView.builder(
-                       shrinkWrap: true,
+                        shrinkWrap: true,
 
                         itemCount: SearchCubit.get(context).courses.length,
                         gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                        SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          mainAxisExtent: height * .37,
+                          mainAxisExtent: height * .33,
                           mainAxisSpacing: width * .03,
                           //   crossAxisSpacing: height * .02
                         ),
@@ -76,12 +123,12 @@ class SearchScreen extends StatelessWidget {
                           width: width,
                           height: height,
                           courseImage:
-                              SearchCubit.get(context).courses[index].image,
+                          SearchCubit.get(context).courses[index].image,
                           platformImage:
-                              SearchCubit.get(context).courses[index].avatar,
+                          SearchCubit.get(context).courses[index].avatar,
                           rate:  SearchCubit.get(context).courses[index].rate,
                           courseName:
-                              SearchCubit.get(context).courses[index].name,
+                          SearchCubit.get(context).courses[index].name,
                           coursePrice: '\$' +
                               SearchCubit.get(context)
                                   .courses[index]
@@ -103,7 +150,6 @@ class SearchScreen extends StatelessWidget {
                             //CourseDetails
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>  CourseInfo(id:id )
-
                             ));
                           },
                           tag: '1',

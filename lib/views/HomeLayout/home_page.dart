@@ -2,6 +2,7 @@
 import 'package:academy/views/Search/SearchScreen.dart';
 import 'package:academy/views/login_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:academy/views/home%20page/pages/main_page.dart' as main;
@@ -68,7 +69,9 @@ class _HomePageState extends State<HomePage> {
               animationCurve: Curves.easeOutExpo,
               items:  <Widget>[
 
-                iconNavBar('images/unvirsites.svg','الكليات'),
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.h,horizontal: 15.w),
+                    child: iconNavBar('images/unvirsites.svg','الكليات')),
 
 
                 //SvgPicture.asset('images/unvirsites.svg',color:const Color(0xff32504F),width: 35,height: 35,),
@@ -76,10 +79,12 @@ class _HomePageState extends State<HomePage> {
                   Icons.home,
                   size: 38,
                   color: Color(0xff32504F),
-
+                  // color: context.isDarkMode ? kTextColorWhiteDark : Colors.black26,
                 ),
-                iconNavBar('images/collages.svg','المساقات'),
-
+                Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.h,horizontal: 15.w),
+                    child: iconNavBar('images/collages.svg','المساقات')),
+                //  SvgPicture.asset('images/collages.svg',color:const Color(0xff32504F),width: 35,height: 35,),
               ],
               onTap: (index) {
 
@@ -88,107 +93,99 @@ class _HomePageState extends State<HomePage> {
 
               },
             ),
-              endDrawer: Drawer(
-          child: Container(
-            height: size.height,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/drawer.png'),
-                fit: BoxFit.fill,
-                filterQuality: FilterQuality.high,
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
+            endDrawer: Drawer(
+              child: Container(
+                height: size.height,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/drawer.png'),
+                    fit: BoxFit.fill,
+                    filterQuality: FilterQuality.high,
+                  ),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      InkWell(
-                        onTap: (){
-                          navigatorTo(context, ProfileScreen());
-                        },
-                        child:CacheHelper.getData(key: 'token')!=null ?ListTile(
-                          leading: SvgPicture.asset('images/user (1).svg'),
-                          title: AutoSizeText(
-                            'الصفحة الشخصية',
-                            style:GoogleFonts.tajawal(
-                              textStyle:  TextStyle(
-                                color: kPrimaryColor,
-                                fontFamily: kFontFamily,
-                                fontSize: kTitleSize,
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              navigatorTo(context, ProfileScreen());
+                            },
+                            child:CacheHelper.getData(key: 'token')!=null ?ListTile(
+                              leading: SvgPicture.asset('images/user (1).svg'),
+                              title: const AutoSizeText(
+                                'الصفحة الشخصية',
+                                style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontFamily: kFontFamily,
+                                  fontSize: 20,
+                                ),
                               ),
-                            )
+                            ):Container(),
                           ),
-                        ):Container(),
-                      ),
 
-               CacheHelper.getData(key: 'token')!=null?
-                      InkWell(
-                        onTap: (){
-                          CacheHelper.removeAllData().then((value) {
-                            navigatorToNew(context, HomePage());
+                          CacheHelper.getData(key: 'token')!=null?
+                          InkWell(
+                            onTap: (){
+                              CacheHelper.removeAllData().then((value) {
+                                navigatorToNew(context, HomePage());
 
-                          });
-                        },
-                        child: ListTile(
-                          leading: SvgPicture.asset('images/online-course (1).svg'),
-                          title: AutoSizeText(
-                            'تسجيل الخروج',
-                            style: GoogleFonts.tajawal(
-                              textStyle: TextStyle(
-                                color: kPrimaryColor,
-                                fontFamily: kFontFamily,
-                                fontSize: kTitleSize,
+                              });
+                            },
+                            child: ListTile(
+                              leading: SvgPicture.asset('images/online-course (1).svg'),
+                              title: const AutoSizeText(
+                                'تسجيل الخروج',
+                                style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontFamily: kFontFamily,
+                                  fontSize: 20,
+                                ),
                               ),
-                            )
-                          ),
-                        ),
-                      ):
-                      InkWell(
-                        onTap: (){
-                          navigatorToNew(context, LoginScreen());
-                        },
-                        child: ListTile(
-                          leading: SvgPicture.asset('images/online-course (1).svg'),
-                          title: AutoSizeText(
-                            'تسجيل الدخول',
-                            style:GoogleFonts.tajawal(
-                              textStyle:  TextStyle(
-                                color: kPrimaryColor,
-                                fontFamily: kFontFamily,
-                                fontSize: kTitleSize,
+                            ),
+                          ):
+                          InkWell(
+                            onTap: (){
+                              navigatorToNew(context, LoginScreen());
+                            },
+                            child: ListTile(
+                              leading: SvgPicture.asset('images/online-course (1).svg'),
+                              title: const AutoSizeText(
+                                'تسجيل الدخول',
+                                style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontFamily: kFontFamily,
+                                  fontSize: 20,
+                                ),
                               ),
-                            )
+                            ),
                           ),
-                        ),
-                      ),
 
-                      GestureDetector(
-                        onTap: (){
-                          launchWhatsApp(phone: 201221481731, message:'مرحبا، أحتاج أن أستفسر عن التالي لو سمحتم!');
-                        },
-                        child: ListTile(
-                          leading: SvgPicture.asset('images/contact-us.svg'),
-                          title: AutoSizeText(
-                            'تواصل معنا',
-                            style:GoogleFonts.tajawal(
-                              textStyle:  TextStyle(
-                                color: kPrimaryColor,
-                                fontFamily: kFontFamily,
-                                fontSize: kTitleSize,
+                          GestureDetector(
+                            onTap: (){
+                              launchWhatsApp(phone: 201221481731, message:'مرحبا، أحتاج أن أستفسر عن التالي لو سمحتم!');
+                            },
+                            child: ListTile(
+                              leading: SvgPicture.asset('images/contact-us.svg'),
+                              title: const AutoSizeText(
+                                'تواصل معنا',
+                                style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontFamily: kFontFamily,
+                                  fontSize: 20,
+                                ),
                               ),
-                            )
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
             appBar: AppBar(
               shadowColor: Colors.black,
               foregroundColor: Colors.black,
@@ -205,17 +202,15 @@ class _HomePageState extends State<HomePage> {
                       navigatorToNew(context, LoginScreen());
 
                     },),
-                    IconButton(icon: Icon(Icons.search), onPressed: (
 
-                        ) { Navigator.of(context).push(MaterialPageRoute(builder: (context) => SearchScreen(),));  },),
 
 
                   ],
 
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 8,right: 8,left: 20,bottom: 8),
                   child: InkWell(
                       onTap: (){
                         _scaffoldKey.currentState!.openEndDrawer();
@@ -231,36 +226,35 @@ class _HomePageState extends State<HomePage> {
               backgroundColor:kSwatchColor,
               color: Colors.white,
               displacement: 200,
-strokeWidth: 2,
-                onRefresh: () async {
-                 cubit.checkNet();
-                 print(cubit.netConnected);
-                },
-                child: SingleChildScrollView(
-               physics:BouncingScrollPhysics() ,
-                  child:Center(
-                      child:Container(
-                        height: MediaQuery.of(context).size.height-400.h,
-                        width: MediaQuery.of(context).size.width,
-                        child:  Icon(
-                          Icons.signal_wifi_statusbar_connected_no_internet_4_sharp,
-                          size: 400.r,
-                          color: kSwatchColor,
-                        ),
-                      )
+              strokeWidth: 2,
+              onRefresh: () async {
+                cubit.checkNet();
 
-                  ) ,
-                ),
-            ):
+              },
+              child: SingleChildScrollView(
+                physics:BouncingScrollPhysics() ,
+                child:Center(
+                    child:Container(
+                      height: MediaQuery.of(context).size.height-400.h,
+                      width: MediaQuery.of(context).size.width,
+                      child:  Icon(
+                        Icons.signal_wifi_statusbar_connected_no_internet_4_sharp,
+                        size: 400.r,
+                        color: kSwatchColor,
+                      ),
+                    )
 
-               IndexedStack(
-                index: cubit.currentIndex,
-                children:const [
-                  University(),
-                  main.MainPage(),
-                  Collage(),
-                ],
+                ) ,
               ),
+            ):
+            IndexedStack(
+              index: cubit.currentIndex,
+              children:const [
+                University(),
+                main.MainPage(),
+                Collage(),
+              ],
+            ),
 
 
           );
@@ -274,7 +268,7 @@ Widget  iconNavBar(String image,String name)
   return Column(
     children: [
       SvgPicture.asset(image,color:const Color(0xff32504F),width: 35,height: 35,),
-      AutoSizeText(name,style: GoogleFonts.tajawal(),)
+      AutoSizeText(name)
     ],
   );
 
