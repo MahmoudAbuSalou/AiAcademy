@@ -32,49 +32,9 @@ class SearchScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar:  PreferredSize(
-              preferredSize: const Size.fromHeight(200),
-              child: SafeArea(
-                child: Container(
-                  width: width,
-                  height: height * 0.11,
-                  decoration: const BoxDecoration(
-                    color: kSwatchColor,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(32),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Expanded(
-                        child: Center(
-                          child: Text(
-                            'ابحث',
-                            style: TextStyle(
-                              color: kPrimaryColor,
-                              fontSize: 18,
-                              fontFamily: kFontFamily,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back_ios_new,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
+            appBar:  AppBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
             ),
             body: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -150,7 +110,7 @@ class SearchScreen extends StatelessWidget {
                     builder: (context) => Expanded(
                       child: GridView.builder(
                         shrinkWrap: true,
-
+                         physics: BouncingScrollPhysics(),
                         itemCount: SearchCubit.get(context).courses.length,
                         gridDelegate:
                         SliverGridDelegateWithFixedCrossAxisCount(
