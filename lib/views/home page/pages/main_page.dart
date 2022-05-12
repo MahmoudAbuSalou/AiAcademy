@@ -101,11 +101,15 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
 
-
+            SizedBox(height: 40.h,),
             Row(
               children: [
-                FittedBox(child: AutoSizeText('الدرجات ',style: TextStyle(fontSize: kTitleSize),),),
-                FittedBox(child: AutoSizeText('الجامعية',style: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),),)
+                FittedBox(child: AutoSizeText('الدرجات ',style: GoogleFonts.tajawal(
+                  textStyle: TextStyle(fontSize: kTitleSize)
+                ),),),
+                FittedBox(child: AutoSizeText('الجامعية',style: GoogleFonts.tajawal(
+                  textStyle: TextStyle(fontSize: kTitleSize,color: kSwatchColor,fontWeight: FontWeight.bold),)
+                ),)
               ],
             ),
             Container(
@@ -166,7 +170,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(height: 8.h),
-              Divider(color:kSwatchColor,height: 3.h),
+
               Expanded(
                 child: FancyShimmerImage(
                   boxFit: BoxFit.fitHeight,

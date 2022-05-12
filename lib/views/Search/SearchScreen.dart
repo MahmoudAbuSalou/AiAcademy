@@ -49,7 +49,7 @@ class SearchScreen extends StatelessWidget {
                       const Expanded(
                         child: Center(
                           child: Text(
-                            'ابحث من هنا',
+                            'البحث',
                             style: TextStyle(
                               color: kPrimaryColor,
                               fontSize: 18,
@@ -126,7 +126,7 @@ class SearchScreen extends StatelessWidget {
                             padding: EdgeInsets.only(left: 10),
                             child: Icon(Icons.search,color: Colors.black54,)
                         ),
-                        hintText: 'بحث',
+                        hintText: 'اسم الكورس',
                         hintStyle:  TextStyle(
                           color: kSwatchColor,
 

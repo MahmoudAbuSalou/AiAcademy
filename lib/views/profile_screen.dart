@@ -14,7 +14,10 @@ import 'Profile_Cubit/profile_cubit.dart';
 import 'course_info.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+
+
+  bool homepage;
+   ProfileScreen({Key? key,required this.homepage}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -49,7 +52,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               builder: (context) {
                 return Scaffold(
                   // appBar: AppBar(),
-                  appBar:const PreferredSize(
+                  appBar:(widget.homepage)?PreferredSize(
+                      preferredSize: Size.fromHeight(0),
+                      child: Container()):const PreferredSize(
                     preferredSize: Size.fromHeight(200),
                     child: MyAppBar(title: "الملف الشخصي"),
 

@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           InkWell(
                             onTap: (){
-                              navigatorTo(context, ProfileScreen());
+                              navigatorTo(context, ProfileScreen(homepage: false,));
                             },
                             child:CacheHelper.getData(key: 'token')!=null ?ListTile(
                               leading: SvgPicture.asset('images/user (1).svg'),
@@ -199,10 +199,17 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     IconButton(icon:CacheHelper.getData(key: 'token')!=null? Icon(Icons.person):Icon(Icons.login), onPressed: () {
                       CacheHelper.getData(key: 'token')!=null?
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(),)):
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileScreen(homepage: false),)):
                       navigatorToNew(context, LoginScreen());
 
                     },),
+                   if (CacheHelper.getData(key: 'token')!=null)
+                     IconButton(icon: Icon(Icons.search_sharp), onPressed: () {
+
+
+                       navigatorTo(context, SearchScreen());
+
+                     },),
 
 
 
@@ -250,9 +257,9 @@ class _HomePageState extends State<HomePage> {
             ):
             IndexedStack(
               index: cubit.currentIndex,
-              children:const [
+              children: [
                 University(),
-                main.MainPage(),
+                (CacheHelper.getData(key: 'token')!=null)?ProfileScreen(homepage: true,):  main.MainPage(),
                 Collage(),
               ],
             ),
