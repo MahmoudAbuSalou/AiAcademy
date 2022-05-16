@@ -68,12 +68,9 @@ class _HomePageState extends State<HomePage> {
               color: kSwatchColor,
               animationCurve: Curves.easeOutExpo,
               items:  <Widget>[
-
                 Padding(
                     padding: EdgeInsets.symmetric(vertical: 15.h,horizontal: 15.w),
-                    child: iconNavBar('images/unvirsites.svg','الكليات')),
-
-
+                    child: iconNavBar('images/unvirsites.svg','الكليات',)),
                 //SvgPicture.asset('images/unvirsites.svg',color:const Color(0xff32504F),width: 35,height: 35,),
                 const   Icon(
                   Icons.home,
@@ -276,8 +273,12 @@ Widget  iconNavBar(String image,String name)
 {
   return Column(
     children: [
-      SvgPicture.asset(image,color:const Color(0xff32504F),width: 35,height: 35,),
-      AutoSizeText(name)
+      SvgPicture.asset(image,color:const Color(0xff32504F),width: 30,height: 30,),
+      AutoSizeText(name,
+        style: TextStyle(
+          fontSize: 25.sp
+        ),
+      )
     ],
   );
 
