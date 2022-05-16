@@ -31,76 +31,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return BlocProvider(
-      create: (BuildContext context) =>ProfileCubit(ProfileInitial())..getUserProfile(),
-      child: BlocConsumer<ProfileCubit, ProfileState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          ProfileCubit cubit = ProfileCubit.get(context);
+    return BlocConsumer<ProfileCubit, ProfileState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        ProfileCubit cubit = ProfileCubit.get(context);
 
 
 
-          return ConditionalBuilder(
-              condition: cubit.show,
-              fallback: (context) => const Scaffold(
-                  backgroundColor: Colors.white,
-                  body: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.blueAccent,
-                    ),
-                  )),
-              builder: (context) {
-                return Scaffold(
-                  // appBar: AppBar(),
-                  appBar:(widget.homepage)?PreferredSize(
-                      preferredSize: Size.fromHeight(0),
-                      child: Container()):const PreferredSize(
-                    preferredSize: Size.fromHeight(200),
-                    child: MyAppBar(title: "الملف الشخصي"),
-
+        return ConditionalBuilder(
+            condition: cubit.show,
+            fallback: (context) => const Scaffold(
+                backgroundColor: Colors.white,
+                body: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.blueAccent,
                   ),
-                  body: SingleChildScrollView(
+                )),
+            builder: (context) {
+              return Scaffold(
+                // appBar: AppBar(),
+                appBar:(widget.homepage)?PreferredSize(
+                    preferredSize: Size.fromHeight(0),
+                    child: Container()):const PreferredSize(
+                  preferredSize: Size.fromHeight(200),
+                  child: MyAppBar(title: "الملف الشخصي"),
 
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
+                ),
+                body: SingleChildScrollView(
 
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            textDirection: TextDirection.rtl,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              ...List.generate(
-                                5,
-                                    (index) => AppBarItem(
-                                  title: textItems[index],
-                                  onPress: () {
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
 
-                                      selectedIndex = index;
-                                      cubit.changeScreen(index);
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          textDirection: TextDirection.rtl,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            ...List.generate(
+                              5,
+                                  (index) => AppBarItem(
+                                title: textItems[index],
+                                onPress: () {
 
-                                  },
-                                  isSelected: selectedIndex == index,
-                                ),
+                                    selectedIndex = index;
+                                    cubit.changeScreen(index);
+
+                                },
+                                isSelected: selectedIndex == index,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                       getCoursesInfo(cubit.profileModel.courses!,
+                      ),
+                     getCoursesInfo(cubit.profileModel.courses!,
 
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                );
-              });
-        },
-      ),
+                ),
+              );
+            });
+      },
     );
   }
 
