@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                 BlocProvider(create: (context) => HomeCubit(HomeInitial())),
 
                 BlocProvider(
-                  lazy: false,
+
                   create: (BuildContext context) =>
                       ProfileCubit(ProfileInitial())..getUserProfile(),
 

@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    HomeCubit.get(context).checkNet();
+
 
 
   }
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         listener: (context, state) {},
         builder: (context, state) {
           HomeCubit cubit = HomeCubit.get(context);
-
+          cubit.checkNet();
 
           return Scaffold(
             key: _scaffoldKey,
@@ -228,30 +228,19 @@ class _HomePageState extends State<HomePage> {
             ),
 
 
-            body: (!cubit.netConnected)?RefreshIndicator(
-              backgroundColor:kSwatchColor,
-              color: Colors.white,
-              displacement: 200,
-              strokeWidth: 2,
-              onRefresh: () async {
-                cubit.checkNet();
+            body: (!cubit.netConnected)?
+            Column(
+              children: [
+                Image.asset('images/noConnection.jpg'),
+                Text('يرجى التحقق من الاتصال بالإنترنت',style: GoogleFonts.tajawal(
+                  fontSize: 50.h,
 
-              },
-              child: SingleChildScrollView(
-                physics:BouncingScrollPhysics() ,
-                child:Center(
-                    child:Container(
-                      height: MediaQuery.of(context).size.height-400.h,
-                      width: MediaQuery.of(context).size.width,
-                      child:  Icon(
-                        Icons.signal_wifi_statusbar_connected_no_internet_4_sharp,
-                        size: 400.r,
-                        color: kSwatchColor,
-                      ),
-                    )
-
-                ) ,
-              ),
+                ),),
+                SizedBox(
+                  height: 100.h,
+                ),
+                CircularProgressIndicator(),
+              ],
             ):
             IndexedStack(
               index: cubit.currentIndex,

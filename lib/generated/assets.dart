@@ -25,6 +25,7 @@ class Assets {
   static const String imagesLogoUp = 'images/logoUp.png';
   static const String imagesMenu = 'images/menu.svg';
   static const String imagesMicroscope = 'images/microscope.svg';
+  static const String imagesNoConnection = 'images/noConnection.jpg';
 
   static const String imagesPharmacy = 'images/pharmacy.svg';
 
