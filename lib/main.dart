@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                 BlocProvider(
 
                   create: (BuildContext context) =>
-                      ProfileCubit(ProfileInitial())..getUserProfile(),
+                      ProfileCubit(ProfileInitial())..getUserProfile()
 
                 ),
               ],

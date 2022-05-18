@@ -262,20 +262,7 @@ class CourseItemCard extends StatelessWidget {
         child: Row(
 
           children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.white60,
-                width: size.width * 0.33,
-                child: FancyShimmerImage(
-                  boxFit: BoxFit.contain,
-                  imageUrl: 'https://www.clipartkey.com/mpngs/m/11-118380_transparent-development-clipart-role-and-responsibility-icon.png',
-                  errorWidget: Image.network(
-                      'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                ),
 
-              ),
-            ),
             Expanded(
               flex: 2,
               child: Container(

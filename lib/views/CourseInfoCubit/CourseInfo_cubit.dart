@@ -96,7 +96,7 @@ class ReviewCubit extends Cubit<ReviewState> {
   void getCourseInfo({required String id}) {
     emit(GetCourseInfoLoading());
     DioHelper.getData(
-            url: 'learnpress/v1/courses/$id',
+            url: 'learnpress/v1/courses/$id?v=123123',
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
       aboutCourseModel = AboutCourseModel.fromJson(value.data);
@@ -143,7 +143,7 @@ class ReviewCubit extends Cubit<ReviewState> {
     emit(GetLessonsLoading());
 
     DioHelper.getData(
-            url: 'learnpress/v1/courses/$id',
+            url: 'learnpress/v1/courses/$id?v=123123',
             token: CacheHelper.getData(key: 'token'))
         .then((value) {
       lessonsModel = AutoGenerate.fromJson(value.data);

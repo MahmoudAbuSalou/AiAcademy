@@ -42,9 +42,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
 
+    super.initState();
+    HomeCubit.get(context).checkNet();
 
 
   }
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
         listener: (context, state) {},
         builder: (context, state) {
           HomeCubit cubit = HomeCubit.get(context);
-          cubit.checkNet();
+
 
           return Scaffold(
             key: _scaffoldKey,
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                     IconButton(icon:Icon(Icons.login), onPressed: () {
 
 
-                      navigatorToNew(context, LoginScreen());
+                      navigatorTo(context, LoginScreen());
 
                     },),
                    if (CacheHelper.getData(key: 'token')!=null)

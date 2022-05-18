@@ -593,9 +593,12 @@ class _CourseInfoState extends State<CourseInfo> {
                                     dialogType: DialogType.WARNING,
                                     animType: AnimType.BOTTOMSLIDE,
                                     title: 'تحذير',
-                                    desc: 'أنك غير مشترك في هذه الدورة',
+                                    desc: (CacheHelper.getData(key: 'token')!=null)?'أنك غير مشترك في هذه الدورة':'يتوجب عليك تسجيل الدخول',
                                     btnCancelOnPress: () {},
-                                    btnOkOnPress: () {},
+                                    btnOkOnPress: () {
+                                      ((CacheHelper.getData(key: 'token')!=null)  )?(){}:Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
+
+                                    },
                                   )..show()
                                 }
                             },

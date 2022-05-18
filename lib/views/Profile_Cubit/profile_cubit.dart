@@ -33,8 +33,9 @@ bool show=false;
         .then((value) {
  /// convert json to class model
         profileModel = ProfileModel.fromJson(value.data['tabs']);
-        //Call Images Of Coureces
-      //  getImages();
+
+
+
 
         show=true;
       emit(ProfileSuccessState(profileModel));
@@ -42,7 +43,7 @@ bool show=false;
       emit(ProfileErrorState("error"));
     });
   }
-  List Images=[];
+
   late AboutCourseModel aboutCourseModel;
   void getImages(){
 
@@ -50,11 +51,12 @@ bool show=false;
     IdsOfCoursesImages.forEach((id){
       print(id);
       DioHelper.getData(
-          url: 'learnpress/v1/courses/$id',
+          url: 'learnpress/v1/courses/$id?v=123123',
           token: CacheHelper.getData(key: 'token'))
           .then((value) {
-        aboutCourseModel=value.data;
-        Images.add(aboutCourseModel.image);
+
+
+
 
         emit(downloadImageSuccessState());
       }).catchError((error) {
