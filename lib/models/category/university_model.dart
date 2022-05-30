@@ -25,6 +25,11 @@ List<int> universityId = [
   3446,3454,3450,3449,3448,3453,3452
 
 ];
+List<int> universityCount = [
+
+
+
+];
 List<String> lawCoursesImages = [
   'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_7774889739-768x512.webp',
   'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_7774889739-768x512.webp',

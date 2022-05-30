@@ -96,11 +96,11 @@ class WatchCourse extends StatelessWidget {
                                         children: [
                                           //List Of Videos
                                           //
+                                         if (cubit.course.linkvideo.length -
+                                              1==1)
+                                           SizedBox(height: 250.h,),
                                           Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height -
-                                                540.h,
+
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               padding: EdgeInsets.all(16.h),
@@ -214,7 +214,8 @@ class WatchCourse extends StatelessWidget {
                                                         color: kSwatchColor,
                                                       ),
                                                     ),
-                                                  Spacer(),
+                                                  if (cubit.course.can_finish_course == true)
+                                                    SizedBox(width: 20.w),
                                                 Expanded(
                                                     child: FlatButton(
                                                       onPressed: () {
