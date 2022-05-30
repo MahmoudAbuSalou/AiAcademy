@@ -1,4 +1,6 @@
 
+import 'package:academy/models/category/collages_models.dart';
+import 'package:academy/models/category/university_model.dart';
 import 'package:academy/views/Search/SearchScreen.dart';
 import 'package:academy/views/login_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -86,6 +88,7 @@ class _HomePageState extends State<HomePage> {
               onTap: (index) {
 
                 // cubit.getHomeData();
+
                 cubit.changBottomBar(index);
 
               },
@@ -242,14 +245,15 @@ class _HomePageState extends State<HomePage> {
                 CircularProgressIndicator(),
               ],
             ):
-            IndexedStack(
+            (collageId.length==collageCount.length &&(universityId.length==universityCount.length))? IndexedStack(
               index: cubit.currentIndex,
               children: [
-                University(),
-                (CacheHelper.getData(key: 'token')!=null)?ProfileScreen(homepage: true,):  main.MainPage(),
-                Collage(),
+
+                (cubit.test)? University():Center(child: CircularProgressIndicator(),),
+                (cubit.test)?(      (CacheHelper.getData(key: 'token')!=null)?ProfileScreen(homepage: true,):  main.MainPage()):Center(child: CircularProgressIndicator(),),
+                (cubit.test)?Collage():Center(child: CircularProgressIndicator(),),
               ],
-            ),
+            ):Center(child: CircularProgressIndicator(),),
 
 
           );

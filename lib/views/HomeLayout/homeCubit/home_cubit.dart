@@ -36,6 +36,7 @@ class HomeCubit extends Cubit<HomeState> {
     University(),
     Collage(),
   ];
+  bool test=false;
   void getCount(){
     emit(GetDataLoadingAcademyProgrammes());
     collageId.forEach((element) {
@@ -68,11 +69,12 @@ class HomeCubit extends Cubit<HomeState> {
 
     },);
 
-
+       test=true;
   }
 
 
   void changBottomBar(int index) {
+
     currentIndex = index;
     emit(ChangBottomBarIconState());
 
