@@ -17,6 +17,7 @@ class CourseDetailsScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
+
           child: Column(
             children: [
               const SizedBox(
@@ -52,16 +53,23 @@ class CourseDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       aboutCourseModel.content,
+
                       style: GoogleFonts.tajawal(
+                        height: 2,
+
                         textStyle: TextStyle(
-                          fontSize: 35.sp,
+
+                          fontSize: 40.sp,
+                          fontWeight: FontWeight.w600,
                           fontFamily: kFontFamily,
                           color: Colors.black.withOpacity(0.7),
                         ),
                       )
                     ),
-                  ),
-                  // SizedBox(height:50,),
+                  )
+                  ,
+
+                  SizedBox(height:650.h,),
 
                 ],
               ),

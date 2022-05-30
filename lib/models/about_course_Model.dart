@@ -27,10 +27,13 @@ class AboutCourseModel {
 /// function to parse html content to String
   String parseHtmlString(String htmlString) {
     final document = parse(htmlString);
-    const end = "للتعرف";
-    final String parsedString =
-        parse(document.body?.text).documentElement!.text;
+    const end = "للتعرف على الأكاديمية";
 
+    String parsedString =
+        parse(document.body?.text).documentElement!.text;
+//    int index=parsedString.indexOf('للتعرف');
+// print(parsedString);
+//     parsedString=parsedString.substring(0,index);
 
     return parsedString;
   }

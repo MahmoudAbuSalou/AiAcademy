@@ -132,42 +132,7 @@ class LoginScreen extends StatelessWidget {
                         ) ,
                       ],
                     )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // ignore: deprecated_member_use
-                    FlatButton(
-                      onPressed: () {},
-                      splashColor: kSwatchColor.withOpacity(0.3),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                      child: InkWell(
-                        onTap:(){
-                          /// register using web view
-                          navigatorToNew(
-                              context,
-                              WebPage(Url:'https://aiacademy.info/%d8%a7%d9%84%d8%ad%d8%b3%d8%a7%d8%a8-%d8%a7%d9%84%d8%b4%d8%ae%d8%b5%d9%8a/?action=register'));
-                        },
-                        child: Container(
-                          width: size.width * 0.35,
-                          child:  FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              'إنشاء حساب إلكتروني',
-                              style: GoogleFonts.tajawal(
-                                textStyle:const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'NotoKufiArabic-Medium',
-                                ),
-                              )
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
               ],
             ),
           );

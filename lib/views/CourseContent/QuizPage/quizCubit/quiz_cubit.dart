@@ -68,6 +68,8 @@ class QuizCubit extends Cubit<QuizState> {
    dynamic start =3600;
 
 
+   bool time=false;
+
 
 //For Change Screen Quiz if Quiz become in 'Review ' State
    bool Review=false;
@@ -87,7 +89,7 @@ class QuizCubit extends Cubit<QuizState> {
            emit(ChangeTime());
          }
          else {
-
+           time=true;
            start--;
 
            emit(ChangeTime());
@@ -179,7 +181,7 @@ class QuizCubit extends Cubit<QuizState> {
       emit(StartQuizSuccess());
 
     }).catchError((onError){
-      showToast(msg: ' "Sorry, You cannot view this item."', state:ToastState.ERROR);
+      showToast(msg: 'لا يمكنك رؤية المحتوى', state:ToastState.ERROR);
 
 
       emit(StartQuizFailed());
@@ -211,7 +213,7 @@ class QuizCubit extends Cubit<QuizState> {
       emit(FinishQuizSuccess());
 
     }).catchError((onError){
-      showToast(msg: ' "Sorry, You cannot Finish this item."', state:ToastState.ERROR);
+      showToast(msg: 'لا يمكنك إنهاء هئا المحتوى', state:ToastState.ERROR);
       // Navigator.of(context).pop();
       print(onError.toString());
 

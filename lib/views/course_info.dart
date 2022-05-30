@@ -89,7 +89,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                     height: 100,
                                     loadSubscribeCourse:
                                         reviewCubit.loadSubscribeCourse,
-                                    title: 'أشترك الأن',
+                                    title: 'إشترك الآن',
                                     width: size.width,
                                     onTap: () {
                                       CacheHelper.getData(key: 'token') == null
@@ -108,7 +108,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                     height: 100,
                                     loadSubscribeCourse:
                                         reviewCubit.loadSubscribeCourse,
-                                    title: 'أشترك مجاني',
+                                    title: 'إشتراك مجاني',
                                     width: size.width,
                                     onTap: () {
                                       CacheHelper.getData(key: 'token') == null
@@ -118,11 +118,17 @@ class _CourseInfoState extends State<CourseInfo> {
                                     }),
                   ),
                   body: SafeArea(
-                    child: Stack(
+                    child: (!reviewCubit.loadInfo)
+                        ?Container(
+                      color: Colors.white,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ):
+                    Stack(
                       children: [
                         // cover Image
-                        (reviewCubit.loadInfo)
-                            ? Container(
+                         Container(
                                 width: size.width,
                                 height: size.height * 0.35,
                                 decoration: BoxDecoration(
@@ -135,18 +141,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                 ),
                               )
 
-                            : Container(
-                                width: double.maxFinite,
-
-                                child:FancyShimmerImage(
-                                  imageUrl:
-                                      'https://hackernoon.com/images/0*4Gzjgh9Y7Gu8KEtZ.gif',
-                                  errorWidget: Image.network(
-                                      'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                                  boxFit: BoxFit.cover,
-                                ),
-
-                              ),
+                         ,
 
                         Column(
                           children: [
@@ -580,6 +575,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                           //QUIZ=CoursePage
                                           QuizPage(
                                               id: e.id.toString(),
+                                            courseId: widget.id,
                                             )
                                           : WatchCourse(
                                               id: e.id.toString(),
@@ -591,6 +587,27 @@ class _CourseInfoState extends State<CourseInfo> {
                                   AwesomeDialog(
                                     context: context,
                                     dialogType: DialogType.WARNING,
+
+                                   btnCancelText: 'إلغاء الأمر',
+                                    buttonsTextStyle: GoogleFonts.tajawal(
+                                      fontSize: 40.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white
+
+                                    ),
+                                    descTextStyle: GoogleFonts.tajawal(
+                                        fontSize: 40.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black
+
+                                    ),
+                                    titleTextStyle: GoogleFonts.tajawal(
+                                        fontSize: 50.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: kSwatchColor
+
+                                    ),
+                                    btnOkText: 'حسناً',
                                     animType: AnimType.BOTTOMSLIDE,
                                     title: 'تحذير',
                                     desc: (CacheHelper.getData(key: 'token')!=null)?'أنك غير مشترك في هذه الدورة':'يتوجب عليك تسجيل الدخول',
@@ -618,7 +635,7 @@ class _CourseInfoState extends State<CourseInfo> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const TitleWithDotIcon(
-                  title: 'اترك تقييم :',
+                  title: 'اترك تقييماً :',
                   fontSize: 18,
                 ),
                 Padding(
@@ -646,7 +663,7 @@ class _CourseInfoState extends State<CourseInfo> {
               ],
             ),
             const TitleWithDotIcon(
-              title: 'اترك تعليق :',
+              title: 'اترك تعليقاً :',
               fontSize: 18,
             ),
             Padding(
@@ -676,8 +693,8 @@ class _CourseInfoState extends State<CourseInfo> {
               child: MyButton(
                   loadSubscribeCourse: '',
                   title: 'إرسال',
-                  width: size.width * 0.5,
-                  height: 60,
+                  width: 700.w,
+                  height: 400.h,
                   onTap: () {
                     /// if token null login before else add rating and comment
                     CacheHelper.getData(key: 'token') == null

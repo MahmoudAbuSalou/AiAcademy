@@ -34,7 +34,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
   //List of Titels and Icons that i use it in bottom Nav Bar In  Class (WatchCourse) in File (lessonContent)
   List<BottomNavigationBarItem> list = [
-    BottomNavigationBarItem(icon: Icon(Icons.video_call_outlined), label: "الفيديوهات"),
+    BottomNavigationBarItem(icon: Icon(Icons.video_call_outlined), label: "الفيديوهات",),
     BottomNavigationBarItem(icon: Icon(Icons.list), label: "الملحقات"),
 
   ];
@@ -89,7 +89,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
     },token: token,).then((value) {
         //Show Message that Backend return it for me (if SUCCESS)
-      showToast(msg: value.data['message'] , state:ToastState.SUCCESS);
+      showToast(msg: 'تهانينا،لقد أكملت المقرر' , state:ToastState.SUCCESS);
       print(value.data);
 
 

@@ -40,9 +40,13 @@ class _MainPageState extends State<MainPage> {
     var size=MediaQuery.of(context).size;
     TextEditingController search = TextEditingController();
     Speci.clear();
-    Speci.add(_degreeCard(title: 'درجة الدكتوراة',id:40.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_2935186286-768x512.webp'),);
-    Speci.add(_degreeCard(title: 'درجة الماجيستير',id:42.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/07/imageedit_3_2634596191-768x512.webp',),);
+
+
+
+    Speci.add(_degreeCard(title: 'درجة الدبلوم',id:38.toString(),image: 'https://aiacademy.info/wp-content/uploads/2021/02/online-degree-arabic.jpg'),);
     Speci.add(_degreeCard(title: 'درجة البكالوريوس',id:32.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_9_8887104436-768x512.webp'),);
+    Speci.add(_degreeCard(title: 'درجة الماجيستير',id:42.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/07/imageedit_3_2634596191-768x512.webp',),);
+    Speci.add(_degreeCard(title: 'درجة الدكتوراه',id:40.toString(),image: 'https://aiacademy.info/wp-content/uploads/2020/04/imageedit_1_2935186286-768x512.webp'),);
     return  SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -83,11 +87,12 @@ class _MainPageState extends State<MainPage> {
                     fillColor: Colors.white,
 
                     prefixIcon: const Padding(
-                        padding: EdgeInsets.only(left: 10),
+                        padding: EdgeInsets.only(left: 10,bottom: 7),
                         child: Icon(Icons.search,color: Colors.black54,)
                     ),
                     hintText: 'بحث',
                     hintStyle:  TextStyle(
+
                       color: kSwatchColor,
 
                       fontSize: 50.sp,

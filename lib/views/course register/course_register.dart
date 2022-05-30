@@ -55,7 +55,7 @@ class _CourseRegisterState extends State<CourseRegister> {
       body: SafeArea(
         child: Column(
           children: [
-            MyAppBar(title: 'شراء الكورس'),
+            MyAppBar(title: 'شراء الكورس',BoolNextPage: true,id: '0'),
             Expanded(
                 child: SingleChildScrollView(
                   child: Column(

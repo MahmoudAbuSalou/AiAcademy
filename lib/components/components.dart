@@ -20,8 +20,13 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 class MyAppBar extends StatelessWidget {
   String title;
 
+  bool BoolNextPage;
+  String id;
   MyAppBar({
     Key? key,
+    required this.BoolNextPage,
+    required this.id,
+
     required this.title,
   }) : super(key: key);
 
@@ -56,8 +61,12 @@ class MyAppBar extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                 onPressed: () {
+                  (BoolNextPage)?
                   Future.delayed(Duration.zero, () {
                     Navigator.of(context).pop();
+                  }):
+                  Future.delayed(Duration.zero, () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CourseInfo(id: id),));
                   });
                 },
                 icon: const Icon(
@@ -96,7 +105,7 @@ class BorderedButton extends StatelessWidget {
         splashColor: color,
         color: color,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40.0),
+          borderRadius: BorderRadius.circular(0.0),
           side: BorderSide(color: color, width: 1),
         ),
         child: Padding(
@@ -104,10 +113,12 @@ class BorderedButton extends StatelessWidget {
           child: FittedBox(
             child: Text(
               title,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
+              style: GoogleFonts.tajawal(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
 
+                )
               ),
             ),
           ),
@@ -154,7 +165,7 @@ class Course extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: EdgeInsets.all(width * .03),
-        height: height * .35,
+        height: height * .40,
         width: width * .43,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -206,7 +217,7 @@ class Course extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height:75.h,
+                          height:100.h,
                           child: Text(
                             courseName,
                             maxLines: 2,
@@ -220,7 +231,7 @@ class Course extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 40.h,
                         ),
                         FittedBox(
                           child: Text(
@@ -355,7 +366,7 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
         onTap: onTap,
         child: Container(
           height: height.h,
@@ -433,7 +444,7 @@ class ItemCard extends StatelessWidget {
                     title,
                     style: GoogleFonts.tajawal(
                       textStyle: TextStyle(
-                        fontFamily: kFontFamily,
+
                         color: kPrimaryColor,
                         fontSize: 16.sp,
                       ),
@@ -458,7 +469,7 @@ class ItemCard extends StatelessWidget {
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyAppBar(title: title),
+                  MyAppBar(title: title,BoolNextPage: true,id: '0'),
 
                   Expanded(
                     child: ConditionalBuilder(
@@ -599,7 +610,7 @@ class Courses extends StatelessWidget {
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyAppBar(title: title),
+                  MyAppBar(title: title,BoolNextPage: true,id: '0'),
 
                   Expanded(
                     child: ConditionalBuilder(

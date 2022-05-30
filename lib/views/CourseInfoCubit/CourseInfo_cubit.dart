@@ -149,6 +149,7 @@ class ReviewCubit extends Cubit<ReviewState> {
       lessonsModel = AutoGenerate.fromJson(value.data);
       loadLessons = true;
 
+
       emit(GetLessonsSuccess(lessonsModel));
     }).catchError((error) {
       emit(GetLessonsError("ERROR"));

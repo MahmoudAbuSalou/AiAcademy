@@ -308,7 +308,7 @@ class CourseItemCard extends StatelessWidget {
                               SizedBox(width: 20.w,),
 
                               Text(
-                                "النتيجة:" "%$results ",
+                                "النتيجة: " "%$results ",
                                 style: GoogleFonts.tajawal(
                                   fontWeight: FontWeight.bold
                                 ),

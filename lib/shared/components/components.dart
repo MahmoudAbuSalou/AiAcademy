@@ -143,12 +143,13 @@ Widget defaultTextButton({required String text,required Function function,Color 
 
 void showToast({required String msg,required ToastState state})=> Fluttertoast.showToast(
       msg: msg,
-      toastLength: Toast.LENGTH_LONG,
+
+      toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 5,
       backgroundColor: toastColor(state),
       textColor: Colors.white,
-      fontSize: 16.0
+      fontSize: 16.0,
 
   );
 class question extends StatefulWidget {

@@ -18,6 +18,8 @@ class CoursesScreen extends StatelessWidget {
           children: [
              MyAppBar(
               title: 'الدورات',
+               id: '0',
+               BoolNextPage: true,
             ),
             Expanded(
               child: getCourses(),
