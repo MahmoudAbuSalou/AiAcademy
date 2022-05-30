@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -400,6 +401,7 @@ class ItemCard extends StatelessWidget {
   ItemCard(
       {Key? key,
       required this.height,
+        required this.count,
       required this.width,
       required this.image,
       required this.title,
@@ -409,6 +411,7 @@ class ItemCard extends StatelessWidget {
   final double height;
   final double width;
   final String image, title;
+  final int count;
   final int id;
 
   @override
@@ -418,40 +421,72 @@ class ItemCard extends StatelessWidget {
     return OpenContainer(
       //the Card Of Collage or University
       closedBuilder: (context, action) => SizedBox(
-        height: height * .25,
+        height:500.h,
         width: width * .35,
-        child: Column(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: height * .01),
-              height: height * .13,
-              width: width * .35,
+              margin: EdgeInsets.only(bottom: 50.h,top: 15.h),
+              height: 500.h,
+              width: 400.w,
               child: FancyShimmerImage(
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.fill,
                 imageUrl: image,
                 errorWidget: Image.network(
                     'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
               ),
             ),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Container(
-                color: kSwatchColor,
-                height: height * .1,
-                width: width,
-                child: FittedBox(
-                  child: Text(
-                    title,
-                    style: GoogleFonts.tajawal(
-                      textStyle: TextStyle(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 30.h,),
+              Text(title,style: GoogleFonts.tajawal(
+              fontSize: 50.sp,
+                fontWeight: FontWeight.bold,
+                color: kSwatchColor
+              ),),
+                SizedBox(height: 140.h,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(Iconsax.archive_book,color: kSwatchColor,),
+                  SizedBox(width: 20.w,),
+                  Text('محاضرات و دورات عددها',style: GoogleFonts.tajawal(fontWeight: FontWeight.bold,fontSize: 40.sp,color: kSwatchColor),),
+                  SizedBox(width: 20.w,),
+                  Text(count.toString(),style: GoogleFonts.tajawal(fontWeight: FontWeight.bold,fontSize: 40.sp,color: kSwatchColor),),
 
-                        color: kPrimaryColor,
-                        fontSize: 16.sp,
+                ],
+              ),
+                SizedBox(height: 20.h,),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 55.w),
+                  child: Container(
+                    color: kSwatchColor,
+                    height: 75.h,
+                    width: 500.w,
+
+                    margin: EdgeInsets.only(bottom: 50.h,top: 50.h),
+                    child: Container(
+
+                      child: Center(
+
+                        child: Text(
+                            'عرض التفاصيل',
+                            style: GoogleFonts.tajawal(
+                              textStyle: TextStyle(
+
+                                color: kPrimaryColor,
+                                fontSize: 55.sp,
+                              ),
+                            )
+                        ),
                       ),
-                    )
+                    ),
                   ),
                 ),
-              ),
+
+              ],
             )
           ],
         ),
