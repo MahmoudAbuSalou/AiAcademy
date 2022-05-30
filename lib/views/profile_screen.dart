@@ -1,3 +1,4 @@
+import 'package:academy/views/Profile_Cubit/imageCubit/cubit_image_cubit.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -123,18 +124,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
      return Container(
        child: Screens[selectedIndex],
      );
-    // return IndexedStack(
-    //   index: selectedIndex,
-    //
-    //   children: [
-    //     AllCourses(course: allCourse), // index = 0
-    //     AllCourses(course: course.in_Progress), // index = 1
-    //      AllCourses(course: course.finished),
-    //
-    //     AllCourses(course: course.passed),
-    //     AllCourses(course: failed),
-    //   ],
-    // );
   }
 }
 
@@ -198,7 +187,7 @@ class AllCourses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     print('here');
+
     return ListView.builder(
 clipBehavior: Clip.antiAliasWithSaveLayer,
       itemCount: course!.length,
@@ -241,222 +230,191 @@ class CourseItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     var size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: () {
         navigatorTo(context, CourseInfo(id: id.toString()));
       },
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 5, right: 15, left: 20),
-        width: size.width,
-        height: size.height * 0.25,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 2,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Row(
+      child: BlocProvider(
+        create:(context) =>ImageCubit()..getProfileImage(id: id),
+        child: BlocConsumer<ImageCubit,ImageState>(
+          listener: (context, state) {
+          },
+          builder: (context,state){
+            ImageCubit cubit = ImageCubit.get(context);
 
-          children: [
+            return Container(
+              margin: const EdgeInsets.only(bottom: 5, right: 15, left: 20),
+              width: size.width,
+              height: size.height * 0.25,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 2,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Row(
 
-            Expanded(
-              flex: 2,
-              child: Container(
-                color: Colors.white,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    textDirection: TextDirection.rtl,
-                    children: [
-                      const SizedBox(height: 3),
-                      Expanded(
-                        child: Center(
-                          child: Container(
-                            padding: const EdgeInsetsDirectional.only(start: 5),
-                            child: Text(
-                              title,
-                              maxLines: 1,
-                              style: GoogleFonts.tajawal(
-                                textStyle: const TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  color: kSwatchColor,
-                                  fontSize: 16,
-                                  fontFamily: kFontFamily,
-                                  fontWeight: FontWeight.w500,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      child:cubit.loadImage? FancyShimmerImage(
+                        imageUrl: cubit.aboutCourseModel.image,
+                        boxFit: BoxFit.fill,
+                        errorWidget: Image.network(
+                            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                      ):Container(),
+
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          textDirection: TextDirection.rtl,
+                          children: [
+                            const SizedBox(height: 3),
+                            Expanded(
+                              child: Center(
+                                child: Container(
+                                  padding: const EdgeInsetsDirectional.only(start: 5),
+                                  child: Text(
+                                      title,
+                                      maxLines: 1,
+                                      style: GoogleFonts.tajawal(
+                                        textStyle: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          color: kSwatchColor,
+                                          fontSize: 16,
+                                          fontFamily: kFontFamily,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      )
+                                  ),
                                 ),
-                              )
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsetsDirectional.only(
-                              start: 10, top: 7, bottom: 8),
-                          child: Row(
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsetsDirectional.only(
+                                    start: 10, top: 7, bottom: 8),
+                                child: Row(
 
-                            children: [
-                            SvgPicture.asset(
-                            'images/result.svg',
-                              width: 70.w,
-
-                          ),
-                              SizedBox(width: 20.w,),
-
-                              Text(
-                                "النتيجة: " "%$results ",
-                                style: GoogleFonts.tajawal(
-                                  fontWeight: FontWeight.bold
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding:
-                          const EdgeInsetsDirectional.only(start: 8, bottom: 8),
-                          height: 30,
-                          child: endTime is! String
-                              ?  Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'images/timeEnd.svg',
-                                    width: 70.w,
-
-                                  ),
-                                  SizedBox(width: 20.w,),
-                                  Text("تاريخ الانتهاء: _",style: GoogleFonts.tajawal(
-                                    fontWeight: FontWeight.bold,
-                                  ),),
-                                ],
-                              )
-                              : Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'images/timeEnd.svg',
-                                    width: 70.w,
-
-                                  ),
-                                  SizedBox(width: 20.w,),
-                                  AutoSizeText(
-                            "تاريخ الانتهاء : " "${endTime.substring(0, 10)}",
-                            maxLines: 2
-                                  ,style: GoogleFonts.tajawal(
-                                    fontWeight: FontWeight.bold
-                                  ),
-                          ),
-                                ],
-                              ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsetsDirectional.only(start: 8),
-                            height: 25,
-                            child: Expiration_time is! String ?
-                             Row(
-                               children: [
-                                 SvgPicture.asset(
-                                   'images/date.svg',
-                                   width: 70.w,
-
-                                 ),
-                                 SizedBox(width: 20.w,),
-                                 Text("تاريخ الصلاحية: _",style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),),
-                               ],
-                             )
-                                :Row(
                                   children: [
                                     SvgPicture.asset(
-                                      'images/date.svg',
+                                      'images/result.svg',
+                                      width: 70.w,
+
+                                    ),
+                                    SizedBox(width: 20.w,),
+
+                                    Text(
+                                      "النتيجة: " "%$results ",
+                                      style: GoogleFonts.tajawal(
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                padding:
+                                const EdgeInsetsDirectional.only(start: 8, bottom: 8),
+                                height: 30,
+                                child: endTime is! String
+                                    ?  Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'images/timeEnd.svg',
+                                      width: 70.w,
+
+                                    ),
+                                    SizedBox(width: 20.w,),
+                                    Text("تاريخ الانتهاء: _",style: GoogleFonts.tajawal(
+                                      fontWeight: FontWeight.bold,
+                                    ),),
+                                  ],
+                                )
+                                    : Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      'images/timeEnd.svg',
                                       width: 70.w,
 
                                     ),
                                     SizedBox(width: 20.w,),
                                     AutoSizeText(
-                              "تاريخ الصلاحية: "
-                                      "${Expiration_time.substring(0, 10)}",
-                              maxLines: 2,style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),
-                            ),
+                                      "تاريخ الانتهاء : " "${endTime.substring(0, 10)}",
+                                      maxLines: 2
+                                      ,style: GoogleFonts.tajawal(
+                                        fontWeight: FontWeight.bold
+                                    ),
+                                    ),
                                   ],
-                                )),
-                      )
-                    ]),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsetsDirectional.only(start: 8),
+                                  height: 25,
+                                  child: Expiration_time is! String ?
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'images/date.svg',
+                                        width: 70.w,
+
+                                      ),
+                                      SizedBox(width: 20.w,),
+                                      Text("تاريخ الصلاحية: _",style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),),
+                                    ],
+                                  )
+                                      :Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'images/date.svg',
+                                        width: 70.w,
+
+                                      ),
+                                      SizedBox(width: 20.w,),
+                                      AutoSizeText(
+                                        "تاريخ الصلاحية: "
+                                            "${Expiration_time.substring(0, 10)}",
+                                        maxLines: 2,style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  )),
+                            )
+                          ]),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+            );
+          },
+
+
         ),
       ),
     );
   }
 }
 
-class CoursesCountContainer extends StatelessWidget {
-  final int count;
-  final String title;
 
-  const CoursesCountContainer(
-      {Key? key, required this.count, required this.title})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 100,
-            width: 100,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: const Color(0xff32504F),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-                child: Text(
-                  count.toString(),
-                  style: GoogleFonts.tajawal(
-                    textStyle: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  )
-                  )
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: AutoSizeText(
-              title,
-              textDirection: TextDirection.rtl,
-              maxLines: 2,
-              style:GoogleFonts.tajawal(
-                textStyle:  const TextStyle(
-                  color: Color(0xff32504F),
-                  fontFamily: kFontFamily,
-                  fontSize: 14,
-                ),
-              )
-
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class MyAppBar extends StatelessWidget {
   final String title;
@@ -510,3 +468,7 @@ class MyAppBar extends StatelessWidget {
     );
   }
 }
+
+
+
+

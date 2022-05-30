@@ -24,17 +24,24 @@ class AboutCourseModel {
 
     rating = json['rating'];
   }
+  void printLongString(String text) {
+    final RegExp pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
+    pattern.allMatches(text).forEach((RegExpMatch match) =>   print(match.group(0)));
+  }
 /// function to parse html content to String
   String parseHtmlString(String htmlString) {
     final document = parse(htmlString);
-    const end = "للتعرف على الأكاديمية";
+    const end = "للتعرف علي الأكاديمية ومن نحن من هنا";
 
-    String parsedString =
-        parse(document.body?.text).documentElement!.text;
-//    int index=parsedString.indexOf('للتعرف');
-// print(parsedString);
-//     parsedString=parsedString.substring(0,index);
+    String parsedString = parse(document.body?.text).documentElement!.text;
 
-    return parsedString;
+    printLongString(parsedString);
+    //
+    // if(parsedString.contains("للتعرف")) {
+    //   print('Contain String');
+    //   return parsedString.substring(0,parsedString.indexOf("للتعرف"));
+    // }
+
+            return parsedString;
   }
 }

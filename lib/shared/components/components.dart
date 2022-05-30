@@ -143,7 +143,6 @@ Widget defaultTextButton({required String text,required Function function,Color 
 
 void showToast({required String msg,required ToastState state})=> Fluttertoast.showToast(
       msg: msg,
-
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 5,

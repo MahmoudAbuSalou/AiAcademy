@@ -61,10 +61,10 @@ class LoginScreen extends StatelessWidget {
                 })
               });
             } else {
-              showToast(msg: "Incorrect Information ", state: ToastState.ERROR);
+              showToast(msg: "معلومات غير صحيحة", state: ToastState.ERROR);
             }
           } else if (state is LoginErrorState) {
-            showToast(msg: state.Error, state: ToastState.ERROR);
+            showToast(msg:'حدث خطأ ما...', state: ToastState.ERROR);
           }
         },
         builder: (context, state) {
