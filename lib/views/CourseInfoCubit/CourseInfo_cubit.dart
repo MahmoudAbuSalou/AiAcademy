@@ -132,7 +132,7 @@ class ReviewCubit extends Cubit<ReviewState> {
     }).catchError((error) {
       // ignore: non_constant_identifier_names
       String ERROR = exceptionsHandle(error: error);
-      showToast(msg: ERROR, state: ToastState.ERROR);
+      showToast(msg: 'حدث خطأ ما...', state: ToastState.ERROR);
 
       emit(PostCourseReviewError(ERROR));
     });
