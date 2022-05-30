@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -43,18 +44,16 @@ return Scaffold(
 
 
              SizedBox(
-                  height: height ,
-                  child: GridView.builder(
+                  height: 3500.h ,
+                  child: ListView.builder(
                     physics:const NeverScrollableScrollPhysics(),
                     itemCount: collageImages.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: width * .03,
-                        crossAxisSpacing: height * .02),
+
                     itemBuilder: (context, index) =>
 
                     //Fill Item Card From CollageModel
                         ItemCard(
+                          count: collageCount[index],
                       height: height,
                       width: width,
                       image: collageImages[index],

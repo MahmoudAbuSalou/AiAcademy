@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -39,18 +40,16 @@ class University extends StatelessWidget {
               SizedBox(
                 height: height * .015,
               ),
-              SizedBox(
-                height: height,
-                child: GridView.builder(
+              Container(
+height: 4000.h,
+                child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: universityImages.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: width * .03,
-                      crossAxisSpacing: height * .02),
+
                   itemBuilder: (context, index) =>
                       //Fill ItemCard From University Model
                       ItemCard(
+                        count: universityCount[index],
                     height: height,
                     width: width,
                     image: universityImages[index],

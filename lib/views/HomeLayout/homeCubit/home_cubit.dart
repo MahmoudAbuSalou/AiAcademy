@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:academy/shared/network/local/cachehelper.dart';
+import 'package:academy/shared/network/remote/dio_helper.dart';
 import 'package:academy/views/profile_screen.dart';
 import 'package:bloc/bloc.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:meta/meta.dart';
 import 'package:academy/views/home%20page/pages/main_page.dart' as main;
 import 'package:flutter/material.dart';
@@ -11,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 
+import '../../../models/category/collages_models.dart';
+import '../../../models/category/university_model.dart';
 import '../../home page/pages/collage/collage.dart';
 import '../../home page/pages/university/unvirsity.dart';
 
@@ -32,6 +36,41 @@ class HomeCubit extends Cubit<HomeState> {
     University(),
     Collage(),
   ];
+  void getCount(){
+    emit(GetDataLoadingAcademyProgrammes());
+    collageId.forEach((element) {
+      print(element);
+      DioHelper.getData(url: 'wp/v2/course_category/${element}?v=123123').then((value) {
+
+        collageCount.add(value.data['count']);
+
+
+        emit(GetDataSuccessAcademyProgrammes());
+      }).catchError((err){
+        print(err.toString());
+        emit(GetDataErrorAcademyProgrammes());
+      });
+
+
+    },);
+    universityId.forEach((element) {
+      print(element);
+      DioHelper.getData(url: 'wp/v2/course_category/${element}?v=123123').then((value) {
+        universityCount.add(value.data['count']);
+
+
+        emit(GetDataSuccessAcademyProgrammes());
+      }).catchError((err){
+        print(err.toString());
+        emit(GetDataErrorAcademyProgrammes());
+      });
+
+
+    },);
+
+
+  }
+
 
   void changBottomBar(int index) {
     currentIndex = index;

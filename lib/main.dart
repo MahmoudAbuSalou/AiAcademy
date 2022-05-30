@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         builder: (_) {
           return MultiBlocProvider(
               providers: [
-                BlocProvider(create: (context) => HomeCubit(HomeInitial())),
+                BlocProvider(create: (context) => HomeCubit(HomeInitial())..getCount()),
 
                 BlocProvider(
 

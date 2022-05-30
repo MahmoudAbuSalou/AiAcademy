@@ -24,5 +24,10 @@ List<int> collageId = [
 
 
 ];
+List<int> collageCount = [
+
+
+
+];
 
 String PHDImage = 'https://aiacademy.info/wp-content/uploads/2022/01/79812-happy-student.gif';
