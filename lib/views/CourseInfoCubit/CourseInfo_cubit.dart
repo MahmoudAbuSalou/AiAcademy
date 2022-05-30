@@ -23,7 +23,7 @@ import 'CourseInfo_state.dart';
 class ReviewCubit extends Cubit<ReviewState> {
   ReviewCubit() : super(ReviewInitial());
 
-  ///  create instance of class ReviewCubit
+ ///  create instance of class ReviewCubit
   static ReviewCubit get(context) => BlocProvider.of(context);
 
   /// Controller for pagination
