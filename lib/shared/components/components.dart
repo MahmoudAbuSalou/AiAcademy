@@ -249,7 +249,7 @@ class _questionState extends State<question> {
         Padding(
           padding:  EdgeInsets.symmetric(horizontal: 20.w),
           child: SizedBox(
-            height: 400.h,
+
             width: double.infinity,
             child:
             ListView.builder(

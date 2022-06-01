@@ -111,9 +111,7 @@ class _QuizPageState extends State<QuizPage> {
 
                               //QuestionsBuilder
                               Container(
-                                height: (cubit.quiz.questions != null)
-                                    ? cubit.quiz.questions.length * 580.h - 80.h
-                                    : 500.h,
+
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),

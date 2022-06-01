@@ -208,8 +208,11 @@ final context1;
                                                                       .getData(
                                                                           key:
                                                                               'token'));
+                                                              ReviewCubit.get(context1).refreshScreen();
+
                                                             },
                                                           )..show();
+
 
 
                                                         },
@@ -287,7 +290,9 @@ final context1;
                                                             child: Text(
                                                                 ' مكتمل',
                                                                 style: GoogleFonts
-                                                                    .tajawal(),
+                                                                    .tajawal(
+                                                                  fontWeight: FontWeight.bold
+                                                                ),
                                                               ),
                                                           ),
                                                       color: kSwatchColor,
@@ -520,6 +525,8 @@ final context1;
                                                   dialogType: DialogType.QUESTION,
                                                   animType: AnimType.BOTTOMSLIDE,
                                                   title: 'تحقق',
+
+                                                  btnCancelText: 'إلغاء الأمر',
                                                   buttonsTextStyle: GoogleFonts.tajawal(
                                                       fontSize: 40.sp,
                                                       fontWeight: FontWeight.bold,
@@ -538,6 +545,9 @@ final context1;
                                                       color: kSwatchColor
 
                                                   ),
+                                                  btnOkText: 'حسناً',
+
+
                                                   desc:
                                                       'هل أنت متأكد أنك تريد إنهاء هذه الدورة',
                                                   btnCancelOnPress: () {},
@@ -546,6 +556,8 @@ final context1;
                                                         id: finishId,
                                                         token: CacheHelper.getData(
                                                             key: 'token'));
+                                                    ReviewCubit cubit1=ReviewCubit.get(context1);
+                                                    cubit1.refreshScreen();
                                                   },
                                                 )..show();
                                               },
@@ -567,6 +579,7 @@ final context1;
                                                 dialogType: DialogType.QUESTION,
                                                 animType: AnimType.BOTTOMSLIDE,
                                                 title: 'تحقق',
+                                                btnCancelText: 'إلغاء الأمر',
                                                 buttonsTextStyle: GoogleFonts.tajawal(
                                                     fontSize: 40.sp,
                                                     fontWeight: FontWeight.bold,
@@ -585,6 +598,7 @@ final context1;
                                                     color: kSwatchColor
 
                                                 ),
+                                                btnOkText: 'حسناً',
                                                 desc:
                                                     'هل أنت متأكد أنك أكملت هذه الدورة',
                                                 btnCancelOnPress: () {},
@@ -593,7 +607,10 @@ final context1;
                                                       id: id,
                                                       token: CacheHelper.getData(
                                                           key: 'token'));
+                                                  ReviewCubit cubit1=ReviewCubit.get(context1);
+                                                  cubit1.refreshScreen();
                                                 },
+
                                               )..show();
                                             },
                                             child: (cubit.course.status ==
