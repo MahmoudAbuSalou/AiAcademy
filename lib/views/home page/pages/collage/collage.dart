@@ -45,21 +45,22 @@ return Scaffold(
 
              SizedBox(
                   height: 3500.h ,
-                  child: ListView.builder(
+                  child: ListView.separated(
                     physics:const NeverScrollableScrollPhysics(),
                     itemCount: collageImages.length,
 
                     itemBuilder: (context, index) =>
 
                     //Fill Item Card From CollageModel
-                        ItemCard(
-                          count: collageCount[index],
-                      height: height,
-                      width: width,
-                      image: collageImages[index],
-                      title: collageNames[index],
-                      id:collageId[index]
+                    ItemCard(
+                        count: collageCount[index],
+                        height: height,
+                        width: width,
+                        image: collageImages[index],
+                        title: collageNames[index],
+                        id:collageId[index]
                     ),
+                    separatorBuilder:(context, index) =>SizedBox(height: 50.sp,) ,
                   ),
                 ),
 

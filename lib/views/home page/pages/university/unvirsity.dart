@@ -41,21 +41,25 @@ class University extends StatelessWidget {
                 height: height * .015,
               ),
               Container(
+
 height: 4000.h,
-                child: ListView.builder(
+                child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: universityImages.length,
 
                   itemBuilder: (context, index) =>
-                      //Fill ItemCard From University Model
-                      ItemCard(
-                        count: universityCount[index],
+                  //Fill ItemCard From University Model
+                  ItemCard(
+                    count: universityCount[index],
                     height: height,
                     width: width,
                     image: universityImages[index],
                     title: universityNames[index],
                     id: universityId[index],
                   ),
+                  separatorBuilder:(context, index) =>Container(
+                    height: 50.h,
+                  ) ,
                 ),
               ),
 

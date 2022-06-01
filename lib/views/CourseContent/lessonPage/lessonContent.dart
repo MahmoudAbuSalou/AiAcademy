@@ -1,5 +1,6 @@
 import 'package:academy/components/const.dart';
 import 'package:academy/shared/components/components.dart';
+import 'package:academy/views/Profile_Cubit/profile_cubit.dart';
 import 'package:academy/views/course_info.dart';
 import 'package:academy/views/web_view/web_view.dart';
 
@@ -16,6 +17,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../../../shared/network/local/cachehelper.dart';
+import '../../CourseInfoCubit/CourseInfo_cubit.dart';
 import 'lessonCubit/course_content_cubit.dart';
 
 class WatchCourse extends StatelessWidget {
@@ -28,8 +30,8 @@ class WatchCourse extends StatelessWidget {
   //To Store Id Of Video when i show it in Full Mode 'Horizintal'
   int globalIndex = 1;
 
-  WatchCourse({required this.id, required this.finishId}) : super();
-
+  WatchCourse({required this.id, required this.finishId,required this.context1}) : super();
+final context1;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -68,7 +70,8 @@ class WatchCourse extends StatelessWidget {
                 //Normal Mode
                 : WillPopScope(
               onWillPop:() async {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CourseInfo(id: finishId),));
+                Navigator.of(context).pop();
+
                 return true;
               },
                   child: Scaffold(
@@ -255,6 +258,8 @@ class WatchCourse extends StatelessWidget {
                                                                     .getData(
                                                                         key:
                                                                             'token'));
+                                                            ReviewCubit cubit1=ReviewCubit.get(context1);
+                                                           cubit1.refreshScreen();
                                                           },
                                                         )..show();
                                                       },
@@ -263,15 +268,19 @@ class WatchCourse extends StatelessWidget {
                                                           ? Row(
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                             children: [
-                                                              Icon(Icons.check_circle,color: Colors.blueAccent,)
 
-                                                              ,
+
+
                                                               SizedBox(width: 10.w,),
                                                               Text(
                                                                   ' مكتمل',
                                                                   style: GoogleFonts
-                                                                      .tajawal(),
+                                                                      .tajawal(
+                                                                    fontWeight: FontWeight.bold
+                                                                  ),
                                                                 ),
+                                                        SizedBox(width: 10.w,),
+                                                        Icon(Icons.check_circle,color: Colors.blueAccent,)
                                                             ],
                                                           )
                                                           : Center(

@@ -62,7 +62,7 @@ class MyAppBar extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
                 onPressed: () {
-                  (BoolNextPage)?
+                  (true)?
                   Future.delayed(Duration.zero, () {
                     Navigator.of(context).pop();
                   }):
@@ -419,16 +419,24 @@ class ItemCard extends StatelessWidget {
 
 
     return OpenContainer(
+
       //the Card Of Collage or University
-      closedBuilder: (context, action) => SizedBox(
-        height:500.h,
+      closedBuilder: (context, action) => Container(
+
+        decoration:  BoxDecoration(
+
+
+         border:Border.all(width: 1,color: kSwatchColor),
+          ),
+
+        height:450.h,
         width: width * .35,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: 50.h,top: 15.h),
-              height: 500.h,
+              margin: EdgeInsets.only(bottom: 0.h,top: 0.h),
+              height: 450.h,
               width: 400.w,
               child: FancyShimmerImage(
                 boxFit: BoxFit.fill,
@@ -444,47 +452,23 @@ class ItemCard extends StatelessWidget {
               Text(title,style: GoogleFonts.tajawal(
               fontSize: 50.sp,
                 fontWeight: FontWeight.bold,
-                color: kSwatchColor
+                color: Colors.blueGrey
               ),),
-                SizedBox(height: 140.h,),
+                SizedBox(height: 100.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(Iconsax.archive_book,color: kSwatchColor,),
+                  SizedBox(width: 10.w,),
+                  Icon(Iconsax.archive_book,color: Colors.blueGrey,),
                   SizedBox(width: 20.w,),
-                  Text('محاضرات و دورات عددها',style: GoogleFonts.tajawal(fontWeight: FontWeight.bold,fontSize: 40.sp,color: kSwatchColor),),
+                  Text('محاضرات و دورات عددها',style: GoogleFonts.tajawal(fontSize: 40.sp,color: Colors.blueGrey),),
                   SizedBox(width: 20.w,),
-                  Text(count.toString(),style: GoogleFonts.tajawal(fontWeight: FontWeight.bold,fontSize: 40.sp,color: kSwatchColor),),
+                  Text(count.toString(),style: GoogleFonts.tajawal(fontSize: 40.sp,color: Colors.blueGrey),),
 
                 ],
               ),
-                SizedBox(height: 20.h,),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 55.w),
-                  child: Container(
-                    color: kSwatchColor,
-                    height: 75.h,
-                    width: 500.w,
+                SizedBox(height: 60.h,),
 
-                    margin: EdgeInsets.only(bottom: 50.h,top: 50.h),
-                    child: Container(
-
-                      child: Center(
-
-                        child: Text(
-                            'عرض التفاصيل',
-                            style: GoogleFonts.tajawal(
-                              textStyle: TextStyle(
-
-                                color: kPrimaryColor,
-                                fontSize: 55.sp,
-                              ),
-                            )
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
 
               ],
             )

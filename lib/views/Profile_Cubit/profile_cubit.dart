@@ -29,7 +29,7 @@ bool show=false;
   void getUserProfile() {
     IdsOfCoursesImages=[];
     emit(ProfileLoadingState());
-    DioHelper.getData(url: PROFILE + CacheHelper.getData(key: 'user_id'),token: CacheHelper.getData(key: 'token'))
+    DioHelper.getData(url: PROFILE + CacheHelper.getData(key: 'user_id')+"?v=123123",token: CacheHelper.getData(key: 'token'))
         .then((value) {
  /// convert json to class model
         profileModel = ProfileModel.fromJson(value.data['tabs']);

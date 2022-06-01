@@ -39,7 +39,7 @@ class CourseInfo extends StatefulWidget {
   String id;
 
   CourseInfo({Key? key, required this.id}) : super(key: key);
-
+var con;
   @override
   State<CourseInfo> createState() => _CourseInfoState();
 }
@@ -59,8 +59,13 @@ class _CourseInfoState extends State<CourseInfo> {
         ..getLessons(id: widget.id)
         ..getReviewCubit(id: widget.id),
       child: BlocConsumer<ReviewCubit, ReviewState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if(state is RefreshScreen){
+              ReviewCubit.get(context).getLessons(id: widget.id);
+            }
+          },
           builder: (context, state) {
+            widget.con=context;
             ReviewCubit reviewCubit = ReviewCubit.get(context);
             return RefreshIndicator(
                 onRefresh: () async {
@@ -567,20 +572,23 @@ class _CourseInfoState extends State<CourseInfo> {
                                   // if (e.status=='completed')
                                   //   {
 
-                                  navigatorTo(
-                                      context,
+
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) =>
                                       (e.type != 'lp_lesson')
                                           ?
 
-                                          //QUIZ=CoursePage
-                                          QuizPage(
-                                              id: e.id.toString(),
-                                            courseId: widget.id,
-                                            )
+                                      //QUIZ=CoursePage
+                                      QuizPage(
+                                        id: e.id.toString(),
+                                        context:widget.con,
+                                        courseId: widget.id,
+                                      )
                                           : WatchCourse(
-                                              id: e.id.toString(),
-                                              finishId: widget.id,
-                                            )),
+                                        context1:widget.con,
+                                        id: e.id.toString(),
+                                        finishId: widget.id,
+                                      ),)),
                                 }
                               else
                                 {

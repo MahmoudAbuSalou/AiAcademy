@@ -140,6 +140,7 @@ class ReviewCubit extends Cubit<ReviewState> {
 
   ///  Get Course Lessons
   void getLessons({required String id}) {
+    print('Here');
     emit(GetLessonsLoading());
 
     DioHelper.getData(
@@ -176,5 +177,8 @@ class ReviewCubit extends Cubit<ReviewState> {
     }).catchError((error) {
       emit(SubscribeCourseError());
     });
+  }
+  void refreshScreen(){
+    emit(RefreshScreen());
   }
 }

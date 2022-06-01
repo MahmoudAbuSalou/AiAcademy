@@ -18,7 +18,8 @@ class ProfileScreen extends StatefulWidget {
 
 
   bool homepage;
-   ProfileScreen({Key? key,required this.homepage}) : super(key: key);
+
+  ProfileScreen({Key? key, required this.homepage}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -31,36 +32,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return BlocConsumer<ProfileCubit, ProfileState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        ProfileCubit cubit = ProfileCubit.get(context);
+    var size = MediaQuery
+        .of(context)
+        .size;
+    return BlocProvider(
+      create: (context) =>  ProfileCubit(ProfileInitial())..getUserProfile(),
+      child: BlocConsumer<ProfileCubit, ProfileState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          ProfileCubit cubit = ProfileCubit.get(context);
 
 
+          return ConditionalBuilder(
+              condition: cubit.show,
+              fallback: (context) =>
+              const Scaffold(
+                  backgroundColor: Colors.white,
+                  body: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.blueAccent,
+                    ),
+                  )),
+              builder: (context) {
+                return Scaffold(
+                  // appBar: AppBar(),
+                  appBar: (widget.homepage) ? PreferredSize(
+                      preferredSize: Size.fromHeight(0),
+                      child: Container()) : const PreferredSize(
+                    preferredSize: Size.fromHeight(200),
+                    child: MyAppBar(title: "الملف الشخصي"),
 
-        return ConditionalBuilder(
-            condition: cubit.show,
-            fallback: (context) => const Scaffold(
-                backgroundColor: Colors.white,
-                body: Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.blueAccent,
                   ),
-                )),
-            builder: (context) {
-              return Scaffold(
-                // appBar: AppBar(),
-                appBar:(widget.homepage)?PreferredSize(
-                    preferredSize: Size.fromHeight(0),
-                    child: Container()):const PreferredSize(
-                  preferredSize: Size.fromHeight(200),
-                  child: MyAppBar(title: "الملف الشخصي"),
-
-                ),
-                body: SingleChildScrollView(
-
-                  child: Column(
+                  body: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(
@@ -76,34 +79,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             ...List.generate(
                               5,
-                                  (index) => AppBarItem(
-                                title: textItems[index],
-                                onPress: () {
-
-                                    selectedIndex = index;
-                                    cubit.changeScreen(index);
-
-                                },
-                                isSelected: selectedIndex == index,
-                              ),
+                                  (index) =>
+                                  AppBarItem(
+                                    title: textItems[index],
+                                    onPress: () {
+                                      selectedIndex = index;
+                                      cubit.changeScreen(index);
+                                    },
+                                    isSelected: selectedIndex == index,
+                                  ),
                             ),
                           ],
                         ),
                       ),
-                     getCoursesInfo(cubit.profileModel.courses!,
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: getCoursesInfo(cubit.profileModel.courses!,
 
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              );
-            });
-      },
+                );
+              });
+        },
+      ),
     );
   }
 
   Widget getCoursesInfo(Courses course) {
-
     List allCourse = [...course.finished, ...course.in_Progress];
 
     /// get course that user not passed
@@ -111,33 +116,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .where((item) =>
     (item.graduation != "passed" && item.graduation != "in-progress"))
         .toList();
-    List <Widget>Screens=[
-     AllCourses(course: allCourse), // index = 0
-     AllCourses(course: course.in_Progress), // index = 1
-     AllCourses(course: course.finished),
+    List <Widget>Screens = [
+      AllCourses(course: allCourse), // index = 0
+      AllCourses(course: course.in_Progress), // index = 1
+      AllCourses(course: course.finished),
 
-      AllCourses(course:course.passed),
-     AllCourses(course: failed)
+      AllCourses(course: course.passed),
+      AllCourses(course: failed)
     ];
 
 
-     return Container(
-       child: Screens[selectedIndex],
-     );
+    return Container(
+      child: Screens[selectedIndex],
+    );
   }
 }
 
 class AppBarItem extends StatelessWidget {
   final String title;
   final bool isSelected;
+
   // ignore: prefer_typing_uninitialized_variables
   final onPress;
 
-  const AppBarItem(
-      {Key? key,
-        required this.title,
-        required this.onPress,
-        required this.isSelected})
+  const AppBarItem({Key? key,
+    required this.title,
+    required this.onPress,
+    required this.isSelected})
       : super(key: key);
 
   @override
@@ -153,15 +158,15 @@ class AppBarItem extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  title,
-                  textDirection: TextDirection.rtl,
-                  style: GoogleFonts.tajawal(
-                    textStyle: const TextStyle(
-                      color: kSecondaryColor,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: kFontFamily,
-                    ),
-                  )
+                    title,
+                    textDirection: TextDirection.rtl,
+                    style: GoogleFonts.tajawal(
+                      textStyle: const TextStyle(
+                        color: kSecondaryColor,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: kFontFamily,
+                      ),
+                    )
                 ),
               ),
             ),
@@ -183,26 +188,32 @@ class AppBarItem extends StatelessWidget {
 class AllCourses extends StatelessWidget {
   List<dynamic>? course;
 
-  AllCourses({Key? key,  this.course}) : super(key: key);
+  AllCourses({Key? key, this.course}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 60.h),
+      child: ListView.separated(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) =>
+            CourseItemCard(
+              id: course![index]?.id,
+              imageUrl: '',
+              title: course![index]?.title,
+              endTime: course![index]?.endTime,
 
-    return ListView.builder(
-clipBehavior: Clip.antiAliasWithSaveLayer,
-      itemCount: course!.length,
-      shrinkWrap: true,
+              Expiration_time: course![index]?.expiration,
+              results: course![index]?.results,
+            ),
+        separatorBuilder: (context, index) =>
+            Container(
 
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => CourseItemCard(
-        id: course![index]?.id,
-        imageUrl: '',
-        title: course![index]?.title,
-        endTime: course![index]?.endTime,
-
-        Expiration_time: course![index]?.expiration,
-        results: course![index]?.results,
-      ),
+              height: 35.h,
+            ),
+        itemCount: course!.length,),
     );
   }
 }
@@ -213,6 +224,7 @@ class CourseItemCard extends StatelessWidget {
   final String id;
   final String title;
   dynamic endTime;
+
   // ignore: non_constant_identifier_names
   final dynamic Expiration_time;
   final dynamic results;
@@ -230,46 +242,54 @@ class CourseItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
 
     return GestureDetector(
       onTap: () {
-        navigatorTo(context, CourseInfo(id: id.toString()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>CourseInfo(id: id.toString()) ,));
+
       },
       child: BlocProvider(
-        create:(context) =>ImageCubit()..getProfileImage(id: id),
-        child: BlocConsumer<ImageCubit,ImageState>(
-          listener: (context, state) {
-          },
-          builder: (context,state){
+        create: (context) =>
+        ImageCubit()
+          ..getProfileImage(id: id),
+        child: BlocConsumer<ImageCubit, ImageState>(
+          listener: (context, state) {},
+          builder: (context, state) {
             ImageCubit cubit = ImageCubit.get(context);
 
             return Container(
+
               margin: const EdgeInsets.only(bottom: 5, right: 15, left: 20),
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               width: size.width,
-              height: size.height * 0.25,
+              height: size.height * 0.2,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.1),
-                    blurRadius: 2,
-                    offset: const Offset(0, 3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 8),
                   ),
                 ],
+                border: Border.all(color:kSwatchColor,width: 1),
+
               ),
+
               child: Row(
 
                 children: [
                   Expanded(
                     flex: 1,
                     child: Container(
-                      child:cubit.loadImage? FancyShimmerImage(
+                      child: cubit.loadImage ? FancyShimmerImage(
                         imageUrl: cubit.aboutCourseModel.image,
                         boxFit: BoxFit.fill,
                         errorWidget: Image.network(
                             'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                      ):Container(),
+                      ) : Container(),
 
                     ),
                   ),
@@ -283,19 +303,21 @@ class CourseItemCard extends StatelessWidget {
                           children: [
                             const SizedBox(height: 3),
                             Expanded(
+
                               child: Center(
                                 child: Container(
-                                  padding: const EdgeInsetsDirectional.only(start: 5),
+                                  padding: const EdgeInsetsDirectional.only(
+                                      start: 5),
                                   child: Text(
                                       title,
-                                      maxLines: 1,
+                                      maxLines: 2,
                                       style: GoogleFonts.tajawal(
-                                        textStyle: const TextStyle(
+                                        textStyle: TextStyle(
                                           overflow: TextOverflow.ellipsis,
-                                          color: kSwatchColor,
-                                          fontSize: 16,
+                                          color: Colors.blueGrey,
+                                          fontSize: 40.sp,
                                           fontFamily: kFontFamily,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       )
                                   ),
@@ -306,21 +328,23 @@ class CourseItemCard extends StatelessWidget {
                               child: Container(
                                 width: double.infinity,
                                 padding: const EdgeInsetsDirectional.only(
-                                    start: 10, top: 7, bottom: 8),
+                                    start: 10, top: 0, bottom: 0),
                                 child: Row(
 
                                   children: [
                                     SvgPicture.asset(
                                       'images/result.svg',
-                                      width: 70.w,
+                                      width: 60.w,
+                                      height: 60.h,
 
                                     ),
                                     SizedBox(width: 20.w,),
 
                                     Text(
-                                      "النتيجة: " "%$results ",
+                                      "النتيجة : " "%$results ",
                                       style: GoogleFonts.tajawal(
-                                          fontWeight: FontWeight.bold
+                                        fontSize: 35.sp
+
                                       ),
                                     ),
                                   ],
@@ -331,35 +355,30 @@ class CourseItemCard extends StatelessWidget {
                               child: Container(
                                 width: double.infinity,
                                 padding:
-                                const EdgeInsetsDirectional.only(start: 8, bottom: 8),
+                                const EdgeInsetsDirectional.only(
+                                    start: 8, bottom: 8),
                                 height: 30,
                                 child: endTime is! String
-                                    ?  Row(
+                                    ? Row(
                                   children: [
-                                    SvgPicture.asset(
-                                      'images/timeEnd.svg',
-                                      width: 70.w,
-
-                                    ),
+                                    Icon(Icons.done, color: Colors.blueGrey,),
                                     SizedBox(width: 20.w,),
-                                    Text("تاريخ الانتهاء: _",style: GoogleFonts.tajawal(
-                                      fontWeight: FontWeight.bold,
-                                    ),),
+                                    AutoSizeText("تاريخ الانتهاء : _",
+                                      style: GoogleFonts.tajawal(
+                                          fontSize: 35.sp
+                                      ),),
                                   ],
                                 )
                                     : Row(
                                   children: [
-                                    SvgPicture.asset(
-                                      'images/timeEnd.svg',
-                                      width: 70.w,
-
-                                    ),
+                                    Icon(Icons.done, color: Colors.blueGrey,),
                                     SizedBox(width: 20.w,),
                                     AutoSizeText(
-                                      "تاريخ الانتهاء : " "${endTime.substring(0, 10)}",
+                                      "تاريخ الانتهاء : " "${endTime.substring(
+                                          0, 10)}",
                                       maxLines: 2
-                                      ,style: GoogleFonts.tajawal(
-                                        fontWeight: FontWeight.bold
+                                      , style: GoogleFonts.tajawal(
+                                        fontSize: 35.sp
                                     ),
                                     ),
                                   ],
@@ -369,32 +388,32 @@ class CourseItemCard extends StatelessWidget {
                             Expanded(
                               child: Container(
                                   width: double.infinity,
-                                  padding: const EdgeInsetsDirectional.only(start: 8),
+                                  padding: const EdgeInsetsDirectional.only(
+                                      start: 8),
                                   height: 25,
                                   child: Expiration_time is! String ?
                                   Row(
                                     children: [
-                                      SvgPicture.asset(
-                                        'images/date.svg',
-                                        width: 70.w,
-
-                                      ),
+                                      Icon(Icons.timer_off_sharp,
+                                        color: Colors.blueGrey,),
                                       SizedBox(width: 20.w,),
-                                      Text("تاريخ الصلاحية: _",style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),),
+                                      Text("تاريخ الصلاحية : _",
+                                        style: GoogleFonts.tajawal(fontSize: 35.sp
+                                        ),),
                                     ],
                                   )
-                                      :Row(
+                                      : Row(
                                     children: [
-                                      SvgPicture.asset(
-                                        'images/date.svg',
-                                        width: 70.w,
-
-                                      ),
+                                      Icon(Icons.timer_off_sharp,
+                                        color: Colors.blueGrey,),
                                       SizedBox(width: 20.w,),
                                       AutoSizeText(
-                                        "تاريخ الصلاحية: "
-                                            "${Expiration_time.substring(0, 10)}",
-                                        maxLines: 2,style: GoogleFonts.tajawal(fontWeight: FontWeight.bold),
+                                        "تاريخ الصلاحية : "
+                                            "${Expiration_time.substring(
+                                            0, 10)}",
+                                        maxLines: 2, style: GoogleFonts.tajawal(
+                                          fontSize: 35.sp
+                                      ),
                                       ),
                                     ],
                                   )),
@@ -415,7 +434,6 @@ class CourseItemCard extends StatelessWidget {
 }
 
 
-
 class MyAppBar extends StatelessWidget {
   final String title;
 
@@ -423,7 +441,9 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     return SafeArea(
       child: Container(
         width: size.width,
@@ -439,14 +459,14 @@ class MyAppBar extends StatelessWidget {
             Expanded(
               child: Center(
                 child: Text(
-                  title,
-                  style: GoogleFonts.tajawal(
-                    textStyle: const TextStyle(
-                      color: kPrimaryColor,
-                      fontSize: 18,
-                      fontFamily: kFontFamily,
-                    ),
-                  )
+                    title,
+                    style: GoogleFonts.tajawal(
+                      textStyle: const TextStyle(
+                        color: kPrimaryColor,
+                        fontSize: 18,
+                        fontFamily: kFontFamily,
+                      ),
+                    )
                 ),
               ),
             ),

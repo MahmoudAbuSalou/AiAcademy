@@ -98,7 +98,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
       emit(SuccessFinishLesson());
     }).catchError((error) {
-      showToast(msg: 'لا يمكنك إنهاء هذا الكورس ', state:ToastState.ERROR);
+      showToast(msg: 'حدث خطأ ما', state:ToastState.ERROR);
 
       String ERROR = exceptionsHandle(error: error);
       emit(ErrorFinishLesson());

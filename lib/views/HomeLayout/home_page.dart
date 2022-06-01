@@ -218,15 +218,19 @@ class _HomePageState extends State<HomePage> {
 
                 ),
                 const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8,right: 8,left: 20,bottom: 8),
-                  child: InkWell(
-                      onTap: (){
-                        _scaffoldKey.currentState!.openEndDrawer();
-                      },
-                      child: SvgPicture.asset('images/menu.svg')),
+                InkWell(
+                  onTap: (){
+                    _scaffoldKey.currentState!.openEndDrawer();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8,right: 8,left: 20,bottom: 8),
+                    child: InkWell(
 
+                        child: SvgPicture.asset('images/menu.svg')),
+
+                  ),
                 ),
+                SizedBox(width: 20.w,),
               ],
             ),
 
@@ -245,15 +249,17 @@ class _HomePageState extends State<HomePage> {
                 CircularProgressIndicator(),
               ],
             ):
-            (collageId.length==collageCount.length &&(universityId.length==universityCount.length))? IndexedStack(
+            ((collageId.length==collageCount.length) &&(universityId.length==universityCount.length))?
+            IndexedStack(
               index: cubit.currentIndex,
               children: [
 
-                (cubit.test)? University():Center(child: CircularProgressIndicator(),),
-                (cubit.test)?(      (CacheHelper.getData(key: 'token')!=null)?ProfileScreen(homepage: true,):  main.MainPage()):Center(child: CircularProgressIndicator(),),
-                (cubit.test)?Collage():Center(child: CircularProgressIndicator(),),
+               University(),
+                      (CacheHelper.getData(key: 'token')!=null)?ProfileScreen(homepage: true,):  main.MainPage(),
+                Collage(),
               ],
-            ):Center(child: CircularProgressIndicator(),),
+            ):
+            Center(child: CircularProgressIndicator(),),
 
 
           );

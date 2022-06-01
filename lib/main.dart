@@ -50,12 +50,7 @@ class MyApp extends StatelessWidget {
               providers: [
                 BlocProvider(create: (context) => HomeCubit(HomeInitial())..getCount()),
 
-                BlocProvider(
 
-                  create: (BuildContext context) =>
-                      ProfileCubit(ProfileInitial())..getUserProfile()
-
-                ),
               ],
               child: GetMaterialApp(
                 debugShowCheckedModeBanner: false,

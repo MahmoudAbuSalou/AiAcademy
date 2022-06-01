@@ -89,6 +89,7 @@ class GetLessonsError extends ReviewState {
 
 /// Enrolled  Course State
 class SubscribeCourseLoading extends ReviewState {}
+class RefreshScreen extends ReviewState {}
 class SubscribeCourseSuccess extends ReviewState {
 
   SubscribeCourseSuccess();

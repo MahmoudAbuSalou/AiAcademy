@@ -34,11 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.orange.shade400,kSwatchColor, kSwatchColor.withOpacity(0.8),kSwatchColor.withOpacity(0.7),],
-              end: Alignment.bottomCenter,
-              begin: Alignment.topCenter
-          ),
+        color: Colors.white,
         ),
         child: Center(
           child: Image.asset('images/logoUp.png',
