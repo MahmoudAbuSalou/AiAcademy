@@ -89,7 +89,7 @@ class CourseContentCubit extends Cubit<CourseContentState> {
 
     },token: token,).then((value) {
         //Show Message that Backend return it for me (if SUCCESS)
-      showToast(msg: 'تهانينا،لقد أكملت المقرر' , state:ToastState.SUCCESS);
+      showToast(msg: 'تهانينا، لقد أكملت المقرر' , state:ToastState.SUCCESS);
       print(value.data);
 
 

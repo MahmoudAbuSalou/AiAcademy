@@ -598,11 +598,12 @@ class _CourseInfoState extends State<CourseInfo> {
 
                                    btnCancelText: 'إلغاء الأمر',
                                     buttonsTextStyle: GoogleFonts.tajawal(
-                                      fontSize: 40.sp,
+                                      fontSize: 30.sp,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white
 
                                     ),
+
                                     descTextStyle: GoogleFonts.tajawal(
                                         fontSize: 40.sp,
                                         fontWeight: FontWeight.bold,
@@ -712,6 +713,7 @@ class _CourseInfoState extends State<CourseInfo> {
                             rate: reviewCubit.ratingValue,
                             title: reviewCubit.aboutCourseModel.name,
                             content: commentController.text);
+                    commentController.text='';
                   }),
             ),
             const SizedBox(
@@ -744,8 +746,8 @@ class CustomerReview extends StatelessWidget {
             width: 60,
             height: 60,
           ),
-          const SizedBox(
-            width: 20,
+           SizedBox(
+            width: 80.w,
           ),
           Expanded(
             child: Column(
@@ -753,16 +755,19 @@ class CustomerReview extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      reviewModel.display_name.toString(),
-                      style: GoogleFonts.tajawal(
-                        textStyle: TextStyle(
-                            overflow: TextOverflow.ellipsis, fontSize: 30.sp),
+                    Expanded(
+                      child: Text(
+                        reviewModel.display_name.toString(),
+                        style: GoogleFonts.tajawal(
+                          textStyle: TextStyle(
+                              overflow: TextOverflow.ellipsis, fontSize: 40.sp),
+                        ),
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
                     ),
+                    SizedBox(width: 100.w,),
                     ClientRating(
                       ratingValue: double.parse(reviewModel.rate),
                     )
@@ -796,21 +801,24 @@ class ClientRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RatingBar.builder(
-      initialRating: ratingValue,
-      minRating: 1,
-      itemSize: 14,
-      direction: Axis.horizontal,
-      allowHalfRating: true,
-      ignoreGestures: false,
-      itemCount: 5,
-      itemBuilder: (context, _) => const Icon(
-        Icons.star,
-        color: kSwatchColor,
-      ),
-      onRatingUpdate: (rating) {
+    return Padding(
+      padding:  EdgeInsets.only(bottom: 30.h),
+      child: RatingBar.builder(
+        initialRating: ratingValue,
+        minRating: 1,
+        itemSize: 14,
+        direction: Axis.horizontal,
+        allowHalfRating: true,
+        ignoreGestures: false,
+        itemCount: 5,
+        itemBuilder: (context, _) => const Icon(
+          Icons.star,
+          color: kSwatchColor,
+        ),
+        onRatingUpdate: (rating) {
 
-      },
+        },
+      ),
     );
   }
 }

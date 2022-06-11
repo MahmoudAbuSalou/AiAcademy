@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                               navigatorTo(context, ProfileScreen(homepage: false,));
                             },
                             child:CacheHelper.getData(key: 'token')!=null ?ListTile(
-                              leading: SvgPicture.asset('images/user (1).svg'),
+                              leading: SvgPicture.asset('images/user (1).svg',width: 80.sp),
                               title: const AutoSizeText(
                                 'الصفحة الشخصية',
                                 style: TextStyle(
@@ -274,9 +274,11 @@ Widget  iconNavBar(String image,String name)
     children: [
       SvgPicture.asset(image,color:const Color(0xff32504F),width: 30,height: 30,),
       AutoSizeText(name,
-        style: TextStyle(
-          fontSize: 25.sp
-        ),
+        style: GoogleFonts.tajawal(
+          textStyle: TextStyle(
+              fontSize: 25.sp
+          ),
+        )
       )
     ],
   );

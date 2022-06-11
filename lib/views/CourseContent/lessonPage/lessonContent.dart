@@ -251,6 +251,8 @@ final context1;
                                                           animType:
                                                               AnimType.BOTTOMSLIDE,
                                                           title: 'تحقق',
+                                                          btnOkText: 'حسناً',
+                                                          btnCancelText: 'إلغاء الأمر',
                                                           desc:
                                                               'هل أنت متأكد أنك أكملت هذه الدورة',
                                                           btnCancelOnPress: () {},

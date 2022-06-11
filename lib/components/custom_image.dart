@@ -31,11 +31,12 @@ class CustomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+
       decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: borderRadius ?? BorderRadius.circular(radius),
+          color: Colors.blueGrey,
+          shape: BoxShape.circle,
+
+
         boxShadow: [
           if (isShadow)
             BoxShadow(
@@ -46,18 +47,11 @@ class CustomImage extends StatelessWidget {
             ),
         ],
       ),
-      child: imageUrl != ""
-          ?
-
-           FancyShimmerImage(
-        boxFit: BoxFit.cover,
-        imageUrl: imageUrl,
-        errorWidget: Image.network(
-            'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-      )
-          : Icon(
+      child:
+           Icon(
               Icons.person_sharp,
-              size: 90,
+              size: 50,
+             color: Colors.white,
             ),
     );
   }

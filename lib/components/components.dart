@@ -461,7 +461,7 @@ class ItemCard extends StatelessWidget {
                   SizedBox(width: 10.w,),
                   Icon(Iconsax.archive_book,color: Colors.blueGrey,),
                   SizedBox(width: 20.w,),
-                  Text('محاضرات و دورات عددها',style: GoogleFonts.tajawal(fontSize: 40.sp,color: Colors.blueGrey),),
+                  Text('عدد التخصصات',style: GoogleFonts.tajawal(fontSize: 40.sp,color: Colors.blueGrey),),
                   SizedBox(width: 20.w,),
                   Text(count.toString(),style: GoogleFonts.tajawal(fontSize: 40.sp,color: Colors.blueGrey),),
 

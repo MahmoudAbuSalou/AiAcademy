@@ -100,7 +100,7 @@ class SearchScreen extends StatelessWidget {
                       controller: search,
              validator: (String? value) {
               if (value!.length == 0)
-                   return 'Search must not be Empty';
+                   return ' ';
                   return "";
                  },
 
@@ -126,7 +126,7 @@ class SearchScreen extends StatelessWidget {
                             padding: EdgeInsets.only(left: 10),
                             child: Icon(Icons.search,color: Colors.black54,)
                         ),
-                        hintText: 'اسم الكورس',
+                        hintText: 'اسم التخصص',
                         hintStyle:  TextStyle(
                           color: kSwatchColor,
 
