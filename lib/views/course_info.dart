@@ -616,7 +616,7 @@ class _CourseInfoState extends State<CourseInfo> {
                                         color: kSwatchColor
 
                                     ),
-                                    btnOkText: 'حسناً',
+                                    btnOkText: 'أوافق',
                                     animType: AnimType.BOTTOMSLIDE,
                                     title: 'تحذير',
                                     desc: (CacheHelper.getData(key: 'token')!=null)?'أنك غير مشترك في هذه الدورة':'يتوجب عليك تسجيل الدخول',
@@ -636,8 +636,8 @@ class _CourseInfoState extends State<CourseInfo> {
                 //  here inner content
               ),
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: 100.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

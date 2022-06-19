@@ -86,14 +86,25 @@ final context1;
                               height: MediaQuery.of(context).size.height,
                               // Subtracting 1 from length of List 'linkvideo' because index 0 contain unUseful Data
                               child: (cubit.course.linkvideo.length - 1 == 0)
-                                  ? Center(
-                                      child: Text(
-                                        'عذراً لا يوجد محتوى في هذا القسم تحقق من قسم الملحقات',
-                                        style: GoogleFonts.tajawal(
-                                            textStyle: const TextStyle(
-                                                fontWeight: FontWeight.bold)),
-                                      ),
-                                    )
+                                  ? Column(
+                                    children: [
+                                      SizedBox(height: 400.h,),
+                                      Center(
+                                          child: Text(
+                                            ' لا يوجد محتوى في هذا القسم تحقق من قسم الملحقات',
+                                            maxLines: 2,
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.tajawal(
+
+                                                textStyle:  TextStyle(
+                                                  fontSize: 50.sp,
+                                                    fontWeight: FontWeight.bold)),
+                                          ),
+                                        ),
+                                      SizedBox(height: 150.h,),
+                                      Icon(Icons.file_copy,size: 500.r,),
+                                    ],
+                                  )
                                   : SingleChildScrollView(
                                       child: Column(
                                         children: [
@@ -224,9 +235,10 @@ final context1;
                                                     SizedBox(width: 20.w),
                                                 Expanded(
                                                     child: FlatButton(
-                                                      onPressed: () {
+                                                      onPressed: (cubit.course.status ==
+                                                          'completed')?(){}  :  () {
                                                         // ignore: avoid_single_cascade_in_expression_statements
-                                                        AwesomeDialog(
+                                                          AwesomeDialog(
                                                           context: context,
                                                           dialogType:
                                                               DialogType.QUESTION,
@@ -251,13 +263,13 @@ final context1;
                                                           animType:
                                                               AnimType.BOTTOMSLIDE,
                                                           title: 'تحقق',
-                                                          btnOkText: 'حسناً',
+                                                          btnOkText: 'أوافق',
                                                           btnCancelText: 'إلغاء الأمر',
                                                           desc:
                                                               'هل أنت متأكد أنك أكملت هذه الدورة',
                                                           btnCancelOnPress: () {},
                                                           btnOkOnPress: () {
-                                                            cubit.finishLesson(
+                                                                   cubit.finishLesson(
                                                                 id: id,
                                                                 token: CacheHelper
                                                                     .getData(
@@ -322,7 +334,7 @@ final context1;
                                     width: MediaQuery.of(context).size.width,
                                     child: ExpansionTile(
                                       title: Text(
-                                        'الملفات الملحقة :',
+                                        'الملفات الملحقة ',
                                         style: GoogleFonts.tajawal(),
                                         textDirection: TextDirection.rtl,
                                       ),
@@ -547,7 +559,7 @@ final context1;
                                                       color: kSwatchColor
 
                                                   ),
-                                                  btnOkText: 'حسناً',
+                                                  btnOkText: 'أوافق',
 
 
                                                   desc:
@@ -574,7 +586,8 @@ final context1;
                                          SizedBox(width: 50.w,),
                                         Expanded(
                                           child: MaterialButton(
-                                            onPressed: () {
+                                            onPressed:(cubit.course.status ==
+                                                'completed')?(){}  : () {
                                               // ignore: avoid_single_cascade_in_expression_statements
                                               AwesomeDialog(
                                                 context: context,
@@ -600,7 +613,7 @@ final context1;
                                                     color: kSwatchColor
 
                                                 ),
-                                                btnOkText: 'حسناً',
+                                                btnOkText: 'أوافق',
                                                 desc:
                                                     'هل أنت متأكد أنك أكملت هذه الدورة',
                                                 btnCancelOnPress: () {},

@@ -55,7 +55,7 @@ class _CourseRegisterState extends State<CourseRegister> {
       body: SafeArea(
         child: Column(
           children: [
-            MyAppBar(title: 'شراء الكورس',BoolNextPage: true,id: '0'),
+            MyAppBar(title: 'شراء التخصص',BoolNextPage: true,id: '0'),
             Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -78,7 +78,7 @@ class _CourseRegisterState extends State<CourseRegister> {
                             padding: const EdgeInsets.all(8.0),
                             child: FittedBox(
                               child: Text(
-                                'اسم الكورس',
+                                'اسم التخصص',
                                 style:GoogleFonts.tajawal(
                                   textStyle:  TextStyle(
                                     fontSize: kSubTitleSize,

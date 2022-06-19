@@ -31,7 +31,7 @@ class CourseDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TitleText(title:'لمحة عن الكورس'),
+                  const TitleText(title:'لمحة عن التخصص'),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
@@ -129,7 +129,7 @@ class CourseDetailsSection extends StatelessWidget {
     return Column(
       children: [
         const TitleText(
-          title: 'تفاصيل الكورس',
+          title: 'تفاصيل التخصص',
         ),
         CourseDetailsRow(
           iconUrl: 'assets/svg/video.svg',

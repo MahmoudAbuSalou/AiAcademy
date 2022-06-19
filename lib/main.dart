@@ -24,6 +24,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
+  print(CacheHelper.getData(key: 'user_email'));
   runApp(const MyApp());
 }
 class MyHttpOverrides extends HttpOverrides {

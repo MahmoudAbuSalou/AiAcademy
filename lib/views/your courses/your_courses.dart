@@ -18,7 +18,7 @@ class _YourCoursesState extends State<YourCourses> {
       body: SafeArea(
         child: Column(
           children: [
-             MyAppBar(title: 'الكورسات الخاصة بك',id: '0',BoolNextPage: true),
+             MyAppBar(title: 'التخصصات الخاصة بك',id: '0',BoolNextPage: true),
             Expanded(
                 child: SingleChildScrollView(
               child: Padding(

@@ -175,6 +175,7 @@ class ReviewCubit extends Cubit<ReviewState> {
 
       emit(SubscribeCourseSuccess());
     }).catchError((error) {
+      showToast(msg: 'لا يمكنك الاشتراك في هذا التخصص', state: ToastState.ERROR);
       emit(SubscribeCourseError());
     });
   }
