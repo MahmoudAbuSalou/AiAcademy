@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                           ):
                           InkWell(
                             onTap: (){
-                              navigatorToNew(context, LoginScreen());
+                              navigatorTo(context, LoginScreen());
                             },
                             child: ListTile(
                               leading: SvgPicture.asset('images/online-course (1).svg'),
